@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:poc_tcc/common/notifier.dart';
+
+import '../common/notifier.dart';
 
 class NotifierBuilder extends StatefulWidget {
   final Notifier controller;

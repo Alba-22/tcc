@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:poc_tcc/approaches/adhoc/adhoc_page.dart';
-import 'package:poc_tcc/approaches/sealed/sealed_page.dart';
-import 'package:poc_tcc/approaches/with_notifier/with_notifier_page.dart';
-
-import 'approaches/with_state/with_state_page.dart';
+import 'package:poc_tcc/state/approaches/approaches_list/approaches_list_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -26,49 +22,10 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const AdhocPage()),
+                  MaterialPageRoute(builder: (context) => const ApproachesListPage()),
                 );
               },
-              child: const Text("Adhoc"),
-            ),
-            const SizedBox(height: 12),
-            ElevatedButton(
-              style: ButtonStyle(
-                minimumSize: MaterialStateProperty.all(const Size(300, 48)),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const WithNotifierPage()),
-                );
-              },
-              child: const Text("With Notifier"),
-            ),
-            const SizedBox(height: 12),
-            ElevatedButton(
-              style: ButtonStyle(
-                minimumSize: MaterialStateProperty.all(const Size(300, 48)),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const WithStatePage()),
-                );
-              },
-              child: const Text("With State"),
-            ),
-            const SizedBox(height: 12),
-            ElevatedButton(
-              style: ButtonStyle(
-                minimumSize: MaterialStateProperty.all(const Size(300, 48)),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SealedPage()),
-                );
-              },
-              child: const Text("With Sealed"),
+              child: const Text("State Representation"),
             ),
           ],
         ),

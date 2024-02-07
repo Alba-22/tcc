@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:poc_tcc/model/success_model.dart';
-import 'package:poc_tcc/repository/get_information_from_network.dart';
-import 'package:poc_tcc/widgets/failure_widget.dart';
-import 'package:poc_tcc/widgets/sucess_widget.dart';
 
 import '../../model/error_exception.dart';
+import '../../model/success_model.dart';
+import '../../repository/get_information_from_network.dart';
+import '../../widgets/failure_widget.dart';
+import '../../widgets/sucess_widget.dart';
 
 class AdhocPage extends StatefulWidget {
   const AdhocPage({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
-import 'package:poc_tcc/common/notifier.dart';
-import 'package:poc_tcc/model/error_exception.dart';
-import 'package:poc_tcc/model/success_model.dart';
-import 'package:poc_tcc/repository/get_information_from_network.dart';
+import '../../common/notifier.dart';
+import '../../model/error_exception.dart';
+import '../../model/success_model.dart';
+import '../../repository/get_information_from_network.dart';
 
 class Controller extends Notifier {
   InfoState _state = InfoInitialState();

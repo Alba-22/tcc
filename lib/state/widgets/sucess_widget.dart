@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:poc_tcc/model/success_model.dart';
+
+import '../model/success_model.dart';
 
 class SuccessWidget extends StatelessWidget {
   final SuccessModel data;

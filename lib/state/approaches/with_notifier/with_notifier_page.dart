@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:poc_tcc/approaches/with_notifier/controller.dart';
-import 'package:poc_tcc/widgets/failure_widget.dart';
-import 'package:poc_tcc/widgets/notifier_builder.dart';
-import 'package:poc_tcc/widgets/sucess_widget.dart';
+
+import '../../widgets/failure_widget.dart';
+import '../../widgets/notifier_builder.dart';
+import '../../widgets/sucess_widget.dart';
+import 'controller.dart';
 
 class WithNotifierPage extends StatefulWidget {
   const WithNotifierPage({Key? key}) : super(key: key);
