@@ -25,12 +25,10 @@ class _FormProposalPageState extends State<FormProposalPage> {
       ),
       "password": FormObjectParameters(
         label: "Senha",
-        hide: false,
         validator: (v) => Validator(v).minLength(12).isPasswordValid().isRequired().build(),
       ),
       "confirm_password": FormObjectParameters(
         label: "Confirmar Senha",
-        hide: false,
         validator: (v) => Validator(v)
             .isEqualTo(formManager.forms["password"]!.controller.text, "As senhas devem ser iguais")
             .isRequired()
@@ -54,11 +52,11 @@ class _FormProposalPageState extends State<FormProposalPage> {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CustomTextField(forms: formManager.forms, formRef: "email"),
+                CustomTextField(form: formManager.forms["email"]!),
                 const SizedBox(height: 12),
-                CustomTextField(forms: formManager.forms, formRef: "password"),
+                CustomTextField(form: formManager.forms["password"]!),
                 const SizedBox(height: 12),
-                CustomTextField(forms: formManager.forms, formRef: "confirm_password"),
+                CustomTextField(form: formManager.forms["confirm_password"]!),
                 const SizedBox(height: 24),
                 CustomButton(
                   text: "Entrar",

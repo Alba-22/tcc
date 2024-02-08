@@ -15,16 +15,15 @@ class FormManager extends Notifier {
           validator: i.value.validator,
           controller: TextEditingController(),
           onChange: (p0) {
-            checkIsValid();
+            _checkIsValid();
             notifyListeners();
           },
-          hide: i.value.hide,
         ),
       });
     }
   }
 
-  void checkIsValid() {
+  void _checkIsValid() {
     for (final item in _forms.entries) {
       if (item.value.validator(item.value.controller.text) != null) {
         _isValid = false;
@@ -47,25 +46,21 @@ class FormObject {
   final String? Function(String?) validator;
   final TextEditingController controller;
   final void Function(String?) onChange;
-  final bool hide;
 
   FormObject({
     required this.label,
     required this.validator,
     required this.controller,
     required this.onChange,
-    required this.hide,
   });
 }
 
 class FormObjectParameters {
   final String label;
   final String? Function(String?) validator;
-  final bool hide;
 
   FormObjectParameters({
     required this.label,
     required this.validator,
-    this.hide = false,
   });
 }
