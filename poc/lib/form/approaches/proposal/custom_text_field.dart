@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 import 'form_manager.dart';
 
 class CustomTextField extends StatelessWidget {
-  final FormsMap forms;
-  final String formRef;
+  final FormObject form;
 
   const CustomTextField({
     Key? key,
-    required this.forms,
-    required this.formRef,
+    required this.form,
   }) : super(key: key);
 
   @override
@@ -17,12 +15,12 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       decoration: InputDecoration(
         border: const OutlineInputBorder(),
-        label: Text(forms[formRef]!.label),
+        label: Text(form.label),
       ),
-      controller: forms[formRef]!.controller,
-      onChanged: forms[formRef]!.onChange,
+      controller: form.controller,
+      onChanged: form.onChange,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      validator: forms[formRef]!.validator,
+      validator: form.validator,
     );
   }
 }
