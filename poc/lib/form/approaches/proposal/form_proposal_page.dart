@@ -25,12 +25,10 @@ class _FormProposalPageState extends State<FormProposalPage> {
       ),
       "password": FormObjectParameters(
         label: "Senha",
-        hide: false,
         validator: (v) => Validator(v).minLength(12).isPasswordValid().isRequired().build(),
       ),
       "confirm_password": FormObjectParameters(
         label: "Confirmar Senha",
-        hide: false,
         validator: (v) => Validator(v)
             .isEqualTo(formManager.forms["password"]!.controller.text, "As senhas devem ser iguais")
             .isRequired()

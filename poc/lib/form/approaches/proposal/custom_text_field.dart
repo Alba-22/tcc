@@ -19,7 +19,6 @@ class CustomTextField extends StatelessWidget {
         border: const OutlineInputBorder(),
         label: Text(forms[formRef]!.label),
       ),
-      obscureText: forms[formRef]!.hide,
       controller: forms[formRef]!.controller,
       onChanged: forms[formRef]!.onChange,
       autovalidateMode: AutovalidateMode.onUserInteraction,
