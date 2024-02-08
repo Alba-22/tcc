@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:poc_tcc/form/approaches/list/form_approaches_list_page.dart';
-import 'package:poc_tcc/state/approaches/approaches_list/approaches_list_page.dart';
+import 'package:poc_tcc/form/approaches/adhoc/adhoc_form_page.dart';
+import 'package:poc_tcc/form/approaches/proposal/form_proposal_page.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class FormApproachesListPage extends StatefulWidget {
+  const FormApproachesListPage({Key? key}) : super(key: key);
 
+  @override
+  State<FormApproachesListPage> createState() => _FormApproachesListPageState();
+}
+
+class _FormApproachesListPageState extends State<FormApproachesListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("POC TCC"),
+        title: const Text("Forms and Validation"),
       ),
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
@@ -23,10 +28,10 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const ApproachesListPage()),
+                  MaterialPageRoute(builder: (context) => const AdhocFormPage()),
                 );
               },
-              child: const Text("State Representation"),
+              child: const Text("Adhoc"),
             ),
             const SizedBox(height: 12),
             ElevatedButton(
@@ -36,10 +41,10 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const FormApproachesListPage()),
+                  MaterialPageRoute(builder: (context) => const FormProposalPage()),
                 );
               },
-              child: const Text("Forms and Validation"),
+              child: const Text("Proposal"),
             ),
           ],
         ),
