@@ -15,7 +15,7 @@ class FormManager extends Notifier {
           validator: i.value.validator,
           controller: TextEditingController(),
           onChange: (p0) {
-            checkIsValid();
+            _checkIsValid();
             notifyListeners();
           },
         ),
@@ -23,7 +23,7 @@ class FormManager extends Notifier {
     }
   }
 
-  void checkIsValid() {
+  void _checkIsValid() {
     for (final item in _forms.entries) {
       if (item.value.validator(item.value.controller.text) != null) {
         _isValid = false;
