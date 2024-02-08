@@ -428,7 +428,7 @@ Para lidar com validações de campos de formulário, o Flutter por si só já o
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.65\textwidth]{figures/states/example_form.png}
+    \includegraphics[width=.65\textwidth]{figures/forms/example_form.png}
     \caption{Exemplo de criação de formulário com Flutter}
     \label{fig:example_form}
 \end{figure}
@@ -449,7 +449,7 @@ Essa abordagem, porém pode apresentar alguns problemas. Para demonstrar esses p
     \label{fig:form_preview_valid}
 \end{figure}
 
-A partir do exemplo apresentado na Figura \ref{fig:example_form}, para criar esse formulário de demonstração é necessário criar as funções de validação para cada um dos campos para que seja feita a validação de cada um dos campos, como visto na Figura \ref{fig:form_adhoc_validators}, e adicionar essa função de validação em cada campo, assim como o \textit{TextEditingController} de cada campo, como exemplificado na Figura \ref{form_adhoc_textformfield}. Além disso, para que o botão reaja à validação do formulário, é necessário criar uma variável booleana e uma função que irá verificar se a validação está correta e chamar o método \textit{setState} para atualizar a tela com o novo valor da variável, como na Figura \ref{form_adhoc_checkFields}. Essa função deve ser chamada sempre que houver uma alteração em cada formulário, como é possível visualizar na Figura \ref{form_adhoc_textformfield}
+A partir do exemplo apresentado na Figura \ref{fig:example_form}, para criar esse formulário de demonstração é necessário criar as funções de validação para cada um dos campos para que seja feita a validação de cada um dos campos, como visto na Figura \ref{fig:form_adhoc_validators}, e adicionar essa função de validação em cada campo, assim como o \textit{TextEditingController} de cada campo, como exemplificado na Figura \ref{fig:form_adhoc_textformfield}. Além disso, para que o botão reaja à validação do formulário, é necessário criar uma variável booleana e uma função que irá verificar se a validação está correta e chamar o método \textit{setState} para atualizar a tela com o novo valor da variável, como na Figura \ref{fig:form_adhoc_checkFields}. Essa função deve ser chamada sempre que houver uma alteração em cada formulário, como é possível visualizar na Figura \ref{fig:form_adhoc_textformfield}
 
 \begin{figure}[ht]
     \centering
@@ -467,7 +467,7 @@ A partir do exemplo apresentado na Figura \ref{fig:example_form}, para criar ess
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.65\textwidth]{figures/forms/form_adhoc_checkFields.png}
+    \includegraphics[width=.8\textwidth]{figures/forms/form_adhoc_checkFields.png}
     \caption{Função para verificação da validade}
     \label{fig:form_adhoc_checkFields}
 \end{figure}
@@ -478,27 +478,27 @@ Para resolver o último problema apontado, pode-se aplicar o padrão de projeto 
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.85\textwidth]{figures/forms/form_validator.png}
+    \includegraphics[width=1\textwidth]{figures/forms/form_validator.png}
     \caption{Classe Validator com aplicação do \textit{Builder Pattern}}
     \label{fig:form_validator}
 \end{figure}
 
 Já para resolver os outros problemas apontados, pode-se criar uma nova estrutura separada para lidar apenas com a validação do formulário em si, de forma a isolar toda a lógica de validação da parte da interface gráfica e eliminar as duplicações de código apontadas anteriormente. Além disso, essa nova classe, chamada de \textit{FormManager}, seguirá o padrão de projeto \textit{Observer}, de forma que ela automaticamente irá verificar as alterações nos formulários e indicar aos seus ouvintes se o formulário está em um estado válido ou não.
 
-A implementação da classe \textit{FormManager}, vista na Figura \ref{fig:form_manager} terá como estrutura de dados um \textit{Map<String, FormObject>}, nomeada como \textit{FormsMap}, na qual as chaves serão uma \textit{String} com um identificador para o campo e o valor armazenado será uma instância da classe \textit{FormObject}, que as seguintes propriedades: 
+A implementação da classe \textit{FormManager}, vista na Figura \ref{fig:form_manager} terá como estrutura de dados um \textit{Map<String, FormObject>}, nomeada como \textit{FormsMap}, na qual as chaves serão uma \textit{String} com um identificador para o campo e o valor armazenado será uma instância da classe \textit{FormObject}, que as seguintes propriedades:
 
 \begin{itemize}
     \item \textit{label}, que será o texto a ser exibido na tela para cada campo do formulário;
     \item \textit{validator}, que será o método \textit{build} da classe \textit{Validator} criada anteriormente;
-    \item \textit{controller}, que será uma instância de \textit{TextEditingController} a ser criada pelo próprio \textit{FormManager}
-    \item \textit{onChange}, que será uma função a ser chamada a cada vez que houver modificação em um campo do formulário, também gerenciada pela própria classe \textit{FormManager}
+    \item \textit{controller}, que será uma instância de \textit{TextEditingController} a ser criada pelo próprio \textit{FormManager};
+    \item \textit{onChange}, que será uma função a ser chamada a cada vez que houver modificação em um campo do formulário, também gerenciada pela própria classe \textit{FormManager};
 \end{itemize}
 
-Além dessa estrutura de dados, a classe \textit{FormManager} terá o método \textit{setForms}, que irá receber um \textit{Map<String, FormObjectParameters>}, em que o \textit{FormObjectParameters} é possui apenas os atributos \textit{label} e \textit{validator} da classe \textit{FormObject}. Esse método irá passar por todas as entradas do mapa passado e irá adicionar uma nova entrada na estrutura de \textit{FormsMap}, de forma a criar o \textit{TextEditingController} para cada campo e definir a função anônima a ser chamada quando o campo for alterado. Essa função anônima chamará a função privada \textit{_checkIsValid} que passará por toda a estrutura de dados \textit{FormsMap} e checará se o valor atual do campo, provido pelo atributo \textit{controller}, está válido. Caso todos estejam válidos, atribuirá o valor verdadeiro para a variável \textit{_isValid}, caso contrário, atribuirá o valor falso. Após a chamada desse método privado, será chamado o método herdado da classe \textit{Notifier}, \textit{notifyListeners}, que irá avisar a todos os ouvintes sobre o novo estado da classe.
+Além dessa estrutura de dados, a classe \textit{FormManager} terá o método \textit{setForms}, que irá receber um \textit{Map<String, FormObjectParameters>}, em que o \textit{FormObjectParameters} é possui apenas os atributos \textit{label} e \textit{validator} da classe \textit{FormObject}. Esse método irá passar por todas as entradas do mapa passado e irá adicionar uma nova entrada na estrutura de \textit{FormsMap}, de forma a criar o \textit{TextEditingController} para cada campo e definir a função anônima a ser chamada quando o campo for alterado. Essa função anônima chamará a função privada \textit{\_checkIsValid} que passará por toda a estrutura de dados \textit{FormsMap} e checará se o valor atual do campo, provido pelo atributo \textit{controller}, está válido. Caso todos estejam válidos, atribuirá o valor verdadeiro para a variável \textit{\_isValid}, caso contrário, atribuirá o valor falso. Após a chamada desse método privado, será chamado o método herdado da classe \textit{Notifier}, \textit{notifyListeners}, que irá avisar a todos os ouvintes sobre o novo estado da classe.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.85\textwidth]{figures/forms/form_manager.png}
+    \includegraphics[width=.7\textwidth]{figures/forms/form_manager.png}
     \caption{Classe \textit{FormManager}, responsável por encapsular todo o registro e validação dos formulários}
     \label{fig:form_manager}
 \end{figure}
@@ -507,7 +507,7 @@ Assim, como o \textit{FormManager} criado, pode-se criar uma nova instância del
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.85\textwidth]{figures/forms/set_forms.png}
+    \includegraphics[width=1\textwidth]{figures/forms/set_forms.png}
     \caption{Inicialização dos formulários na tela}
     \label{fig:set_forms}
 \end{figure}
@@ -516,16 +516,16 @@ Para terminar o uso das novas estruturas criadas, basta passar as informações 
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.85\textwidth]{figures/forms/custom_text_field.png}
+    \includegraphics[width=.65\textwidth]{figures/forms/custom_text_field.png}
     \caption{Criação do componente personalizado para um formulário}
     \label{fig:custom_text_field}
 \end{figure}
 
 Assim, o uso de todas essas classes será o presente na Figura \ref{fig:use_of_form_proposal}, em que terá-se um \textit{NotifierBuilder} para notificar os componentes sobre as alterações do \textit{FormManager} e será listado de forma direta quais os campos existentes para aquele formulário, além de o widget \textit{CustomButton} já saber sempre se o estado do formulário é válido ou não para bloquear ou não o clique sobre o botão.
- 
+
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.85\textwidth]{figures/forms/use_of_form_proposal.png}
+    \includegraphics[width=.65\textwidth]{figures/forms/use_of_form_proposal.png}
     \caption{Uso dos formulários com reatividade no código da interface gráfica}
     \label{fig:use_of_form_proposal}
 \end{figure}
