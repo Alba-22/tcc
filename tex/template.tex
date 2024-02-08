@@ -149,9 +149,9 @@ brazil]{facom-ufu-abntex2}
     \item[DDD] Domain Driven Design
     \item[YAGNI] You Aren't Gonna Need It
     \item[DRY] Don't Repeat Yourself
-    \item[SRP] Single Responsability Principle
+    \item[SRP] Single Responsibility Principle
     \item[OCP] Open-Closed Principle
-    \item[LSP] Liskov Substituition Principle
+    \item[LSP] Liskov Substitution Principle
     \item[ISP] Interface Segregation Principle
     \item[DIP] Dependency Inversion Principle
     \item[GUI] Graphic User Interface
@@ -232,7 +232,7 @@ Dentre os princípios SOLID, pode-se destacar dois que se relacionam fortemente 
 
 Segundo \citeonline{GOF}, projetar software orientado a objetos é difícil, e projetar código orientado a objetos que seja reusável é mais difícil ainda. O código criado seve ser específico para resolver o problema em questão, mas ao mesmo tempo deve ser genérico o suficiente para resolver problemas e requerimento futuros. Assim, projetistas experientes tomaram como ação para resolver esse dilema em reusar soluções que foram bem sucedidas no passado e, com o tempo, surgiram os chamados padrões de projeto. No livro "Design Patterns: Elements of Reusable Object-Oriented Software", \citeonline{GOF}, descrevem alguns grupos de padrões de projeto para solucionar problemas comuns e melhorar o reuso de código em um projeto de software. Os padrões criacionais se preocupam no processo de criar um novo objeto para aumentar a flexibilidade e reuso. Os padrões estruturais explicam como agregar objetos e classes em estruturas maiores, ainda de forma a manter essas estruturas flexíveis e eficientes. Já o padrões comportamentais lidam com a comunicação e atribuição de responsabilidades entre objetos, fato esse que é de suma importância para a existência de uma boa arquitetura.
 
-Outros dois conceitos de extrema importância no estudo de arquitetura de software são os conceitos de acoplamento e coesão em um projeto de software. Segundo \citeonline{FOWLER2} se ao alterar um módulo de um programa requer alterar outro módulo, seja por questões de código duplicado ou pelo fato de um módulo acessar diretamente código de outro módulo, então o acoplamento existe entre esses módulos. Para a construção de um bom software, deve-se desejar ter um baixo acoplamento entre os componentes e módulos, de forma a ter uma independência maior entre eles e de forma que as políticas de alto nível não dependam dos detalhes de baixo nível, o que está diretamente relacionado ao DIP. Já a coesão é, segundo \citeonline{MARTIN}, a força que une um código a um determinado ator, o que se relaciona de forma próxima com o \textit{Single Responsibility Principle(SPR)}, a letra S do acrônimo SOLID, que diz que um módulo deve ser responsável a um, e apenas um, ator, sendo "ator" aqui definido como um grupo de pessoas(normalmente usuários ou \textit{stakeholder} de uma organização) que requerem mudanças em um software. Assim, a coesão mede o como um trecho de código(uma classe e/ou função) funciona para cumprir um único e bem definido propósito. Com isso, entende-se que um bom software deve sempre buscar um alto nível de coesão dentro de seus componentes e módulos de forma a atingir, em conjunto com um baixo acoplamento, níveis satisfatórios de manutenabilidade, escalabilidade e confiabilidade.
+Outros dois conceitos de extrema importância no estudo de arquitetura de software são os conceitos de acoplamento e coesão em um projeto de software. Segundo \citeonline{FOWLER2} se ao alterar um módulo de um programa requer alterar outro módulo, seja por questões de código duplicado ou pelo fato de um módulo acessar diretamente código de outro módulo, então o acoplamento existe entre esses módulos. Para a construção de um bom software, deve-se desejar ter um baixo acoplamento entre os componentes e módulos, de forma a ter uma independência maior entre eles e de forma que as políticas de alto nível não dependam dos detalhes de baixo nível, o que está diretamente relacionado ao DIP. Já a coesão é, segundo \citeonline{MARTIN}, a força que une um código a um determinado ator, o que se relaciona de forma próxima com o \textit{Single Responsibility Principle(SPR)}, a letra S do acrônimo SOLID, que diz que um módulo deve ser responsável a um, e apenas um, ator, sendo "ator" aqui definido como um grupo de pessoas(normalmente usuários ou \textit{stakeholder} de uma organização) que requerem mudanças em um software. Assim, a coesão mede o como um trecho de código(uma classe e/ou função) funciona para cumprir um único e bem definido propósito. Com isso, entende-se que um bom software deve sempre buscar um alto nível de coesão dentro de seus componentes e módulos de forma a atingir, em conjunto com um baixo acoplamento, níveis satisfatórios de manutenibilidade, escalabilidade e confiabilidade.
 
 \section{Padrões de Projeto}
 
@@ -419,6 +419,117 @@ Com essa alteração feita nas classes de estados, pode-se alterar a interface d
 \end{figure}
 
 \section{Melhorando Formulários e suas Validações}
+
+Em aplicações que rodam no lado do cliente, é muito comum a presença de formulários, seja para criação de conta, login, criação de recursos, edição de dados, etc. Para isso, é comum a presença de campos de formulários nessas aplicações, que são componentes de interface que permitem ao usuário digitar valores e registrá-los, seja por um envio desses dados à algum servidor ou pela escrita em um banco de dados no próprio dispositivo.
+
+Assim, além da coleta desses dados pela aplicação cliente, é muito importante haver também a validação desses dados na própria aplicação por dois principais motivos. O primeiro deles se relaciona com a experiência do usuário. Em caso do usuário digitar algo que seja inválido, é importante avisá-lo com boas mensagens de erros que sejam as mais descritivas possível, além de mostrar essas mensagens de erro de forma reativa, ou seja, conforme ele já digita nos campos para que ele já saiba o quanto antes que o valor está incorreto, visto que pode ser uma experiência desagradável para um usuário de uma aplicação só ser avisado sobre erros no formulário somente após preencher diversos campos de formulário. Outro motivo que denota a importância de se haver a validação na própria aplicação é de garantir a consistência de dados do formulário a ser preenchido, de forma que não sejam armazenados dados inválidos. Por exemplo, pode-se garantir que o valor em um campo que deve ser um CPF, seja realmente um CPF válido de acordo com o algoritmo de geração de CPF, ou que um campo que é uma data realmente seja uma data válida, e não uma data que aponte para um mês maior que 12, ou um dia que não existe em um determinado mês.
+
+Para lidar com validações de campos de formulário, o Flutter por si só já oferece mecanismos prontos para lidar com isso, por meio do \textit{widget} \textit{TextFormField}, que possui uma propriedade \textit{validator} que permite a execução de uma função anônima que será executada a cada vez que houver uma modificação no campo. Essa função deve retornar \textit{null} em caso do campo estar válido ou uma \textit{String} com a mensagem de error em caso do campo estar inválido. Para que já seja executada a validação conforme o usuário digitar no campo, o framework disponibiliza a propriedade \textit{autovalidateMode}, que pode ser atribuída com o valor \textit{AutovalidateMode.onUserInteraction}. Ainda, para que seja possível obter o valor do campo posteriormente, é necessário criar uma instância de \textit{TextEditingController} para cada campo e adicionar no atributo \textit{controller} de cada \textit{TextFormField}. Ao final de um formulário, é comum ter-se um botão para fazer o registros dos dados e, para que possa-se prosseguir com a ação desejada, o formulário deve estar válido. Para isso, o framework disponibiliza uma classe \textit{Form} que deve envolver os componentes de formulário, de forma que deve ser dada a essa instância uma \textit{key}, do tipo \textit{GlobalKey<FormState>}, que possibilitará a verificação da validade do formulário, como visto na figura \ref{fig:example_form}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.65\textwidth]{figures/states/example_form.png}
+    \caption{Exemplo de criação de formulário com Flutter}
+    \label{fig:example_form}
+\end{figure}
+
+Essa abordagem, porém pode apresentar alguns problemas. Para demonstrar esses problemas, e também como resolvê-los por meio da aplicação de padrões de projeto, foi criado um exemplo de formulário com três campos: um para e-mail, que não é obrigatório, mas caso seja preenchido deve ser válido, outro para senha, que é obrigatório e deve ter pelo menos 12 caracteres e pelo menos uma letra e um número, e um campo de confirmação de senha, que é obrigatório e deve verificar se seu conteúdo está idêntico ao campo de senha. Além disso, a tela terá um botão, que só deve estar habilitado caso o formulário esteja válido, como visto nas Figuras \ref{fig:form_preview_invalid} e \ref{fig:form_preview_valid}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.65\textwidth]{figures/forms/form_preview_invalid.png}
+    \caption{Exemplos de formulários inválidos}
+    \label{fig:form_preview_invalid}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.65\textwidth]{figures/forms/form_preview_valid.png}
+    \caption{Exemplos de formulários válidos}
+    \label{fig:form_preview_valid}
+\end{figure}
+
+A partir do exemplo apresentado na Figura \ref{fig:example_form}, para criar esse formulário de demonstração é necessário criar as funções de validação para cada um dos campos para que seja feita a validação de cada um dos campos, como visto na Figura \ref{fig:form_adhoc_validators}, e adicionar essa função de validação em cada campo, assim como o \textit{TextEditingController} de cada campo, como exemplificado na Figura \ref{form_adhoc_textformfield}. Além disso, para que o botão reaja à validação do formulário, é necessário criar uma variável booleana e uma função que irá verificar se a validação está correta e chamar o método \textit{setState} para atualizar a tela com o novo valor da variável, como na Figura \ref{form_adhoc_checkFields}. Essa função deve ser chamada sempre que houver uma alteração em cada formulário, como é possível visualizar na Figura \ref{form_adhoc_textformfield}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.65\textwidth]{figures/forms/form_adhoc_validators.png}
+    \caption{Funções para validação dos campos da demonstração}
+    \label{fig:form_adhoc_validators}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.65\textwidth]{figures/forms/form_adhoc_textformfield.png}
+    \caption{Widget TextFormField para o campo de e-mail}
+    \label{fig:form_adhoc_textformfield}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.65\textwidth]{figures/forms/form_adhoc_checkFields.png}
+    \caption{Função para verificação da validade}
+    \label{fig:form_adhoc_checkFields}
+\end{figure}
+
+A partir dessa demonstração inicial, pode-se notar alguns problemas. O primeiro deles é o fato da classe responsável pela tela interface gráfica da aplicação ter que se preocupar também com a validação do formulário, o que sobrecarrega as responsabilidades da classe e fere o Single Responsibility Principle, do SOLID. Um segundo problema é o fato de ter-se que criar explicitamente um \textit{TextEditingController} para cada um dos campos do formulário, o que fará com que tenham muitas variáveis a serem controladas em casos de formulários com muitos campos. Outro porém é a necessidade de chamar a função \textit{checkFields} em cada um dos campos, o que pode ser facilmente esquecido pelo desenvolvedor em algum campo, o que acarretará em um bug na aplicação. Além disso, há o fato de ter-se que chamar as funções de validação duas vezes, o que também pode ser esquecido durante o desenvolvimento e fere o princípio DRY. Um último ponto que é problemático para a escalabilidade da aplicação é o fato das funções de validação serem específicas para o formulário em questão, de forma que é possível que elas não sejam reaproveitáveis em sua totalidade para outros formulários da aplicação. Por exemplo, para o campo e-mail do caso demonstrado não há a validação se o campo é obrigatório. Porém, se em outra parte da aplicação ocorrer de ter um campo e-mail que seja obrigatório teria-se que: ou criar uma nova função, com trecho de código semelhante e, portanto, com duplicação de parte de base de código, ou adicionar um parâmetro booleano na função já existente, o que poderá causar bug em partes da aplicação que já estão desenvolvidas.
+
+Para resolver o último problema apontado, pode-se aplicar o padrão de projeto Builder, de forma que poderá ser criada a uma classe apenas para lidar com validação de forma mais simplificada. Seguindo o padrão, qualquer parte do código que precisar de fazer uma validação irá especificar, por meio de encadeamento de métodos, quais aspectos do valor de entrada que deseja-se validar e, ao final, chamar um método \textit{build} que irá retornar \textit{null} caso a entrada esteja válida ou uma \textit{String} com a mensagem do que está inválido na dada entrada. A implementação feita, vista na Figura \ref{fig:form_validator} consiste em criar uma classe que recebe em seu construtor a variável do tipo \textit{String nullable} que será feita a validação. Ainda dentro dessa classe, há uma lista de \textit{String} com os erros que podem ser registrados para a entrada dada e também uma variável booleana que indica a obrigatoriedade do campo. Assim, a classe terá uma série de métodos para pequenas validações que serão compostas por quem utilizar a classe, de forma que cada método irá retornar sua própria instância e em caso da entrada ser inválida irá adicionar uma mensagem de erro na lista de erros. Ao final, o método \textit{build} irá retornar \textit{null} caso a lista de erros esteja vazia ou uma \textit{String} que concatenará todos os erros.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.85\textwidth]{figures/forms/form_validator.png}
+    \caption{Classe Validator com aplicação do \textit{Builder Pattern}}
+    \label{fig:form_validator}
+\end{figure}
+
+Já para resolver os outros problemas apontados, pode-se criar uma nova estrutura separada para lidar apenas com a validação do formulário em si, de forma a isolar toda a lógica de validação da parte da interface gráfica e eliminar as duplicações de código apontadas anteriormente. Além disso, essa nova classe, chamada de \textit{FormManager}, seguirá o padrão de projeto \textit{Observer}, de forma que ela automaticamente irá verificar as alterações nos formulários e indicar aos seus ouvintes se o formulário está em um estado válido ou não.
+
+A implementação da classe \textit{FormManager}, vista na Figura \ref{fig:form_manager} terá como estrutura de dados um \textit{Map<String, FormObject>}, nomeada como \textit{FormsMap}, na qual as chaves serão uma \textit{String} com um identificador para o campo e o valor armazenado será uma instância da classe \textit{FormObject}, que as seguintes propriedades: 
+
+\begin{itemize}
+    \item \textit{label}, que será o texto a ser exibido na tela para cada campo do formulário;
+    \item \textit{validator}, que será o método \textit{build} da classe \textit{Validator} criada anteriormente;
+    \item \textit{controller}, que será uma instância de \textit{TextEditingController} a ser criada pelo próprio \textit{FormManager}
+    \item \textit{onChange}, que será uma função a ser chamada a cada vez que houver modificação em um campo do formulário, também gerenciada pela própria classe \textit{FormManager}
+\end{itemize}
+
+Além dessa estrutura de dados, a classe \textit{FormManager} terá o método \textit{setForms}, que irá receber um \textit{Map<String, FormObjectParameters>}, em que o \textit{FormObjectParameters} é possui apenas os atributos \textit{label} e \textit{validator} da classe \textit{FormObject}. Esse método irá passar por todas as entradas do mapa passado e irá adicionar uma nova entrada na estrutura de \textit{FormsMap}, de forma a criar o \textit{TextEditingController} para cada campo e definir a função anônima a ser chamada quando o campo for alterado. Essa função anônima chamará a função privada \textit{_checkIsValid} que passará por toda a estrutura de dados \textit{FormsMap} e checará se o valor atual do campo, provido pelo atributo \textit{controller}, está válido. Caso todos estejam válidos, atribuirá o valor verdadeiro para a variável \textit{_isValid}, caso contrário, atribuirá o valor falso. Após a chamada desse método privado, será chamado o método herdado da classe \textit{Notifier}, \textit{notifyListeners}, que irá avisar a todos os ouvintes sobre o novo estado da classe.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.85\textwidth]{figures/forms/form_manager.png}
+    \caption{Classe \textit{FormManager}, responsável por encapsular todo o registro e validação dos formulários}
+    \label{fig:form_manager}
+\end{figure}
+
+Assim, como o \textit{FormManager} criado, pode-se criar uma nova instância dele na classe da UI e, na inicialização da tela, por meio do método \textit{initState}, definir quais os campos do formulário e quais serão as validações feitas sobre eles, como demonstrado na Figura \ref{fig:set_forms}. Essa forma de criar formulários, além de ser menos passível de erros por descrever-se as validações apenas uma vez, é muito mais semântica, já que deixa explícito o que está sendo validado em cada campo.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.85\textwidth]{figures/forms/set_forms.png}
+    \caption{Inicialização dos formulários na tela}
+    \label{fig:set_forms}
+\end{figure}
+
+Para terminar o uso das novas estruturas criadas, basta passar as informações do \textit{FormManager} para os componentes da interface. Nisso, o \textit{TextFormField} terá que receber os parâmetros \textit{label}, \textit{controller}, \textit{validator} e \textit{onChange} em cada campo. Além disso, para customizações visuais nos campos de formulário, como adição de ícones e customização de fonte, teria-se que repetir grandes trechos de código. Para evitar essa duplicação desnecessária, pode-se criar um componente customizado para o formulário, como visto na Figura \ref{fig:custom_text_field}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.85\textwidth]{figures/forms/custom_text_field.png}
+    \caption{Criação do componente personalizado para um formulário}
+    \label{fig:custom_text_field}
+\end{figure}
+
+Assim, o uso de todas essas classes será o presente na Figura \ref{fig:use_of_form_proposal}, em que terá-se um \textit{NotifierBuilder} para notificar os componentes sobre as alterações do \textit{FormManager} e será listado de forma direta quais os campos existentes para aquele formulário, além de o widget \textit{CustomButton} já saber sempre se o estado do formulário é válido ou não para bloquear ou não o clique sobre o botão.
+ 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.85\textwidth]{figures/forms/use_of_form_proposal.png}
+    \caption{Uso dos formulários com reatividade no código da interface gráfica}
+    \label{fig:use_of_form_proposal}
+\end{figure}
+
 
 \section{Uma proposta de arquitetura}
 
