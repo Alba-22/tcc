@@ -5,6 +5,12 @@
       "type": "dart",
       "request": "launch",
       "program": "poc/lib/main.dart"
+    },
+    {
+      "name": "Launch FlutterPad",
+      "type": "dart",
+      "request": "launch",
+      "program": "flutterpad/lib/main.dart"
     }
   ]
 }

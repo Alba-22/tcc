@@ -25,5 +25,7 @@
     "**/*desktop.ini": true,
     ".flutter-plugins": true,
     ".flutter-plugins-dependencies": true
-  }
+  },
+  "cSpell.language": "en,pt-BR",
+  "cSpell.enableFiletypes": ["tex"]
 }
