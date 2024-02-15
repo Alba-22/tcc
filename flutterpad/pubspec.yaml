@@ -9,9 +9,11 @@ environment:
   sdk: ">=3.2.3 <4.0.0"
 
 dependencies:
+  connectivity_plus: ^5.0.2
   equatable: ^2.0.5
   flutter:
     sdk: flutter
+  internet_connection_checker: ^1.0.0+1
 
 dev_dependencies:
   flutter_test:

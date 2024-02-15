@@ -17,7 +17,7 @@ final class MarkTasksCompletionUsecase extends Usecase<TaskCompletionParams, voi
     task = task.copyWith(
       completed: input.completion,
     );
-    await _repository.saveTask(task);
+    await _repository.updateTask(task);
   }
 }
 
