@@ -10,7 +10,7 @@ class TaskEntity extends Equatable {
   const TaskEntity({
     required this.id,
     required this.text,
-    this.description,
+    required this.description,
     required this.date,
     required this.completed,
   });
