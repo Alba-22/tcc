@@ -8,6 +8,8 @@ version: 1.0.0+1
 environment:
   sdk: ">=3.2.3 <4.0.0"
 
+isar_version: &isar_version 3.1.0
+
 dependencies:
   clock: ^1.1.1
   connectivity_plus: ^5.0.2
@@ -16,12 +18,16 @@ dependencies:
   flutter:
     sdk: flutter
   internet_connection_checker: ^1.0.0+1
+  isar: *isar_version
+  isar_flutter_libs: *isar_version
+  path_provider: ^2.1.2
 
 dev_dependencies:
+  build_runner: any
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^2.0.0
+  isar_generator: *isar_version
 
 flutter:
   uses-material-design: true

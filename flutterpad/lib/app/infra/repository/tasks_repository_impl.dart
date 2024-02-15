@@ -38,6 +38,7 @@ class TasksRepositoryImpl implements TasksRepository {
   Future<void> createTask(TaskEntity task) async {
     await _localDatasource.saveTask(task, false);
     if (await _networkChecker.isConnected) {
+      // DELETAR TASK COM ID ANTIGO
       final id = await _remoteDatasource.createTask(task);
       task = task.copyWith(
         id: id,
