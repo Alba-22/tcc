@@ -14,9 +14,7 @@ final class MarkTasksCompletionUsecase extends Usecase<TaskCompletionParams, voi
     if (task == null) {
       throw TaskNotFoundFailure();
     }
-    task = task.copyWith(
-      completed: input.completion,
-    );
+    task = task.markTaskCompletion(input.completion);
     await _repository.updateTask(task);
   }
 }

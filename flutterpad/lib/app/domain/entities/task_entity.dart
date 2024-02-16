@@ -18,6 +18,10 @@ class TaskEntity extends Equatable {
   @override
   List<Object?> get props => [id, text, description, date, completed];
 
+  TaskEntity markTaskCompletion(bool completed) {
+    return copyWith(completed: completed);
+  }
+
   @override
   bool get stringify => true;
 
