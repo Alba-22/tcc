@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutterpad/app/core/components/custom_button.dart';
 import 'package:flutterpad/app/core/di/di.dart';
@@ -6,6 +8,7 @@ import 'package:flutterpad/app/core/utils/notifier_builder.dart';
 import 'package:flutterpad/app/presentation/components/home/home_header.dart';
 import 'package:flutterpad/app/presentation/components/home/home_success_widget.dart';
 import 'package:flutterpad/app/presentation/stores/get_tasks_store.dart';
+import 'package:flutterpad/app/presentation/stores/mark_task_completion_store.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,12 +18,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final store = locator.get<GetTasksStore>();
+  final getStore = locator.get<GetTasksStore>();
+  final markStore = locator.get<MarkTaskCompletionStore>();
+
+  void listener() {
+    if (markStore.state is MarkTaskCompletionSuccessState) {
+      getStore.getTasks();
+    } else if (markStore.state is MarkTaskCompletionErrorState) {
+      log("ERROR");
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    store.getTasks();
+    getStore.getTasks();
+    markStore.addListener(listener);
   }
 
   @override
@@ -32,9 +45,9 @@ class _HomePageState extends State<HomePage> {
           const HomeHeader(),
           Expanded(
             child: NotifierBuilder(
-              controller: store,
+              controller: getStore,
               builder: () {
-                return switch (store.state) {
+                return switch (getStore.state) {
                   GetTasksInitialState() => const SizedBox(),
                   GetTasksLoadingState() => const Center(child: CircularProgressIndicator()),
                   GetTasksErrorState(message: final message) => Text(message),
@@ -71,5 +84,11 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    markStore.removeListener(listener);
+    super.dispose();
   }
 }
