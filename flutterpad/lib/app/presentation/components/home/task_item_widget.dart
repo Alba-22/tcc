@@ -7,12 +7,14 @@ class TaskItemWidget extends StatelessWidget {
   final String text;
   final DateTime date;
   final bool isCompleted;
+  final void Function(bool value) onTapCheckbox;
 
   const TaskItemWidget({
     Key? key,
     required this.text,
     required this.date,
     required this.isCompleted,
+    required this.onTapCheckbox,
   }) : super(key: key);
 
   @override
@@ -54,7 +56,7 @@ class TaskItemWidget extends StatelessWidget {
           ),
           CustomCheckbox(
             value: isCompleted,
-            onTap: (value) {},
+            onTap: onTapCheckbox,
           ),
         ],
       ),
