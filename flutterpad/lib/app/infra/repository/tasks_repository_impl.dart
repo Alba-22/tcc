@@ -18,11 +18,6 @@ class TasksRepositoryImpl implements TasksRepository {
   }
 
   @override
-  Future<TaskEntity?> getTaskById(String id) {
-    return _localDatasource.getTaskById(id);
-  }
-
-  @override
   Future<void> createTask(TaskEntity task) async {
     await _localDatasource.saveTask(task, false);
   }
