@@ -42,7 +42,7 @@ class TaskItemWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    DateFormat("dd/MM/yyyy - HH:MM", "pt-BR").format(date),
+                    DateFormat("dd/MM/yyyy - HH:mm", "pt-BR").format(date),
                     style: TextStyle(
                       decoration: isCompleted ? TextDecoration.lineThrough : TextDecoration.none,
                       fontSize: 14,
