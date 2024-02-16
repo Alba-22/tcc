@@ -16,8 +16,10 @@ class GetTasksStore extends Notifier {
   GetTasksStore(this._pendingTasksUsecase, this._lastCompletedTasksUsecase);
 
   Future<void> getTasks() async {
-    _state = GetTasksLoadingState();
-    notifyListeners();
+    if (_state is GetTasksInitialState) {
+      _state = GetTasksLoadingState();
+      notifyListeners();
+    }
     try {
       final pendingTasks = await _pendingTasksUsecase.call({});
       final completedTasks = await _lastCompletedTasksUsecase.call({});
