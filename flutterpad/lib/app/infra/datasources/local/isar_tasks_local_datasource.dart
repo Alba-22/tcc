@@ -17,7 +17,7 @@ class IsarTasksLocalDatasource implements TasksLocalDatasource {
     final tasks = await collection
         .filter()
         .completionEqualTo(true)
-        .syncDateGreaterThan(clock.now().subtract(const Duration(hours: 24)))
+        .dateGreaterThan(clock.now().subtract(const Duration(hours: 24)))
         .findAll();
     return tasks.map((taskModel) {
       return IsarTaskAdapter.toEntity(taskModel);
@@ -56,7 +56,7 @@ class IsarTasksLocalDatasource implements TasksLocalDatasource {
     } else {
       taskModel.syncDate = clock.now();
     }
-    _isar.writeTxn(() async {
+    await _isar.writeTxn(() async {
       await collection.put(taskModel);
     });
   }
