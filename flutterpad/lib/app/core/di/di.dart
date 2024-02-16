@@ -34,9 +34,7 @@ void registerDependencies() {
   locator.registerFactory<TasksLocalDatasource>(() => IsarTasksLocalDatasource(locator.get()));
 
   // Repositories
-  locator.registerFactory<TasksRepository>(
-    () => TasksRepositoryImpl(locator.get(), locator.get(), locator.get()),
-  );
+  locator.registerFactory<TasksRepository>(() => TasksRepositoryImpl(locator.get()));
 
   // Usecases
   locator.registerFactory(() => GetLastCompletedTasksUsecase(locator.get()));
