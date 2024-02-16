@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpad/app/core/components/custom_button.dart';
+import 'package:flutterpad/app/core/di/di.dart';
 import 'package:flutterpad/app/core/utils/custom_colors.dart';
-import 'package:flutterpad/app/presentation/components/home/completed_task_list_widget.dart';
+import 'package:flutterpad/app/core/utils/notifier_builder.dart';
 import 'package:flutterpad/app/presentation/components/home/home_header.dart';
-import 'package:flutterpad/app/presentation/components/home/pending_task_list_widget.dart';
+import 'package:flutterpad/app/presentation/components/home/home_success_widget.dart';
+import 'package:flutterpad/app/presentation/stores/get_tasks_store.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,6 +15,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final store = locator.get<GetTasksStore>();
+
+  @override
+  void initState() {
+    super.initState();
+    store.getTasks();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,20 +31,20 @@ class _HomePageState extends State<HomePage> {
         children: [
           const HomeHeader(),
           Expanded(
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-              ),
-              child: const SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SizedBox(height: 24),
-                    PendingTaskListWidget(),
-                    CompletedTaskListWidget(),
-                    SizedBox(height: 16),
-                  ],
-                ),
-              ),
+            child: NotifierBuilder(
+              controller: store,
+              builder: () {
+                return switch (store.state) {
+                  GetTasksInitialState() => const SizedBox(),
+                  GetTasksLoadingState() => const Center(child: CircularProgressIndicator()),
+                  GetTasksErrorState(message: final message) => Text(message),
+                  GetTasksSuccessState(
+                    pendingTasks: final pending,
+                    completedTasks: final completed
+                  ) =>
+                    HomeSuccessWidget(pendingTasks: pending, completedTasks: completed),
+                };
+              },
             ),
           ),
           Container(
@@ -60,14 +70,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      // floatingActionButton: Container(
-      //   padding: const EdgeInsets.symmetric(horizontal: 16),
-      //   child: CustomButton(
-      //     text: "Nova tarefa",
-      //     onTap: () {},
-      //   ),
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
     );
   }
 }

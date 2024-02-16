@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutterpad/app/core/utils/constants.dart';
 import 'package:flutterpad/app/core/utils/custom_colors.dart';
+import 'package:flutterpad/app/domain/entities/task_entity.dart';
 import 'package:flutterpad/app/presentation/components/home/task_item_widget.dart';
 
 class PendingTaskListWidget extends StatelessWidget {
-  const PendingTaskListWidget({Key? key}) : super(key: key);
+  final List<TaskEntity> pendingTasks;
+
+  const PendingTaskListWidget({
+    Key? key,
+    required this.pendingTasks,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +23,14 @@ class PendingTaskListWidget extends StatelessWidget {
       child: ListView.separated(
         shrinkWrap: true,
         padding: EdgeInsets.zero,
-        itemCount: 3,
+        itemCount: pendingTasks.length,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
+          final item = pendingTasks[index];
           return TaskItemWidget(
-            text: "Tarefa ${index + 1}",
-            date: DateTime.now(),
-            isCompleted: false,
+            text: item.text,
+            date: item.date,
+            isCompleted: item.completed,
           );
         },
         separatorBuilder: (context, index) {

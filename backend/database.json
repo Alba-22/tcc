@@ -1,3 +1,39 @@
 {
-    "tasks": []
+    "tasks": [
+        {
+            "id": "17d35449-f2b8-4a3b-b182-c013d6fa0e46",
+            "date": "2024-02-15T20:00:00.000Z",
+            "title": "Estudar arquitetura limpa",
+            "description": null,
+            "done": false
+        },
+        {
+            "id": "17d35449-f2b8-4a3b-b182-c013d6fa0e46",
+            "date": "2024-02-16T10:00:00.000Z",
+            "title": "Correr 5km",
+            "description": null,
+            "done": false
+        },
+        {
+            "id": "17d35449-f2b8-4a3b-b182-c013d6fa0e46",
+            "date": "2024-02-16T20:00:00.000Z",
+            "title": "Jogar Boliche",
+            "description": null,
+            "done": false
+        },
+        {
+            "id": "17d35449-f2b8-4a3b-b182-c013d6fa0e46",
+            "date": "2024-02-15T12:00:00.000Z",
+            "title": "Escrever artigos de teste unitários",
+            "description": null,
+            "done": true
+        },
+        {
+            "id": "17d35449-f2b8-4a3b-b182-c013d6fa0e46",
+            "date": "2024-02-15T08:00:00.000Z",
+            "title": "Reunião Semanal",
+            "description": null,
+            "done": true
+        }
+    ]
 }

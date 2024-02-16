@@ -9,7 +9,7 @@ class RestTasksRemoteDatasource implements TasksRemoteDatasource {
 
   RestTasksRemoteDatasource(this._dio);
 
-  static get baseUrl => "localhost:8080";
+  static get baseUrl => "http://192.168.100.100:8080";
 
   @override
   Future<String> createTask(TaskEntity task) async {
@@ -32,7 +32,9 @@ class RestTasksRemoteDatasource implements TasksRemoteDatasource {
       return RestTaskAdapter.fromMap(e);
     }).toList();
     return tasks
-        .where((element) => element.completed == true && element.date.compareTo(clock.now()) == 1)
+        .where((element) =>
+            element.completed == true &&
+            element.date.compareTo(clock.now().subtract(const Duration(hours: 24))) == 1)
         .toList();
   }
 
