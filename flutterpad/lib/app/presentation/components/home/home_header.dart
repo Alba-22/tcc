@@ -17,7 +17,7 @@ class HomeHeader extends StatelessWidget {
       color: CustomColors.primary,
       child: Column(
         children: [
-          SizedBox(height: max(MediaQuery.of(context).padding.top, 36)),
+          SizedBox(height: max(MediaQuery.of(context).padding.top + 16, 36)),
           Text(
             dateStr,
             style: const TextStyle(

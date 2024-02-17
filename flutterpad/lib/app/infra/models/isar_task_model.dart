@@ -12,6 +12,7 @@ class IsarTaskModel {
   DateTime date;
   bool completion;
   DateTime? syncDate;
+  bool createdRemotelly = false;
 
   IsarTaskModel({
     required this.taskId,
@@ -20,5 +21,6 @@ class IsarTaskModel {
     required this.date,
     required this.completion,
     this.syncDate,
+    this.createdRemotelly = false,
   });
 }

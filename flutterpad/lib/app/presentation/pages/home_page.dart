@@ -9,6 +9,7 @@ import 'package:flutterpad/app/presentation/components/home/home_header.dart';
 import 'package:flutterpad/app/presentation/components/home/home_success_widget.dart';
 import 'package:flutterpad/app/presentation/stores/get_tasks_store.dart';
 import 'package:flutterpad/app/presentation/stores/mark_task_completion_store.dart';
+import 'package:flutterpad/app/presentation/stores/synchronize_store.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -20,12 +21,20 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final getStore = locator.get<GetTasksStore>();
   final markStore = locator.get<MarkTaskCompletionStore>();
+  final syncStore = locator.get<SynchronizeStore>();
 
-  void listener() {
+  void markCompletionListener() {
     if (markStore.state is MarkTaskCompletionSuccessState) {
       getStore.getTasks();
+      syncStore.synchronize();
     } else if (markStore.state is MarkTaskCompletionErrorState) {
       log("ERROR");
+    }
+  }
+
+  void synchronizeListener() {
+    if (syncStore.state is SynchronizeSuccessState) {
+      getStore.getTasks();
     }
   }
 
@@ -33,7 +42,9 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     getStore.getTasks();
-    markStore.addListener(listener);
+    syncStore.synchronize();
+    markStore.addListener(markCompletionListener);
+    syncStore.addListener(synchronizeListener);
   }
 
   @override
@@ -88,7 +99,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
-    markStore.removeListener(listener);
+    markStore.removeListener(markCompletionListener);
+    syncStore.removeListener(synchronizeListener);
     super.dispose();
   }
 }

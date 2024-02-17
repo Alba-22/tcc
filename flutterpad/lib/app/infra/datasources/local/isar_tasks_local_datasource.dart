@@ -1,6 +1,5 @@
 import 'package:clock/clock.dart';
 import 'package:flutterpad/app/domain/entities/task_entity.dart';
-import 'package:flutterpad/app/domain/errors/task_not_found_failure.dart';
 import 'package:flutterpad/app/infra/adapters/isar_task_adapter.dart';
 import 'package:flutterpad/app/infra/datasources/local/tasks_local_datasource.dart';
 import 'package:flutterpad/app/infra/models/isar_task_model.dart';
@@ -34,30 +33,37 @@ class IsarTasksLocalDatasource implements TasksLocalDatasource {
   }
 
   @override
-  Future<TaskEntity> getTaskById(String id) async {
+  Future<IsarTaskModel?> getTaskById(String id) async {
     final collection = _isar.collection<IsarTaskModel>();
-    final task = await collection.filter().taskIdEqualTo(id).findFirst();
-    if (task == null) {
-      throw TaskNotFoundFailure();
-    }
-    return IsarTaskAdapter.toEntity(task);
+    return await collection.filter().taskIdEqualTo(id).findFirst();
   }
 
   @override
-  Future<void> saveTask(TaskEntity task, bool synchorized) async {
+  Future<void> saveTask(TaskEntity task, bool synchorized, {String? newTaskId}) async {
     final collection = _isar.collection<IsarTaskModel>();
     final taskModel = IsarTaskAdapter.fromEntity(task);
     final existingTaskOnDb = await collection.filter().taskIdEqualTo(task.id).findFirst();
     if (existingTaskOnDb != null) {
       taskModel.id = existingTaskOnDb.id;
+      taskModel.createdRemotelly = existingTaskOnDb.createdRemotelly;
     }
     if (synchorized == false) {
       taskModel.syncDate = null;
     } else {
       taskModel.syncDate = clock.now();
+      taskModel.createdRemotelly = true;
+    }
+    if (newTaskId != null) {
+      taskModel.taskId = newTaskId;
     }
     await _isar.writeTxn(() async {
       await collection.put(taskModel);
     });
+  }
+
+  @override
+  Future<List<IsarTaskModel>> getTasksNotSynchronized() async {
+    final collection = _isar.collection<IsarTaskModel>();
+    return await collection.filter().syncDateIsNull().findAll();
   }
 }

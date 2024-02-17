@@ -5,4 +5,5 @@ abstract interface class TasksRepository {
   Future<void> updateTask(TaskEntity task);
   Future<List<TaskEntity>> getPendingTasks();
   Future<List<TaskEntity>> getCompletedTasksInLast24Hours();
+  Future<void> synchronizeTasks();
 }

@@ -22,28 +22,33 @@ const IsarTaskModelSchema = CollectionSchema(
       name: r'completion',
       type: IsarType.bool,
     ),
-    r'date': PropertySchema(
+    r'createdRemotelly': PropertySchema(
       id: 1,
+      name: r'createdRemotelly',
+      type: IsarType.bool,
+    ),
+    r'date': PropertySchema(
+      id: 2,
       name: r'date',
       type: IsarType.dateTime,
     ),
     r'description': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'description',
       type: IsarType.string,
     ),
     r'syncDate': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'syncDate',
       type: IsarType.dateTime,
     ),
     r'taskId': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'taskId',
       type: IsarType.string,
     ),
     r'text': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'text',
       type: IsarType.string,
     )
@@ -86,11 +91,12 @@ void _isarTaskModelSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeBool(offsets[0], object.completion);
-  writer.writeDateTime(offsets[1], object.date);
-  writer.writeString(offsets[2], object.description);
-  writer.writeDateTime(offsets[3], object.syncDate);
-  writer.writeString(offsets[4], object.taskId);
-  writer.writeString(offsets[5], object.text);
+  writer.writeBool(offsets[1], object.createdRemotelly);
+  writer.writeDateTime(offsets[2], object.date);
+  writer.writeString(offsets[3], object.description);
+  writer.writeDateTime(offsets[4], object.syncDate);
+  writer.writeString(offsets[5], object.taskId);
+  writer.writeString(offsets[6], object.text);
 }
 
 IsarTaskModel _isarTaskModelDeserialize(
@@ -101,11 +107,12 @@ IsarTaskModel _isarTaskModelDeserialize(
 ) {
   final object = IsarTaskModel(
     completion: reader.readBool(offsets[0]),
-    date: reader.readDateTime(offsets[1]),
-    description: reader.readStringOrNull(offsets[2]),
-    syncDate: reader.readDateTimeOrNull(offsets[3]),
-    taskId: reader.readString(offsets[4]),
-    text: reader.readString(offsets[5]),
+    createdRemotelly: reader.readBoolOrNull(offsets[1]) ?? false,
+    date: reader.readDateTime(offsets[2]),
+    description: reader.readStringOrNull(offsets[3]),
+    syncDate: reader.readDateTimeOrNull(offsets[4]),
+    taskId: reader.readString(offsets[5]),
+    text: reader.readString(offsets[6]),
   );
   object.id = id;
   return object;
@@ -121,14 +128,16 @@ P _isarTaskModelDeserializeProp<P>(
     case 0:
       return (reader.readBool(offset)) as P;
     case 1:
-      return (reader.readDateTime(offset)) as P;
+      return (reader.readBoolOrNull(offset) ?? false) as P;
     case 2:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readDateTime(offset)) as P;
     case 3:
-      return (reader.readDateTimeOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 4:
-      return (reader.readString(offset)) as P;
+      return (reader.readDateTimeOrNull(offset)) as P;
     case 5:
+      return (reader.readString(offset)) as P;
+    case 6:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -236,6 +245,16 @@ extension IsarTaskModelQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'completion',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarTaskModel, IsarTaskModel, QAfterFilterCondition>
+      createdRemotellyEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'createdRemotelly',
         value: value,
       ));
     });
@@ -871,6 +890,20 @@ extension IsarTaskModelQuerySortBy
     });
   }
 
+  QueryBuilder<IsarTaskModel, IsarTaskModel, QAfterSortBy>
+      sortByCreatedRemotelly() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'createdRemotelly', Sort.asc);
+    });
+  }
+
+  QueryBuilder<IsarTaskModel, IsarTaskModel, QAfterSortBy>
+      sortByCreatedRemotellyDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'createdRemotelly', Sort.desc);
+    });
+  }
+
   QueryBuilder<IsarTaskModel, IsarTaskModel, QAfterSortBy> sortByDate() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'date', Sort.asc);
@@ -946,6 +979,20 @@ extension IsarTaskModelQuerySortThenBy
       thenByCompletionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'completion', Sort.desc);
+    });
+  }
+
+  QueryBuilder<IsarTaskModel, IsarTaskModel, QAfterSortBy>
+      thenByCreatedRemotelly() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'createdRemotelly', Sort.asc);
+    });
+  }
+
+  QueryBuilder<IsarTaskModel, IsarTaskModel, QAfterSortBy>
+      thenByCreatedRemotellyDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'createdRemotelly', Sort.desc);
     });
   }
 
@@ -1032,6 +1079,13 @@ extension IsarTaskModelQueryWhereDistinct
     });
   }
 
+  QueryBuilder<IsarTaskModel, IsarTaskModel, QDistinct>
+      distinctByCreatedRemotelly() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'createdRemotelly');
+    });
+  }
+
   QueryBuilder<IsarTaskModel, IsarTaskModel, QDistinct> distinctByDate() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'date');
@@ -1077,6 +1131,13 @@ extension IsarTaskModelQueryProperty
   QueryBuilder<IsarTaskModel, bool, QQueryOperations> completionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'completion');
+    });
+  }
+
+  QueryBuilder<IsarTaskModel, bool, QQueryOperations>
+      createdRemotellyProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'createdRemotelly');
     });
   }
 
