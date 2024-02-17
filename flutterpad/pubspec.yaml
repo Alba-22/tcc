@@ -25,6 +25,7 @@ dependencies:
   isar: *isar_version
   isar_flutter_libs: *isar_version
   path_provider: ^2.1.2
+  uuid: ^4.3.3
 
 dev_dependencies:
   build_runner: any
