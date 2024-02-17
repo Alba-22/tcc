@@ -25,15 +25,14 @@ class HomeSuccessWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
         horizontal: 16,
       ),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(height: 24),
-            if (pendingTasks.isNotEmpty) PendingTaskListWidget(pendingTasks: pendingTasks),
-            if (completedTasks.isNotEmpty) CompletedTaskListWidget(completedTasks: completedTasks),
-            const SizedBox(height: 16),
-          ],
-        ),
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          const SizedBox(height: 24),
+          if (pendingTasks.isNotEmpty) PendingTaskListWidget(pendingTasks: pendingTasks),
+          if (completedTasks.isNotEmpty) CompletedTaskListWidget(completedTasks: completedTasks),
+          const SizedBox(height: 16),
+        ],
       ),
     );
   }
