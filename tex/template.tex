@@ -309,6 +309,8 @@ Para exemplificar esse mecanismo de realizar uma ação assíncrona a como pode-
     \label{fig:simulate_request}
 \end{figure}
 
+\subsection{Exemplo Adhoc para Representação de Estados}
+
 Como um exemplo \textit{adhoc}, utilizando o mecanismo mais básico para gerenciamento de estado efêmero do Flutter, o \textit{setState}, pode-se criar dentro de um \textit{StatefulWidget} três variáveis, uma variável booleana para representar o carregamento da requisição, uma \textit{String nullable} com o conteúdo da mensagem de erro e uma variável \textit{nullable} com o objeto de sucesso, como exemplificado na Figura \ref{fig:variables}.
 
 \begin{figure}[ht]
@@ -337,6 +339,8 @@ Por último nessa classe têm-se a função \textit{getInformation}, que será r
 \end{figure}
 
 Sobre essa abordagem, embora seja simples e direta, pode-se apontar alguns problemas. Um primeiro problema é a quebra do Princípio da Responsabilidade Única, visto que a classe responsável pela exibição da interface gráfica é também responsável por gerenciar o estado da aplicação. Além disso, a forma apresentada permite a representação de estados inválidos. Por exemplo, é possível de ter a variável \textit{isLoading} com o valor verdadeiro ao mesmo tempo que a variável \textit{successData} não é nula ou então é possível ter ambas as variáveis \textit{successData} e \textit{errorMessage} não nulas ao mesmo tempo. Esses casos e outros são considerados representações inválidas, visto que não estão previstas no diagrama da Figura \ref{fig:states_diagram}, além de ferirem o princípio DRY que afirma que todo pedaço de conhecimento deve ter uma representação única, não ambígua e autoritativa dentro de um sistema. Outro possível problema é que a forma apresentada não força o desenvolvedor a tratar, na parte da interface visual, todos os estados possíveis, de forma que o desenvolvedor pode se esquecer de criar os componentes a serem exibidos para algum dos estados, ou então, caso seja adicionado um estado novo no futuro da aplicação, também é possível que os desenvolvedores não adicionem a tratativa na parte de renderização de tela.
+
+\subsection{Aplicação do Observer Pattern}
 
 Para resolver o primeiro problema, pode-se criar uma classe separada para fazer o gerenciamento do estado da aplicação, de forma que a classe da interface gráfica será responsável apenas por exibir o conteúdo de acordo com o estado atual presente nela. Porém, o método \textit{setState} só está presente dentro do \textit{StatefulWidget} criado, não podendo ser acessado por outras classes. Um meio de resolver esse problema, pode ser feito pela implementação do padrão de projeto \textit{Observer}. Assim, como visto na Figura \ref{fig:notifier}, pode-se criar uma classe \textit{Notifier} que conterá dentro dela uma lista de \textit{callbacks} e os métodos \textit{addListener}, \textit{removeListener} e \textit{notifyListeners} responsáveis por adicionar um ouvinte, remover um ouvinte e notificar todos os ouvintes, respectivamente.
 
@@ -373,7 +377,11 @@ Com isso, basta reescrever a parte da interface gráfica para passar a utilizar 
     \label{fig:with_notifier_page}
 \end{figure}
 
-Assim, com a implementação do padrão de projeto \textit{Observer} temos que todo código referente a alteração de estado e obtenção dos dados pela ação assíncrona ficam separados da parte do código de construção da interface. Porém, ainda têm-se o problema de que pode-se haver a representação de estados inválidos, como descrito anteriormente. Para resolver essa questão, pode-se utilizar do padrão de projeto \textit{State} em combinação com polimorfismo para que seja criada uma classe base que represente o estado geral e subclasses que irão representar os reais estados da aplicação: inicial, carregamento, erro e sucesso, como visto na Figura \ref{fig:states}. Assim, os dados de sucesso só estão disponíveis dentro da classe de estado de sucesso e o mesmo é válido para o caso de erro, de forma que esses dados não pode ser acessados de forma errônea quando a aplicação estiver em outro estado.
+Assim, com a implementação do padrão de projeto \textit{Observer} temos que todo código referente a alteração de estado e obtenção dos dados pela ação assíncrona ficam separados da parte do código de construção da interface. Porém, ainda têm-se o problema de que pode-se haver a representação de estados inválidos, como descrito anteriormente.
+
+\subsection{Aplicação do State Pattern para Representação de Estados Válidos}
+
+Para resolver a questão dos estados inválidos, pode-se utilizar do padrão de projeto \textit{State} em combinação com polimorfismo para que seja criada uma classe base que represente o estado geral e subclasses que irão representar os reais estados da aplicação: inicial, carregamento, erro e sucesso, como visto na Figura \ref{fig:states}. Assim, os dados de sucesso só estão disponíveis dentro da classe de estado de sucesso e o mesmo é válido para o caso de erro, de forma que esses dados não pode ser acessados de forma errônea quando a aplicação estiver em outro estado.
 
 \begin{figure}[ht]
     \centering
@@ -400,6 +408,8 @@ Com essa alteração feita, podemos agora alterar a classe da interface para uti
     \label{fig:with_state_page}
 \end{figure}
 
+\subsection{Aplicação de Classes Seladas para Match Exaustivo}
+
 Um problema apontado que ainda não foi resolvido é o da possibilidade de o desenvolvedor não tratar todos os estados da aplicação. Isso pode ser resolvido por meio de mecanismos introduzidos pela linguagem Dart em sua versão 3. Nessa versão foram introduzidas classes seladas e várias mecânicas de \textit{pattern matching} na linguagem, que podem ser usadas nas classes de estado apresentadas anteriormente para que, por meio do \textit{pattern matching}, o compilador da linguagem avise sobre estados não tratados. As classes seladas funcionam de forma que elas só podem ser estendidas ou implementadas dentro da mesma biblioteca(e uma biblioteca no Dart é tudo que está dentro de um único arquivo). Dessa forma, o compilador consegue fazer um \textit{match} exaustivo e saber em tempo de compilação todas as subclasses que estendem a classe selada e consegue bloquear a compilação. Na Figura \ref{fig:sealed_states} é mostrada a alteração feita na classe de estado, que deixa de ser abstrata e passa a ser selada. Além disso, às subclasses foi adicionada a palavra reservada \textit{final}, também introduzida na versão 3 da linguagem, para indicar que elas não podem ser estendidas ou implementadas fora da biblioteca, mas podem ser construídas.
 
 \begin{figure}[ht]
@@ -418,7 +428,7 @@ Com essa alteração feita nas classes de estados, pode-se alterar a interface d
     \label{fig:sealed_page}
 \end{figure}
 
-\section{Melhorando Formulários e suas Validações}
+\section{Melhorias para Formulários e suas Validações}
 
 Em aplicações que rodam no lado do cliente, é muito comum a presença de formulários, seja para criação de conta, login, criação de recursos, edição de dados, etc. Para isso, é comum a presença de campos de formulários nessas aplicações, que são componentes de interface que permitem ao usuário digitar valores e registrá-los, seja por um envio desses dados à algum servidor ou pela escrita em um banco de dados no próprio dispositivo.
 
