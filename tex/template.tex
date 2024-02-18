@@ -434,6 +434,8 @@ Em aplicações que rodam no lado do cliente, é muito comum a presença de form
 
 Assim, além da coleta desses dados pela aplicação cliente, é muito importante haver também a validação desses dados na própria aplicação por dois principais motivos. O primeiro deles se relaciona com a experiência do usuário. Em caso do usuário digitar algo que seja inválido, é importante avisá-lo com boas mensagens de erros que sejam as mais descritivas possível, além de mostrar essas mensagens de erro de forma reativa, ou seja, conforme ele já digita nos campos para que ele já saiba o quanto antes que o valor está incorreto, visto que pode ser uma experiência desagradável para um usuário de uma aplicação só ser avisado sobre erros no formulário somente após preencher diversos campos de formulário. Outro motivo que denota a importância de se haver a validação na própria aplicação é de garantir a consistência de dados do formulário a ser preenchido, de forma que não sejam armazenados dados inválidos. Por exemplo, pode-se garantir que o valor em um campo que deve ser um CPF, seja realmente um CPF válido de acordo com o algoritmo de geração de CPF, ou que um campo que é uma data realmente seja uma data válida, e não uma data que aponte para um mês maior que 12, ou um dia que não existe em um determinado mês.
 
+\subsection{Estruturas Padrões para Lidar com Formulários}
+
 Para lidar com validações de campos de formulário, o Flutter por si só já oferece mecanismos prontos para lidar com isso, por meio do \textit{widget} \textit{TextFormField}, que possui uma propriedade \textit{validator} que permite a execução de uma função anônima que será executada a cada vez que houver uma modificação no campo. Essa função deve retornar \textit{null} em caso do campo estar válido ou uma \textit{String} com a mensagem de error em caso do campo estar inválido. Para que já seja executada a validação conforme o usuário digitar no campo, o framework disponibiliza a propriedade \textit{autovalidateMode}, que pode ser atribuída com o valor \textit{AutovalidateMode.onUserInteraction}. Ainda, para que seja possível obter o valor do campo posteriormente, é necessário criar uma instância de \textit{TextEditingController} para cada campo e adicionar no atributo \textit{controller} de cada \textit{TextFormField}. Ao final de um formulário, é comum ter-se um botão para fazer o registros dos dados e, para que possa-se prosseguir com a ação desejada, o formulário deve estar válido. Para isso, o framework disponibiliza uma classe \textit{Form} que deve envolver os componentes de formulário, de forma que deve ser dada a essa instância uma \textit{key}, do tipo \textit{GlobalKey<FormState>}, que possibilitará a verificação da validade do formulário, como visto na figura \ref{fig:example_form}
 
 \begin{figure}[ht]
@@ -484,6 +486,8 @@ A partir do exemplo apresentado na Figura \ref{fig:example_form}, para criar ess
 
 A partir dessa demonstração inicial, pode-se notar alguns problemas. O primeiro deles é o fato da classe responsável pela tela interface gráfica da aplicação ter que se preocupar também com a validação do formulário, o que sobrecarrega as responsabilidades da classe e fere o Single Responsibility Principle, do SOLID. Um segundo problema é o fato de ter-se que criar explicitamente um \textit{TextEditingController} para cada um dos campos do formulário, o que fará com que tenham muitas variáveis a serem controladas em casos de formulários com muitos campos. Outro porém é a necessidade de chamar a função \textit{checkFields} em cada um dos campos, o que pode ser facilmente esquecido pelo desenvolvedor em algum campo, o que acarretará em um bug na aplicação. Além disso, há o fato de ter-se que chamar as funções de validação duas vezes, o que também pode ser esquecido durante o desenvolvimento e fere o princípio DRY. Um último ponto que é problemático para a escalabilidade da aplicação é o fato das funções de validação serem específicas para o formulário em questão, de forma que é possível que elas não sejam reaproveitáveis em sua totalidade para outros formulários da aplicação. Por exemplo, para o campo e-mail do caso demonstrado não há a validação se o campo é obrigatório. Porém, se em outra parte da aplicação ocorrer de ter um campo e-mail que seja obrigatório teria-se que: ou criar uma nova função, com trecho de código semelhante e, portanto, com duplicação de parte de base de código, ou adicionar um parâmetro booleano na função já existente, o que poderá causar bug em partes da aplicação que já estão desenvolvidas.
 
+\subsection{Aplicação do Padrão Builder em Validadores}
+
 Para resolver o último problema apontado, pode-se aplicar o padrão de projeto Builder, de forma que poderá ser criada a uma classe apenas para lidar com validação de forma mais simplificada. Seguindo o padrão, qualquer parte do código que precisar de fazer uma validação irá especificar, por meio de encadeamento de métodos, quais aspectos do valor de entrada que deseja-se validar e, ao final, chamar um método \textit{build} que irá retornar \textit{null} caso a entrada esteja válida ou uma \textit{String} com a mensagem do que está inválido na dada entrada. A implementação feita, vista na Figura \ref{fig:form_validator} consiste em criar uma classe que recebe em seu construtor a variável do tipo \textit{String nullable} que será feita a validação. Ainda dentro dessa classe, há uma lista de \textit{String} com os erros que podem ser registrados para a entrada dada e também uma variável booleana que indica a obrigatoriedade do campo. Assim, a classe terá uma série de métodos para pequenas validações que serão compostas por quem utilizar a classe, de forma que cada método irá retornar sua própria instância e em caso da entrada ser inválida irá adicionar uma mensagem de erro na lista de erros. Ao final, o método \textit{build} irá retornar \textit{null} caso a lista de erros esteja vazia ou uma \textit{String} que concatenará todos os erros.
 
 \begin{figure}[ht]
@@ -492,6 +496,8 @@ Para resolver o último problema apontado, pode-se aplicar o padrão de projeto 
     \caption{Classe Validator com aplicação do \textit{Builder Pattern}}
     \label{fig:form_validator}
 \end{figure}
+
+\subsection{Criação de uma Estrutura para Gerenciamento de Formulários de Forma Facilitada}
 
 Já para resolver os outros problemas apontados, pode-se criar uma nova estrutura separada para lidar apenas com a validação do formulário em si, de forma a isolar toda a lógica de validação da parte da interface gráfica e eliminar as duplicações de código apontadas anteriormente. Além disso, essa nova classe, chamada de \textit{FormManager}, seguirá o padrão de projeto \textit{Observer}, de forma que ela automaticamente irá verificar as alterações nos formulários e indicar aos seus ouvintes se o formulário está em um estado válido ou não.
 
@@ -541,9 +547,17 @@ Assim, o uso de todas essas classes será o presente na Figura \ref{fig:use_of_f
 \end{figure}
 
 
-\section{Uma proposta de arquitetura}
+\section{Apresentação de Componentes de Plataformas Específicas de Forma Facilitada}
 
-\section{Funcionamento de Aplicações Offline de Forma Contínua}
+\section{Aplicação de Conceitos de Arquitetura de Software em Aplicações Flutter}
+
+
+\subsection{Uma Aplicação Clássica da Arquitetura Limpa}
+
+\subsection{Aplicações Offline-First: Uma Responsabilidade da Camada de Infraestrutura}
+
+\subsection{Uma Arquitetura de Duas Camadas Simplificada}
+% Application Bussiness Rules da CleanArch são muito atrelados à tela
 
 \chapter{Conclusão}
 
