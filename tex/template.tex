@@ -304,7 +304,7 @@ Para exemplificar esse mecanismo de realizar uma ação assíncrona a como pode-
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.65\textwidth]{figures/states/getInformationFromNetwork.png}
+    \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/getInformationFromNetwork.png}
     \caption{Função para simular uma ação assíncrona}
     \label{fig:simulate_request}
 \end{figure}
@@ -315,7 +315,7 @@ Como um exemplo \textit{adhoc}, utilizando o mecanismo mais básico para gerenci
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.65\textwidth]{figures/states/variables.png}
+    \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/variables.png}
     \caption{Variáveis para representar os estados da página}
     \label{fig:variables}
 \end{figure}
@@ -324,7 +324,7 @@ Em seguida, cria-se a parte visual que tratará por exibir diferentes componente
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.65\textwidth]{figures/states/adhoc_widget.png}
+    \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/adhoc_widget.png}
     \caption{Método \textit{build} para construção da tela da abordagem \textit{adhoc}}
     \label{fig:adhoc_widget}
 \end{figure}
@@ -333,7 +333,7 @@ Por último nessa classe têm-se a função \textit{getInformation}, que será r
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.65\textwidth]{figures/states/adhoc_getinfo.png}
+    \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/adhoc_getinfo.png}
     \caption{Função que realizará a alteração dos estados de acordo com o andamento da ação assíncrona}
     \label{fig:adhoc_getinfo}
 \end{figure}
@@ -346,7 +346,7 @@ Para resolver o primeiro problema, pode-se criar uma classe separada para fazer 
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.65\textwidth]{figures/states/notifier.png}
+    \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/notifier.png}
     \caption{Classe \textit{Notifier} que implementa o \textit{Observer Pattern}}
     \label{fig:notifier}
 \end{figure}
@@ -354,7 +354,7 @@ Para auxiliar no quesito de exibição na tela, podemos criar uma classe \textit
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.65\textwidth]{figures/states/notifier_builder.png}
+    \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/notifier_builder.png}
     \caption{Classe \textit{NotifierBuilder}, um ouvinte do \textit{Notifier}}
     \label{fig:notifier_builder}
 \end{figure}
@@ -363,7 +363,7 @@ Com isso, pode-se criar uma classe que será a nossa controladora de estado e es
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.65\textwidth]{figures/states/notifier_controller.png}
+    \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/notifier_controller.png}
     \caption{Classe \textit{Controller}, responsável por gerenciar o estado da aplicação}
     \label{fig:notifier_controller}
 \end{figure}
@@ -372,7 +372,7 @@ Com isso, basta reescrever a parte da interface gráfica para passar a utilizar 
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.65\textwidth]{figures/states/with_notifier_page.png}
+    \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/with_notifier_page.png}
     \caption{Código da UI utilizando o \textit{Controller} criado}
     \label{fig:with_notifier_page}
 \end{figure}
@@ -385,7 +385,7 @@ Para resolver a questão dos estados inválidos, pode-se utilizar do padrão de 
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.65\textwidth]{figures/states/states.png}
+    \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/states.png}
     \caption{Representação de código utilizando polimorfismo}
     \label{fig:states}
 
@@ -394,7 +394,7 @@ Com essas classes novas para representar o estado, pode-se refatorar a classe \t
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.65\textwidth]{figures/states/controller_with_states.png}
+    \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/controller_with_states.png}
     \caption{Nova versão do \textit{Controller} utilizando as classes de estado criadas}
     \label{fig:controller_with_states}
 \end{figure}
@@ -403,7 +403,7 @@ Com essa alteração feita, podemos agora alterar a classe da interface para uti
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.65\textwidth]{figures/states/with_state_page.png}
+    \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/with_state_page.png}
     \caption{UI utilizando as classes de estado criadas}
     \label{fig:with_state_page}
 \end{figure}
@@ -414,7 +414,7 @@ Um problema apontado que ainda não foi resolvido é o da possibilidade de o des
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.65\textwidth]{figures/states/sealed_states.png}
+    \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/sealed_states.png}
     \caption{Alteração nas classes de estados, introduzido o conceito de classes seladas}
     \label{fig:sealed_states}
 \end{figure}
@@ -423,7 +423,7 @@ Com essa alteração feita nas classes de estados, pode-se alterar a interface d
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.65\textwidth]{figures/states/sealed_page.png}
+    \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/sealed_page.png}
     \caption{UI utilizando \textit{pattern matching} para exibição dos componentes de acordo com o estado}
     \label{fig:sealed_page}
 \end{figure}
@@ -438,7 +438,7 @@ Para lidar com validações de campos de formulário, o Flutter por si só já o
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.65\textwidth]{figures/forms/example_form.png}
+    \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/forms/example_form.png}
     \caption{Exemplo de criação de formulário com Flutter}
     \label{fig:example_form}
 \end{figure}
@@ -463,21 +463,21 @@ A partir do exemplo apresentado na Figura \ref{fig:example_form}, para criar ess
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.65\textwidth]{figures/forms/form_adhoc_validators.png}
+    \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/forms/form_adhoc_validators.png}
     \caption{Funções para validação dos campos da demonstração}
     \label{fig:form_adhoc_validators}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.65\textwidth]{figures/forms/form_adhoc_textformfield.png}
+    \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/forms/form_adhoc_textformfield.png}
     \caption{Widget TextFormField para o campo de e-mail}
     \label{fig:form_adhoc_textformfield}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.8\textwidth]{figures/forms/form_adhoc_checkFields.png}
+    \includegraphics[width=.8\textwidth, trim={0 30 0 100}, clip]{figures/forms/form_adhoc_checkFields.png}
     \caption{Função para verificação da validade}
     \label{fig:form_adhoc_checkFields}
 \end{figure}
@@ -488,7 +488,7 @@ Para resolver o último problema apontado, pode-se aplicar o padrão de projeto 
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=1\textwidth]{figures/forms/form_validator.png}
+    \includegraphics[width=1\textwidth, trim={0 30 0 100}, clip]{figures/forms/form_validator.png}
     \caption{Classe Validator com aplicação do \textit{Builder Pattern}}
     \label{fig:form_validator}
 \end{figure}
@@ -508,7 +508,7 @@ Além dessa estrutura de dados, a classe \textit{FormManager} terá o método \t
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.7\textwidth]{figures/forms/form_manager.png}
+    \includegraphics[width=.7\textwidth, trim={0 30 0 100}, clip]{figures/forms/form_manager.png}
     \caption{Classe \textit{FormManager}, responsável por encapsular todo o registro e validação dos formulários}
     \label{fig:form_manager}
 \end{figure}
@@ -517,7 +517,7 @@ Assim, como o \textit{FormManager} criado, pode-se criar uma nova instância del
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=1\textwidth]{figures/forms/set_forms.png}
+    \includegraphics[width=1\textwidth, trim={0 30 0 100}, clip]{figures/forms/set_forms.png}
     \caption{Inicialização dos formulários na tela}
     \label{fig:set_forms}
 \end{figure}
@@ -526,7 +526,7 @@ Para terminar o uso das novas estruturas criadas, basta passar as informações 
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.65\textwidth]{figures/forms/custom_text_field.png}
+    \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/forms/custom_text_field.png}
     \caption{Criação do componente personalizado para um formulário}
     \label{fig:custom_text_field}
 \end{figure}
@@ -535,7 +535,7 @@ Assim, o uso de todas essas classes será o presente na Figura \ref{fig:use_of_f
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.65\textwidth]{figures/forms/use_of_form_proposal.png}
+    \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/forms/use_of_form_proposal.png}
     \caption{Uso dos formulários com reatividade no código da interface gráfica}
     \label{fig:use_of_form_proposal}
 \end{figure}
