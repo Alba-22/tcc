@@ -234,12 +234,39 @@ Segundo \citeonline{GOF}, projetar software orientado a objetos é difícil, e p
 
 Outros dois conceitos de extrema importância no estudo de arquitetura de software são os conceitos de acoplamento e coesão em um projeto de software. Segundo \citeonline{FOWLER2} se ao alterar um módulo de um programa requer alterar outro módulo, seja por questões de código duplicado ou pelo fato de um módulo acessar diretamente código de outro módulo, então o acoplamento existe entre esses módulos. Para a construção de um bom software, deve-se desejar ter um baixo acoplamento entre os componentes e módulos, de forma a ter uma independência maior entre eles e de forma que as políticas de alto nível não dependam dos detalhes de baixo nível, o que está diretamente relacionado ao DIP. Já a coesão é, segundo \citeonline{MARTIN}, a força que une um código a um determinado ator, o que se relaciona de forma próxima com o \textit{Single Responsibility Principle(SPR)}, a letra S do acrônimo SOLID, que diz que um módulo deve ser responsável a um, e apenas um, ator, sendo "ator" aqui definido como um grupo de pessoas(normalmente usuários ou \textit{stakeholder} de uma organização) que requerem mudanças em um software. Assim, a coesão mede o como um trecho de código(uma classe e/ou função) funciona para cumprir um único e bem definido propósito. Com isso, entende-se que um bom software deve sempre buscar um alto nível de coesão dentro de seus componentes e módulos de forma a atingir, em conjunto com um baixo acoplamento, níveis satisfatórios de manutenibilidade, escalabilidade e confiabilidade.
 
-\section{Padrões de Projeto}
+\subsection{Padrão de Projeto Observer}
 
-\subsection{Padrão Observer}
-\subsection{Padrão State}
-\subsection{Padrão Builder}
-\subsection{Padrão Adapter}
+O padrão de projeto \textit{Observer}, segundo \citeonline{SHVETZ}, define uma relação de uma para muitos entre objetos de forma que quando um objeto muda de estado, todos os seus dependentes são notificados e atualizam automaticamente. Nesse padrão, é definido um objeto que o mantenedor do modelo de dados. Outros objetos que desejem receber informação desse modelo de dados conforme ele mude, devem se inscrever nesse objeto, que irá transmitir para todos os ouvintes a nova informação assim que houver uma mudança no modelo de dados. Dessa forma, o padrão \textit{Observer} define uma interface muito desacoplada que permite que múltiplos ouvintes sejam configurados em tempo de execução, com a possibilidade deles se inscreverem e desinscreverem a qualquer momento, como pode ser percebido na estrutura da Figura \ref{fig:observer_diagram}. Esse padrão consegue ser muito útil principalmente para casos de interface gráfica, visto que componentes visuais podem se inscrever em classes que controlam dados e responder a mudanças aos estados em tempo real, o que torna a experiência de quem usa a aplicação gráfica melhor, por conta da reatividade.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.65\textwidth]{figures/design_patterns/observer_diagram.png}
+    \caption{Diagrama da Estrutura do Padrão Observer}
+    \label{fig:observer_diagram}
+\end{figure}
+
+
+\subsection{Padrão de Projeto State}
+
+\subsection{Padrão de Projeto Builder}
+
+Segundo \citeonline{GOF}, o padrão de projeto \textit{Builder} permite a separação da construção de um objeto complexo da sua representação, de forma que o mesmo processo de construção pode criar diferentes representações. O padrão organiza a construção do objeto em um conjunto de passos, de modo que, para criar um objeto, é realizada a chamada apenas dos passos necessários(não necessariamente todos) no objeto \textit{builder} e, ao final, é chamado um método que irá realizar de fato a construção do objeto desejado.
+
+Para casos em que um mesmo processo de construção pode ter múltiplas implementações, é possível criar diferentes clases \textit{builder} que implementam o mesmo conjunto de de processos de construção. Para realizar o gerenciamento de diversas implementações de um mesmo processo de construção, o padrão de projeto especifica a existência de uma classe Diretor, que tem a responsabilidade de manejar quais os passos de construção a serem chamados para cada implementação, como pode ser visto na Figura \ref{fig:builder_diagram}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.65\textwidth]{figures/design_patterns/builder_diagram.png}
+    \caption{Diagrama da Estrutura do Padrão Builder}
+    \label{fig:builder_diagram}
+\end{figure}
+
+\subsection{Padrão de Projeto Adapter}
+
+\subsection{Padrão de Projeto Factory}
+
+\subsection{Padrão de Projeto Repository}
+O padrão \textit{Repository} foi introduzido por Eric Evans em 2004, por meio da obra \textit{Domain Driven Design}. Esse padrão provê uma interface que abstrai o acesso a dados de uma aplicação, de forma que é possível adicionar, remover, atualizar e buscar dados de uma dada coleção sem tenha-se a preocupação com especificidades de onde os dados estão armazenados, já que esses detalhes de como manipular os dados na base de dados estarão presentes apenas na implementação dessa interface. Assim, esse padrão permite um menor acoplamento e faz com que os objetos do domínio da aplicação sejam independentes dos detalhes de persistência.
 
 \section{Domain Driven Design}
 Segundo \citeonline{FOWLER3}, a ideia da necessidade de sistemas de software serem baseados em um modelo de domínio bem desenvolvido é algo presente na indústria à muito tempo, sendo um ponto chave dos trabalho das comunidades de bancos de dados e de linguagens orientadas a objetos entre os anos 1980 e 1990. Um dos trabalhos com maior destaque para resolver essa necessidade da indústria foi o \textit{Domain Driven Design}, introduzido por \citeonline{EVANS} em seu livro "Domain-driven design: atacando as complexidades no coração do software", lançado em 2003.
