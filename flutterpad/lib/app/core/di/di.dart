@@ -1,6 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutterpad/app/domain/repositories/tasks_repository.dart';
+import 'package:flutterpad/app/domain/usecases/create_task_usecase.dart';
 import 'package:flutterpad/app/domain/usecases/get_last_completed_tasks_usecase.dart';
 import 'package:flutterpad/app/domain/usecases/get_pending_tasks_usecase.dart';
 import 'package:flutterpad/app/domain/usecases/mark_tasks_completion_usecase.dart';
@@ -13,11 +14,13 @@ import 'package:flutterpad/app/infra/datasources/remote/tasks_remote_datasource.
 import 'package:flutterpad/app/infra/repository/tasks_repository_impl.dart';
 import 'package:flutterpad/app/infra/services/network_checker/mixed_network_checker.dart';
 import 'package:flutterpad/app/infra/services/network_checker/network_checker.dart';
+import 'package:flutterpad/app/presentation/stores/create_edit_store.dart';
 import 'package:flutterpad/app/presentation/stores/get_tasks_store.dart';
 import 'package:flutterpad/app/presentation/stores/mark_task_completion_store.dart';
 import 'package:flutterpad/app/presentation/stores/synchronize_store.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:uuid/uuid.dart';
 
 final GetIt locator = GetIt.instance;
 
@@ -27,6 +30,7 @@ void registerDependencies() {
   locator.registerFactory(() => Connectivity());
   locator.registerFactory(() => Dio());
   locator.registerFactory(() => IsarDatasource.isar);
+  locator.registerFactory(() => const Uuid());
 
   // Services
   locator.registerFactory<NetworkChecker>(() => MixedNetworkChecker(locator.get(), locator.get()));
@@ -45,9 +49,11 @@ void registerDependencies() {
   locator.registerFactory(() => GetPendingTasksUsecase(locator.get()));
   locator.registerFactory(() => MarkTasksCompletionUsecase(locator.get()));
   locator.registerLazySingleton(() => SynchronizeTasksUsecase(locator.get()));
+  locator.registerLazySingleton(() => CreateTaskUsecase(locator.get(), locator.get()));
 
   // Stores
   locator.registerLazySingleton(() => GetTasksStore(locator.get(), locator.get()));
   locator.registerLazySingleton(() => MarkTaskCompletionStore(locator.get()));
   locator.registerLazySingleton(() => SynchronizeStore(locator.get()));
+  locator.registerLazySingleton(() => CreateEditStore(locator.get()));
 }

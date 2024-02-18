@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutterpad/app/core/components/custom_bottom_container.dart';
 import 'package:flutterpad/app/core/components/custom_button.dart';
 import 'package:flutterpad/app/core/di/di.dart';
 import 'package:flutterpad/app/core/utils/custom_colors.dart';
@@ -10,6 +11,8 @@ import 'package:flutterpad/app/presentation/components/home/home_success_widget.
 import 'package:flutterpad/app/presentation/stores/get_tasks_store.dart';
 import 'package:flutterpad/app/presentation/stores/mark_task_completion_store.dart';
 import 'package:flutterpad/app/presentation/stores/synchronize_store.dart';
+
+import 'create_edit_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -80,25 +83,15 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
-            Container(
-              padding: EdgeInsets.only(
-                left: 16,
-                right: 16,
-                top: 12,
-                bottom: MediaQuery.of(context).padding.bottom + 16,
-              ),
-              decoration: const BoxDecoration(
-                color: CustomColors.fullWhite,
-                border: Border(
-                  top: BorderSide(
-                    width: 1,
-                    color: CustomColors.border,
-                  ),
-                ),
-              ),
+            CustomBottomContainer(
               child: CustomButton(
                 text: "Nova tarefa",
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const CreateEditPage()),
+                  );
+                },
               ),
             ),
           ],

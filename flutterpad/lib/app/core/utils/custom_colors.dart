@@ -7,4 +7,5 @@ abstract class CustomColors {
   static const background = Color(0xFFF1F5F9);
   static const text = Color(0xFF1B1B1D);
   static const border = Color(0xFFE0E0E0);
+  static const error = Color(0xFF9F0000);
 }
