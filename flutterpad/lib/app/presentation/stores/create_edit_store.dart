@@ -1,11 +1,14 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutterpad/app/core/utils/notifier.dart';
+import 'package:flutterpad/app/domain/entities/task_entity.dart';
 import 'package:flutterpad/app/domain/usecases/create_task_usecase.dart';
+import 'package:flutterpad/app/domain/usecases/edit_task_usecase.dart';
 
 class CreateEditStore extends Notifier {
   final CreateTaskUsecase _createTaskUsecase;
+  final EditTaskUsecase _editTaskUsecase;
 
-  CreateEditStore(this._createTaskUsecase);
+  CreateEditStore(this._createTaskUsecase, this._editTaskUsecase);
 
   CreateEditTaskState _state = CreateEditTaskInitialState();
 
@@ -14,7 +17,7 @@ class CreateEditStore extends Notifier {
     String date,
     String time,
     String description,
-    bool isUpdate,
+    TaskEntity? task,
   ) async {
     _state = CreateEditTaskLoadingState();
     notifyListeners();
@@ -28,8 +31,14 @@ class CreateEditStore extends Notifier {
         int.parse(splittedTime[0]),
         int.parse(splittedTime[1]),
       );
-      if (isUpdate) {
-        //
+      if (task != null) {
+        await _editTaskUsecase.call((
+          id: task.id,
+          text: text,
+          date: dateObj,
+          description: description,
+          completed: task.completed,
+        ));
       } else {
         await _createTaskUsecase.call((text: text, date: dateObj, description: description));
       }

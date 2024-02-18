@@ -4,6 +4,7 @@ import 'package:flutterpad/app/core/utils/constants.dart';
 import 'package:flutterpad/app/core/utils/custom_colors.dart';
 import 'package:flutterpad/app/domain/entities/task_entity.dart';
 import 'package:flutterpad/app/presentation/components/home/task_item_widget.dart';
+import 'package:flutterpad/app/presentation/pages/create_edit_page.dart';
 import 'package:flutterpad/app/presentation/stores/mark_task_completion_store.dart';
 
 class PendingTaskListWidget extends StatefulWidget {
@@ -42,6 +43,12 @@ class _PendingTaskListWidgetState extends State<PendingTaskListWidget> {
             isCompleted: item.completed,
             onTapCheckbox: (value) {
               markStore.markTaskCompletion(item, value);
+            },
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CreateEditPage(task: item)),
+              );
             },
           );
         },

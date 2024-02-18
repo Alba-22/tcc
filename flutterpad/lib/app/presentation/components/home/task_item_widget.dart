@@ -8,6 +8,7 @@ class TaskItemWidget extends StatelessWidget {
   final DateTime date;
   final bool isCompleted;
   final void Function(bool value) onTapCheckbox;
+  final void Function()? onTap;
 
   const TaskItemWidget({
     Key? key,
@@ -15,6 +16,7 @@ class TaskItemWidget extends StatelessWidget {
     required this.date,
     required this.isCompleted,
     required this.onTapCheckbox,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -27,33 +29,37 @@ class TaskItemWidget extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: Opacity(
-              opacity: isCompleted ? 0.5 : 1,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    text,
-                    style: TextStyle(
-                      decoration: isCompleted ? TextDecoration.lineThrough : TextDecoration.none,
-                      fontSize: 16,
-                      color: CustomColors.text,
-                      fontWeight: FontWeight.w600,
+            child: InkWell(
+              onTap: onTap,
+              child: Opacity(
+                opacity: isCompleted ? 0.5 : 1,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      text,
+                      style: TextStyle(
+                        decoration: isCompleted ? TextDecoration.lineThrough : TextDecoration.none,
+                        fontSize: 16,
+                        color: CustomColors.text,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  Text(
-                    DateFormat("dd/MM/yyyy - HH:mm", "pt-BR").format(date),
-                    style: TextStyle(
-                      decoration: isCompleted ? TextDecoration.lineThrough : TextDecoration.none,
-                      fontSize: 14,
-                      color: CustomColors.text,
-                      fontWeight: FontWeight.w500,
+                    Text(
+                      DateFormat("dd/MM/yyyy - HH:mm", "pt-BR").format(date),
+                      style: TextStyle(
+                        decoration: isCompleted ? TextDecoration.lineThrough : TextDecoration.none,
+                        fontSize: 14,
+                        color: CustomColors.text,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
+          const SizedBox(width: 8),
           CustomCheckbox(
             value: isCompleted,
             onTap: onTapCheckbox,

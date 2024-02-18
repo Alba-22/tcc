@@ -26,6 +26,7 @@ class FormManager extends Notifier {
         _forms[i.key]!.controller.text = i.value.initialValue!;
       }
     }
+    _checkIsValid();
   }
 
   void _checkIsValid() {

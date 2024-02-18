@@ -2,6 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutterpad/app/domain/repositories/tasks_repository.dart';
 import 'package:flutterpad/app/domain/usecases/create_task_usecase.dart';
+import 'package:flutterpad/app/domain/usecases/edit_task_usecase.dart';
 import 'package:flutterpad/app/domain/usecases/get_last_completed_tasks_usecase.dart';
 import 'package:flutterpad/app/domain/usecases/get_pending_tasks_usecase.dart';
 import 'package:flutterpad/app/domain/usecases/mark_tasks_completion_usecase.dart';
@@ -50,10 +51,11 @@ void registerDependencies() {
   locator.registerFactory(() => MarkTasksCompletionUsecase(locator.get()));
   locator.registerLazySingleton(() => SynchronizeTasksUsecase(locator.get()));
   locator.registerLazySingleton(() => CreateTaskUsecase(locator.get(), locator.get()));
+  locator.registerLazySingleton(() => EditTaskUsecase(locator.get()));
 
   // Stores
   locator.registerLazySingleton(() => GetTasksStore(locator.get(), locator.get()));
   locator.registerLazySingleton(() => MarkTaskCompletionStore(locator.get()));
   locator.registerLazySingleton(() => SynchronizeStore(locator.get()));
-  locator.registerLazySingleton(() => CreateEditStore(locator.get()));
+  locator.registerLazySingleton(() => CreateEditStore(locator.get(), locator.get()));
 }
