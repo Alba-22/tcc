@@ -18,6 +18,12 @@
       "request": "launch",
       "program": "flutterpad/lib/main.dart",
       "args": ["--dart-define=PREVIEW_ENABLED=true"]
+    },
+    {
+      "name": "Launch FlutterPad Simplified",
+      "type": "dart",
+      "request": "launch",
+      "program": "flutterpad_simplified/lib/main.dart"
     }
   ]
 }
