@@ -13,8 +13,8 @@ class TasksRepositoryImpl implements TasksRepository {
   TasksRepositoryImpl(this._localDatasource, this._networkChecker, this._remoteDatasource);
 
   @override
-  Future<List<TaskEntity>> getCompletedTasksInLast24Hours() async {
-    return _localDatasource.getCompletedTasksInLast24Hours();
+  Future<List<TaskEntity>> getCompletedTasksInLastMonth() async {
+    return _localDatasource.getCompletedTasksInLastMonth();
   }
 
   @override
@@ -46,10 +46,8 @@ class TasksRepositoryImpl implements TasksRepository {
           await _localDatasource.saveTask(task, true, newTaskId: remoteId);
         }
       }
-      final remoteRequest = await Future.wait([
-        _remoteDatasource.getPendingTasks(),
-        _remoteDatasource.getCompletedTasksInLast24Hours()
-      ]);
+      final remoteRequest = await Future.wait(
+          [_remoteDatasource.getPendingTasks(), _remoteDatasource.getCompletedTasksInLastMonth()]);
       final remoteTasks = [...remoteRequest[0], ...remoteRequest[1]];
       for (final remoteTask in remoteTasks) {
         await _localDatasource.saveTask(remoteTask, true);

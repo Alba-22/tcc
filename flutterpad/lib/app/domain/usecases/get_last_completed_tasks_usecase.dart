@@ -9,6 +9,6 @@ final class GetLastCompletedTasksUsecase extends Usecase<void, List<TaskEntity>>
 
   @override
   Future<List<TaskEntity>> call(void input) {
-    return _repository.getCompletedTasksInLast24Hours();
+    return _repository.getCompletedTasksInLastMonth();
   }
 }

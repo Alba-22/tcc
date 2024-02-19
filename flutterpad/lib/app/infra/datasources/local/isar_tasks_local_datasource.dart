@@ -11,12 +11,12 @@ class IsarTasksLocalDatasource implements TasksLocalDatasource {
   IsarTasksLocalDatasource(this._isar);
 
   @override
-  Future<List<TaskEntity>> getCompletedTasksInLast24Hours() async {
+  Future<List<TaskEntity>> getCompletedTasksInLastMonth() async {
     final collection = _isar.collection<IsarTaskModel>();
     final tasks = await collection
         .filter()
         .completionEqualTo(true)
-        .dateGreaterThan(clock.now().subtract(const Duration(hours: 24)))
+        .dateGreaterThan(clock.now().subtract(const Duration(days: 30)))
         .findAll();
     return tasks.map((taskModel) {
       return IsarTaskAdapter.toEntity(taskModel);

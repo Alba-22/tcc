@@ -20,7 +20,7 @@ class GetTasksStore extends Notifier {
     }
     try {
       final pendingTasks = await _repository.getPendingTasks();
-      final completedTasks = await _repository.getCompletedTasksInLast24Hours();
+      final completedTasks = await _repository.getCompletedTasksInLastMonth();
       _state = GetTasksSuccessState(pendingTasks, completedTasks);
     } on Failure catch (failure) {
       _state = GetTasksErrorState(failure.message);

@@ -21,7 +21,7 @@ class RestTasksRemoteDatasource implements TasksRemoteDatasource {
   }
 
   @override
-  Future<List<TaskEntity>> getCompletedTasksInLast24Hours() async {
+  Future<List<TaskEntity>> getCompletedTasksInLastMonth() async {
     final response = await _dio.get("$baseUrl/tasks");
     final List<TaskEntity> tasks = response.data.map<TaskEntity>((e) {
       return RestTaskAdapter.fromMap(e);
@@ -29,7 +29,7 @@ class RestTasksRemoteDatasource implements TasksRemoteDatasource {
     return tasks
         .where((element) =>
             element.completed == true &&
-            element.date.compareTo(clock.now().subtract(const Duration(hours: 24))) == 1)
+            element.date.compareTo(clock.now().subtract(const Duration(days: 30))) == 1)
         .toList();
   }
 

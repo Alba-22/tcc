@@ -5,6 +5,6 @@ abstract interface class TasksLocalDatasource {
   Future<void> saveTask(TaskEntity task, bool synchorized, {String? newTaskId});
   Future<IsarTaskModel?> getTaskById(String id);
   Future<List<TaskEntity>> getPendingTasks();
-  Future<List<TaskEntity>> getCompletedTasksInLast24Hours();
+  Future<List<TaskEntity>> getCompletedTasksInLastMonth();
   Future<List<IsarTaskModel>> getTasksNotSynchronized();
 }
