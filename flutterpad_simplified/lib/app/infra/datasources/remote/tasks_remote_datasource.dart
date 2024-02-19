@@ -5,5 +5,4 @@ abstract interface class TasksRemoteDatasource {
   Future<List<TaskEntity>> getPendingTasks();
   Future<List<TaskEntity>> getCompletedTasksInLast24Hours();
   Future<void> updateTask(TaskEntity task);
-  Future<void> deleteTask();
 }

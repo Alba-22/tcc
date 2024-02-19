@@ -9,7 +9,7 @@ class RestTasksRemoteDatasource implements TasksRemoteDatasource {
 
   RestTasksRemoteDatasource(this._dio);
 
-  static get baseUrl => "http://192.168.100.100:8080";
+  static get baseUrl => const String.fromEnvironment("BASE_URL");
 
   @override
   Future<String> createTask(TaskEntity task) async {
@@ -18,11 +18,6 @@ class RestTasksRemoteDatasource implements TasksRemoteDatasource {
       data: RestTaskAdapter.toMap(task),
     );
     return response.data["id"];
-  }
-
-  @override
-  Future<void> deleteTask() {
-    throw UnimplementedError();
   }
 
   @override

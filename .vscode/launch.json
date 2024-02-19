@@ -10,20 +10,25 @@
       "name": "Launch FlutterPad",
       "type": "dart",
       "request": "launch",
-      "program": "flutterpad/lib/main.dart"
+      "program": "flutterpad/lib/main.dart",
+      "args": ["--dart-define=BASE_URL=http://192.168.100.100:8080"]
     },
     {
       "name": "Launch FlutterPad With Preview",
       "type": "dart",
       "request": "launch",
       "program": "flutterpad/lib/main.dart",
-      "args": ["--dart-define=PREVIEW_ENABLED=true"]
+      "args": [
+        "--dart-define=PREVIEW_ENABLED=true",
+        "--dart-define=BASE_URL=http://192.168.100.100:8080"
+      ]
     },
     {
       "name": "Launch FlutterPad Simplified",
       "type": "dart",
       "request": "launch",
-      "program": "flutterpad_simplified/lib/main.dart"
+      "program": "flutterpad_simplified/lib/main.dart",
+      "args": ["--dart-define=BASE_URL=http://192.168.100.100:8080"]
     }
   ]
 }
