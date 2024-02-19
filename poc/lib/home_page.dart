@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:poc_tcc/dialog/approaches/list/dialog_approaches_list_page.dart';
 import 'package:poc_tcc/form/approaches/list/form_approaches_list_page.dart';
 import 'package:poc_tcc/state/approaches/approaches_list/approaches_list_page.dart';
 
@@ -40,6 +41,19 @@ class HomePage extends StatelessWidget {
                 );
               },
               child: const Text("Forms and Validation"),
+            ),
+            const SizedBox(height: 12),
+            ElevatedButton(
+              style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all(const Size(300, 48)),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const DialogApproachesListPage()),
+                );
+              },
+              child: const Text("Dialog"),
             ),
           ],
         ),
