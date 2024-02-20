@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:poc_tcc/dialog/approaches/factory/dialog_specification.dart';
+import 'package:poc_tcc/dialog/approaches/factory/base_dialog.dart';
 
 class AndroidDialog implements BaseDialog {
   @override

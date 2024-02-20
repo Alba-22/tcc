@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:poc_tcc/dialog/approaches/factory/android_dialog.dart';
-import 'package:poc_tcc/dialog/approaches/factory/dialog_specification.dart';
+import 'package:poc_tcc/dialog/approaches/factory/base_dialog.dart';
 import 'package:poc_tcc/dialog/approaches/factory/ios_dialog.dart';
 
 class DialogFactory {

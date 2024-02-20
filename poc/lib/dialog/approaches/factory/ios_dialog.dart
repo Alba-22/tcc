@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:poc_tcc/dialog/approaches/factory/dialog_specification.dart';
+import 'package:poc_tcc/dialog/approaches/factory/base_dialog.dart';
 
 class IosDialog implements BaseDialog {
   @override
