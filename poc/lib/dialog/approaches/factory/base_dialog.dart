@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class BaseDialog {
+abstract interface class BaseDialog {
   Widget create(BuildContext context, String title, String content, List<DialogAction> actions);
 }
 
