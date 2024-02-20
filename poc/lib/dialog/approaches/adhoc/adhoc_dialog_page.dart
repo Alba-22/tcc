@@ -21,10 +21,10 @@ class _AdhocDialogPageState extends State<AdhocDialogPage> {
         child: ElevatedButton(
           child: const Text("Aperte para abrir o Dialog"),
           onPressed: () {
-            if (Platform.isIOS) {
-              showDialog(
-                context: context,
-                builder: (context) {
+            showDialog(
+              context: context,
+              builder: (context) {
+                if (Platform.isIOS) {
                   return CupertinoAlertDialog(
                     title: const Text("Confirmação Necessária"),
                     content: const Text("Deseja confirmar a operação?"),
@@ -39,12 +39,7 @@ class _AdhocDialogPageState extends State<AdhocDialogPage> {
                       ),
                     ],
                   );
-                },
-              );
-            } else {
-              showDialog(
-                context: context,
-                builder: (context) {
+                } else {
                   return AlertDialog(
                     title: const Text("Confirmação Necessária"),
                     content: const Text("Deseja confirmar a operação?"),
@@ -59,9 +54,9 @@ class _AdhocDialogPageState extends State<AdhocDialogPage> {
                       ),
                     ],
                   );
-                },
-              );
-            }
+                }
+              },
+            );
           },
         ),
       ),
