@@ -157,6 +157,7 @@ brazil]{facom-ufu-abntex2}
     \item[GUI] Graphic User Interface
     \item[HTTP] Hypertext Transfer Protocol
     \item[UI] User Interface
+    \item[SO] Sistema Operacional
 \end{siglas}
 % ---
 
@@ -575,6 +576,63 @@ Assim, o uso de todas essas classes será o presente na Figura \ref{fig:use_of_f
 
 
 \section{Apresentação de Componentes de Plataformas Específicas de Forma Facilitada}
+
+Em termos de identidade visual, cada sistema operacional possui seu próprio \textit{Design System}, que corresponde a um conjunto de componentes prontos que seguem um padrão estabelecido por uma organização. Assim, têm-se que a \textit{Google} possui o \textit{Material Design}, a \textit{Apple} em seus SOs possui o \textit{Human Interface Guidelines}, a \textit{Microsoft} com o \textit{Windows} possui a \textit{Fluent UI}, dentre outros. Com isso, no momento de desenvolver uma aplicação cliente utilizando o Flutter, têm-se duas opções no que tange à construção de interfaces gráficas. Pode-se optar por criar um \textit{Design System} próprio para a aplicação, de forma que ele seja totalmente customizável e tenha um mesmo comportamento em todas as plataformas em que a aplicação irá rodar. Essa escolha colabora com a aplicação ter uma identidade visual mais forte, porém num momento inicial os usuário podem ficar perdidos pelo fato da interface não ser muito semelhante à interface do sistema operacional que usam, necessitando de um tempo para se acostumarem.
+
+Uma outra opção é de fazer com que o layout da aplicação seja único para cada plataforma, seja em sua totalidade, seja em componentes específicos que o \textit{Design System} do SO já possui um componente que realiza a função desejada. Para aplicações nativas, essa tarefa se torna trivial, visto que um desenvolvedor \textit{Android}, que irá criar uma aplicação em Kotlin e possui acesso apenas ao \textit{Material Design} da Google para a criação dos componentes. O mesmo é válido para desenvolvedores \textit{iOS}, que já possuirão todas as ferramentas fornecidas pela Apple e conseguirão apenas criar aplicações para o ecossistema da Apple.
+
+Porém, para desenvolvedores que utilizam de \textit{frameworks cross-platform}, como o Flutter, para adotar essa segunda abordagem seria necessário em todo componente que se deseje ter a aparência da plataforma em que o app está rodando, fazer verificações sobre qual plaforma a aplicação está sendo utilizada, o que levará a duplicação em diversas partes da base de código. Assim, de forma a seguir o princípio DRY, essa  seção desse trabalho propõe em utilizar o padrão de projeto \textit{Factory} para resolver essa problemática. Será desenvolvida uma prova de conceito simples que mostrará um componente \textit{Dialog} ao apertar de uma botão, de forma que ele seguirá o \textit{Material Design} quando a aplicação estiver no \textit{Android} e seguirá o \textit{Cupertino Design System} quando estiver rodando no \textit{iOS}, como mostrado na Figura \ref{fig:plaforms_dialog}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.65\textwidth]{figures/dialog/platforms_dialog.png}
+    \caption{Exemplo da visualização dos Dialog no iOS e Android, respectivamente}
+    \label{fig:plaforms_dialog}
+\end{figure}
+
+\subsection{Forma Direta de Apresentar Componentes Nativos}
+
+Para a exibição de \textit{Dialogs}, o Flutter disponibiliza a função assíncrona \textit{showDialog}, que recebe o \textit{BuildContext} e uma função que retornará um widget a ser exibido. Esse widget será o \textit{CupertinoAlertDialog} para o \textit{iOS} e um \textit{AlertDialog} para o \textit{Android}, ambos providos pelo próprio Flutter, de forma que será necessário chamar métodos estáticos da classe \textit{Platform}, da biblioteca \textit{dart:io} para verificar em qual SO a aplicação está rodando, como mostrado na Figura \ref{fig:adhoc_dialog}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/dialog/adhoc_dialog.png}
+    \caption{Exemplo direto do uso de diferentes Dialogs de acordo com o SO no qual a aplicação está rodando}
+    \label{fig:adhoc_dialog}
+\end{figure}
+
+Apesar de bem direta, a forma apresentada acarretará em problemas futuros para o projeto, visto que haverá sempre a duplicação de código ao chamar as classes \textit{AlertDialog} e \textit{CupertinoAlertDialog} em vários lugares na base de código, de forma que caso o Flutter mude os parâmetros dessas classes em versões futuras, ou até mesmo descontinue a classe em favor de outra, seria necessário fazer alterações em vários arquivos do projeto. Além disso, têm-se o fato de sempre ser necessária as verificações de plataforma em todo lugar que for necessário exibir o \textit{Dialog}, de forma que se em um futuro a aplicação passar a dar suporte a uma nova plataforma, será necessário ir em todas as checagens e adicionar uma nova condição para essa nova plataforma para que seja exibido um novo componente.
+
+\subsection{Uso do Padrão Factory para Mostrar Componentes Nativos}
+
+Diante dos problemas apresentados, é possível introduzir o padrão de projeto \textit{Factory}, que permitirá a criação de uma classe que encapsulará a responsabilidade de realizar a checagem de plataforma e, diante de uma interface criada para a exibição de \textit{Dialogs}, irá retornar o \textit{Dialog} apropriado para a plataforma vigente em que a aplicação está rodando. Para implementar esse padrão, é necessário primeiramente criar a interface que todas as implementações de \textit{Dialog} devem seguir. Essa interface receberá o título, conteúdo e as ações possíveis para os botões do \textit{Dialog}, como visto na Figura \ref{fig:base_dialog}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.85\textwidth, trim={0 30 0 100}, clip]{figures/dialog/base_dialog.png}
+    \caption{Interface para criação de Dialogs}
+    \label{fig:base_dialog}
+\end{figure}
+
+Em seguida, deve-se criar as implementações dos \textit{Dialogs} a partir dessa interface criada, com cada um retornando o componente correto de cada plataforma e realizando customizações que serão específicas daquela plataforma, como visto na Figura \ref{fig:dialog_implementations}
+
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.85\textwidth, trim={0 30 0 100}, clip]{figures/dialog/dialog_implementations.png}
+    \caption{Implementações dos \textit{Dialogs} com base na interface \textit{BaseDialog}}
+    \label{fig:dialog_implementations}
+\end{figure}
+
+Por último, deve-se criar a classe \textit{DialogFactory}, que irá receber os parâmetros de título, conteúdo e ações dos botões e irá fazer a verificação de qual plataforma a aplicação está rodando para que possa ser feita a escolha de qual implementação do \textit{BaseDialog} será utilizada para a exibição do componente de \textit{dialog}, como visto na Figura \ref{fig:dialog_factory}. Com essa implementação utilizando o padrão \textit{Factory}, quando for necessário adicionar uma nova plataforma, bastará criar a nova implementação da interface \textit{BaseDialog} e adicionar uma única nova condição dentro da fábrica, de forma em qualquer lugar da base de código que chame o método estático \textit{showAlertDialog} já será exibido o componente correto para a nova plataforma. Destaca-se que esse padrão pode ser aplicado para qualquer parte da interface, desde partes que chamem componentes de interface comuns nos sistemas operacionais, como \textit{overlays} de carregamento, \textit{date pickers}, \textit{dialogs}, até componentes mais específicos da aplicação em si, como \textit{cards}, campos de texto, botões, etc.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.85\textwidth, trim={0 30 0 100}, clip]{figures/dialog/dialog_factory.png}
+    \caption{Classe que utiliza propriamente o padrão \textit{Factory}}
+    \label{fig:dialog_factory}
+\end{figure}
+
 
 \section{Aplicação de Conceitos de Arquitetura de Software em Aplicações Flutter}
 
