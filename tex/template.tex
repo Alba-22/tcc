@@ -7,6 +7,7 @@ a4paper,    %
 brazil]{facom-ufu-abntex2}
 
 \usepackage{graphicx}
+\usepackage{hyperref}
 \graphicspath{{figuras/}{pictures/}{images/}{./}} % where to search for the images
 
 \newcommand{\blue}[1]{\textcolor{blue}{#1}}
@@ -158,6 +159,8 @@ brazil]{facom-ufu-abntex2}
     \item[HTTP] Hypertext Transfer Protocol
     \item[UI] User Interface
     \item[SO] Sistema Operacional
+    \item[DTO] Data Transfer Object
+    \item[API] Application Program Interface
 \end{siglas}
 % ---
 
@@ -324,10 +327,10 @@ Já o \textit{framework} Flutter, criado também pela Google, e apresentado inic
 
 
 
-\chapter{Desenvolvimento}
+\chapter{Desenvolvimento} \label{chapt:development}
 Nesta seção serão abordados alguns problemas comuns no desenvolvimento de aplicações Flutter, de forma que para cada problema será apresentada uma ou mais resoluções de forma a aplicar padrões de projeto e de arquitetura amplamente conhecidos e já documentados. Por meio desses padrões, busca-se código mais padronizados, legíveis, manuteníveis e que haja uma menor chance de erros serem cometidos pelos desenvolvedores enquanto constroem softwares complexos.
 
-\section{O Problema da Representação de Estados}
+\section{O Problema da Representação de Estados} \label{sec:state_representation}
 Por o framework Flutter ser focado na criação de aplicações cliente, ou seja, que são executadas no dispositivo do usuário, existem muitos casos em que é necessário que haja a comunicação com um servidor para execução de regras de negócio e armazenamento de dados. Essa comunicação é feita por meio de requisições à rede internet e ocorrem de maneira assíncrona, com a resposta dessas requisições demorando algum tempo para acontecer. Além disso, essas requisições podem se completar de duas formas: com sucesso e com erro. Em casos de sucesso, costuma-se ter como o resultado a informação que se deseja obter do servidor, ou então uma confirmação de que o envio de dados foi realizado com sucesso. Em casos de erros, pode-se ter mensagens ou códigos de erro de forma que o usuário possa entender melhor qual o erro que ocorreu ao realizar uma ação dentro da aplicação, já que o erro pode ser causado por motivos diversos, desde um valor inválido informado pelo usuário até erros de comunicação de baixo nível na rede. Esse mesmo princípio pode se aplicar para comunicações que não sejam em rede, como em acessos a bancos de dados no dispositivo do usuário, chamadas de sistema operacional, comunicação por \textit{Bluetooth} e muitas outras.
 
 Com isso em vista, têm-se que qualquer tipo de comunicação assíncrona pode ser representada por meio de um diagrama de estados, em que a partir de um estado inicial, transiciona-se para um estado de carregamento a partir de uma ação do usuário e, após a realização da ação assíncrona, pode-se transicionar para um estado de sucesso ou para um estado de erro, como descrito na Figura \ref{fig:states_diagram}.
@@ -467,7 +470,7 @@ Com essa alteração feita nas classes de estados, pode-se alterar a interface d
     \label{fig:sealed_page}
 \end{figure}
 
-\section{Melhorias para Formulários e suas Validações}
+\section{Melhorias para Formulários e suas Validações} \label{sec:forms}
 
 Em aplicações que rodam no lado do cliente, é muito comum a presença de formulários, seja para criação de conta, login, criação de recursos, edição de dados, etc. Para isso, é comum a presença de campos de formulários nessas aplicações, que são componentes de interface que permitem ao usuário digitar valores e registrá-los, seja por um envio desses dados à algum servidor ou pela escrita em um banco de dados no próprio dispositivo.
 
@@ -586,7 +589,7 @@ Assim, o uso de todas essas classes será o presente na Figura \ref{fig:use_of_f
 \end{figure}
 
 
-\section{Apresentação de Componentes de Plataformas Específicas de Forma Facilitada}
+\section{Apresentação de Componentes de Plataformas Específicas de Forma Facilitada} \label{sec:plaform_components}
 
 Em termos de identidade visual, cada sistema operacional possui seu próprio \textit{Design System}, que corresponde a um conjunto de componentes prontos que seguem um padrão estabelecido por uma organização. Assim, têm-se que a \textit{Google} possui o \textit{Material Design}, a \textit{Apple} em seus SOs possui o \textit{Human Interface Guidelines}, a \textit{Microsoft} com o \textit{Windows} possui a \textit{Fluent UI}, dentre outros. Com isso, no momento de desenvolver uma aplicação cliente utilizando o Flutter, têm-se duas opções no que tange à construção de interfaces gráficas. Pode-se optar por criar um \textit{Design System} próprio para a aplicação, de forma que ele seja totalmente customizável e tenha um mesmo comportamento em todas as plataformas em que a aplicação irá rodar. Essa escolha colabora com a aplicação ter uma identidade visual mais forte, porém num momento inicial os usuário podem ficar perdidos pelo fato da interface não ser muito semelhante à interface do sistema operacional que usam, necessitando de um tempo para se acostumarem.
 
@@ -639,20 +642,116 @@ Para a aplicação do padrão \textit{Factory} em si, deve-se criar a classe abt
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.85\textwidth, trim={0 30 0 100}, clip]{figures/dialog/dialog_factory.png}
+    \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/dialog/dialog_factory.png}
     \caption{Classe que utiliza propriamente o padrão \textit{Factory}}
     \label{fig:dialog_factory}
 \end{figure}
 
 
-\section{Aplicação de Conceitos de Arquitetura de Software em Aplicações Flutter}
 
 
-\subsection{Uma Aplicação Clássica da Arquitetura Limpa}
+\section{Aplicação de Conceitos de Arquitetura de Software em Aplicações Flutter} \label{sec:arch}
 
-\subsection{Aplicações Offline-First: Uma Responsabilidade da Camada de Infraestrutura}
+Para a abordagem prática dos estudos sobre arquitetura realizados no capítulo 2 desse trabalho, foi construída uma aplicação cliente utilizando o framework Flutter. Essa aplicação consiste em um gerenciador de tarefas simples, no qual o usuário poderá criar novas tarefas, edita-las e marca-las como feitas ou não feitas. Uma tarefa terá título, data, horário e uma descrição opcional. As telas de protótipo da aplicação podem ser vistas na Figura \ref{fig:flutterpad_figma}, que consistem de uma tela para visualização das tarefas, de forma que elas são separadas em feitas e não feitas, e também uma tela para criação e edição de uma tarefa. Toda a prototipação do projeto foi baseada na aplicação \textit{FlutterPad}, criada em um evento promovido pela comunidade \textit{Flutterando} em dezembro de 2023.
 
-\subsection{Uma Arquitetura de Duas Camadas Simplificada}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.85\textwidth]{figures/arch/flutterpad_figma.png}
+    \caption{Protótipo da Aplicação FlutterPad}
+    \label{fig:flutterpad_figma}
+\end{figure}
+
+Do ponto de vista de ferramentas utilizadas para construção da aplicação, além do Flutter para construção da interface gráfica, destaca-se o uso das seguintes bibliotecas de Dart:
+\begin{itemize}
+    \item \href{https://pub.dev/packages/isar}{Isar} para banco de dados local da aplicação;
+    \item \href{https://pub.dev/packages/dio}{Dio} para realizar requisições HTTP na aplicação;
+    \item \href{https://pub.dev/packages/json_rest_server}{JSON Rest Server} para simular uma API REST para comunicação com um servidor
+    \item \href{https://pub.dev/packages/get_it}{GetIt} como provedor de instâncias de classes, auxiliando na inversão de controle e injeção de dependências
+    \item \href{https://pub.dev/packages/internet_connection_checker}{Internet Connection Checker} e \href{https://pub.dev/packages/connectivity_plus}{Connectivity Plus} para verificação de acesso à internet
+    \item \href{https://pub.dev/packages/equatable}{Equatable} para facilitar a comparação de classes por seu conteúdo, sem ter que sobreescrever métodos de igualdade
+\end{itemize}
+
+Todo o código da aplicação feita está disponível no seguinte \href{https://github.com/Alba-22/tcc}{repositório público}, em que além do código da aplicação FlutterPad, também contém as provas de conceito utilizadas para as seções anteriores desse capítulo 3. Além disso, vale destacar que essa aplicação foi desenvolvida com o intuito de conseguir funcionar de forma totalmente offline quando o dispositivo do usuário não tiver conexão com a internet, mas a partir do momento que houver o restabelecimento da conexão, a aplicação deve conseguir se sincronizar com a API sendo utilizada e obter dados mais recentes e enviar dados que ainda estão pendentes de serem enviados. Mais detalhes sobre essa sincronização estarão presentes no momento que for discutida a camada de infraestrutura da aplicação.
+
+
+\subsection{Uma Aplicação Clássica da Arquitetura Limpa} \label{subsec:clean_arch}
+
+Com os estudos realizados em cima dos conceitos de \textit{Domain Driven Design}, Arquitetura Hexagonal e Arquitetura Limpa, percebe-se que no quesito de arquitetura de software, os conceitos das três obras são muito semelhantes, como todos focando na não interferência de detalhes externos como interface gráfica e acesso a dados na parte do domínio e regras de negócio da aplicação, como todas buscando o desacomplamento entre as camadas e utilizando de diversos princípios de desenvolvimento de software, como os princípios do acrônimo SOLID, padrões de projeto e outros discutidos no capítulo 2 desse trabalho.
+
+Apesar de em sua obra "Clean Architecture: A Craftsman's Guide to Software Structure and Design" Robert Martin não definir uma estrutura exata para uma arquitetura limpa, mas sim definir aspectos que tornam uma arquitetura de um projeto de software mais simpla, é possível se inspirar nos mais de 30 capítulos da obra para formar de fato uma arquitetura para um projeto Flutter. Assim, a arquitetura montada para o aplicativo \textit{FlutterPad} se inspira nos conceitos de DDD, Arquitetura Hexagonal e fortemente nos conceitos de o que torna uma arquitetura, de fato, limpa, segundo a visão de Robert Martin. Na Figura \ref{fig:arch_diagram} pode-se visualizar um diagrama que representa a arquitetura elaborada, que contém 3 camadas: a camada de domínio, a camada de apresentação e a camada de infraestrutura, em que cada uma tem suas responsabilidades e objetivos e serão discutidas durante essa seção. Além disso, na figura é possível visualizar o fluxo das chamadas a partir das interações do usuário que se inicia na camada de apresentação(equivalente ao lado condutor da arquitetura hexagonal) até chegar na camada de infraestrutura(que é equivalente ao lado conduzido da arquitetura hexagonal), assim como também o fluxo de dados que se mostra na direção oposta ao fluxo de chamadas.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/arch/arch_diagram.png}
+    \caption{Diagrama da Arquitetura Desenvolvida}
+    \label{fig:arch_diagram}
+\end{figure}
+
+Na arquitetura elaborada, a camada de domínio, como seu próprio nome diz, é responsável por tratar tudo que é relativo ao domínio da aplicação e possui 3 principais componentes: as entidades, os casos de uso e as interfaces dos repositórios. As entidades, como colocado nas obras citadas anteriormente, são responsáveis por representar a estrutura e o comportamento das regras de negócio nas quais a aplicação de software trabalha e devem possuir alguma forma de identidade que represente unicamente aquela instância. Para a aplicação \textit{FlutterPad}, foi criada uma entidade para representação de uma tarefa, como pode ser visto na Figura \ref{fig:task_entity}. Essa entidade estende da classe \textit{Equatable} para facilitar a comparação por meio dos seus atributos em vez do endereço de memória da instância da classe. Além disso, para esse projeto, optou-se por todos os seus atributos serem colocados como a palavra-chave \textit{final}, o que garante a imutabilidade da classe e faz com que seus atributos não possam ser alterados após a instanciação da classe. Como comportamento, por se tratar de um exemplo simples, foram criado 2 métodos, um para marcar a tarefa como concluída, e que retornará uma nova instância da classe, e o método \textit{copyWith}, que trabalha de forma a retornar uma nova instância da classe com novos atributos passados no método.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.50\textwidth, trim={0 30 0 100}, clip]{figures/arch/task_entity.png}
+    \caption{Código para classe TaskEntity}
+    \label{fig:task_entity}
+\end{figure}
+
+Ainda na camada de domínio, têm-se os casos de uso. Inspirados nos casos de uso descritos na Arquitetura Limpa e nos \textit{Application Services} descritos no DDD, os casos de uso são os responsáveis por descrever o modo como um sistema automatizado é usado, de forma a resolver uma intenção completa ou um fluxo de uso exigido pelo usuário da aplicação. Na aplicação desenvolvida foi criada uma classe abstrata para representar os casos de uso, em que define-se um tipo genérico para entrada de dados e um para a saída, além da presença de uma função que executará o caso de uso, como visto na Figura \ref{fig:usecase_interface}. Como exemplo de caso de uso desenvolvido, pode-se colocar o caso de uso utlizado para marcar uma tarefa como completa ou não, como mostrado na Figura \ref{fig:mark_task_completion_usecase}. Essa classe estenderá da classe de \textit{Usecase} criada anteriormente e receberá como entrada um DTO que conterá a tarefa que será manipulado e se ela deve ser marcada como realizada ou não.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/arch/usecase_interface.png}
+    \caption{Classe genérica para representação de casos de uso}
+    \label{fig:usecase_interface}
+\end{figure}
+
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/arch/mark_task_completion_usecase.png}
+    \caption{Caso de uso para marcação de realização de tarefas}
+    \label{fig:mark_task_completion_usecase}
+\end{figure}
+
+Por último na camada de domínio, têm-se os repositórios, que inspirados no padrão de projeto \textit{Repository} do DDD, servem como uma abstração para o acesso a dados que os casos de uso necessitarão, como visto na Figura \ref{fig:mark_task_completion_usecase}, que recebe uma instância de \textit{TaskRepository} em seu construtor, e que é usado para chamar o método responsável por atualizar a tarefa após ela ser marcada como realizada ou não. Os repositórios criados nessa camada se caracterizam por ser apenas a interface que fará o acesso aos dados que os casos de uso necessirarão, de forma que a implementação desses repositórios deve estar em outra camada que não seja a de domínio, visto que essa camada não tem como responsabilidade lidar com persistência e acesso a dados. Ainda, vale salientar o fato dos casos de uso especificarem uma interface a ser passada em seu construtor, o que atende o \textit{Dependency Inversion Principle} do SOLID de Robert Martin e permite a Inversão de Controle sobre as dependências da aplicação, de forma que, por exemplo, na criação de testes unitários para os casos de uso é possível criar uma outra implementação que simule o acesso a dados, ao invés de depender de reais acessos a bancos de dados ou serviços externos para testar os casos de uso. Na Figura \ref{fig:tasks_repository} pode-se ver os métodos da interface utilizados na aplicação. Outro ponto de destaque é que, caso a aplicação tenha outros modelos de domínio, deve-se criar outros repositórios para acesso e persistência de dados, ao invés de utilizar o repositório já criado, o que colaborará para a manutenção e legibilidade da aplicação por aplicar o \textit{Interface Segregation Principle} do SOLID.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/arch/tasks_repository.png}
+    \caption{Interface do Repositório de Tarefas}
+    \label{fig:tasks_repository}
+\end{figure}
+
+A camada de infraestrutura, têm-se como principal responsabilidade a realização de acesso a dados, seja por meio de escritas e leituras à bancos de dados locais do dispositivo do usuário, seja por meio de requisições na internet por meio de protocolos como HTTP ou gRPC, ou até mesmo comunicação por \textit{Bluetooth} com outros dispositivos. Como visto na Figura \ref{fig:arch_diagram}, a camada de infraestrutura tem como seus componentes: repositório, modelos, fontes de dados e adaptadores.
+
+Os repositórios nessa camada são as implementações concretas das interfaces dos repositórios existentes na camada de domínio. Essas implementações têm como objetivo escolher a fonte de dados apropriada para obter o dado exigido pela interface. A escolha da fonte de dados pode ser feita por meio de verificações de o dispositivo do usuário tem acesso a conexão de internet, para então saber se deve obter o dado de um banco de dados local do dispositivo ou se deve consultar algum tipo de API disponível online. A depender da lógica da aplicação, também é possível que não seja necessário fazer esse tipo de escolha e o repositório tenha apenas o papel de chamar diretamente uma das fontes de dados para realizar a operação, atuando como um intermediário da operação definida da interface que o caso de uso necessita.
+
+Na arquitetura criada para essa aplicação, os modelos estão muito relacionados com as fontes de dados, de forma que o modelo é a representação de uma entidade para aquela fonte de dados, visto que as representações, por conta dos mecanismo de persistência ou de requisições na web, podem diferir do modo como a aplicação representa a regra de negócio por meio das entidades. Assim, como se deseja que as entidades não sejam "sujas" pelos mecanismos relacionados a persistência de dados, há a criação dos modelos. Além disso, para que se possa enviar os dados dos modelos para a camada de domínio, há a presença dos adaptadores, que são classes que conterão métodos que conseguem converter um modelo numa entidade e vice-versa. Na Figura \ref{fig:isar_task_model}, tem-se a classe que representa uma tarefa no banco de dados local, que na aplicação desenvolvida utiliza a biblioteca \textit{Isar}. Pode-se notar que essa classe possui uma série de adições em relação à entidade de tarefa mostrada na Figura \ref{fig:task_entity}, como por exemplo a anotação \textit{@collection} presente no topo da classe, a presença de um identificador novo exigido pela biblioteca e outros 2 atribuitos \textit{syncDate} e \textit{createdRemotelly}, utilizados para sincronização de dados na aplicação.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.5\textwidth, trim={0 30 0 100}, clip]{figures/arch/isar_task_model.png}
+    \caption{Classe que representa uma tarefa no banco de dados}
+    \label{fig:isar_task_model}
+\end{figure}
+
+No quesito das fontes de dados, foram criadas duas fontes de dados para essa aplicação, a \textit{TasksLocalDatasource}, que utiliza da bilioteca \textit{Isar} e a \textit{TasksRemoteDatasource}, que utiliza da biblioteca \textit{Dio} para comunicar com a API criada pelo pacote \textit{JSON Rest Server}. Na Figura \ref{fig:save_local_task}, tem-se um exemplo de uso da biblioteca \textit{Isar} para salvar uma instância de \textit{IsarTaskModel} a partir de uma dada \textit{TaskEntity}, de forma com que os detalhes relativos à persistência de dados e sincrozação do modelo do domínio estão contidos apenas na camada de infraestrutura, sem nenhum conhecimento desses detalhes pela camada de domínio.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.7\textwidth, trim={0 30 0 100}, clip]{figures/arch/save_local_task.png}
+    \caption{Método do \textit{TasksLocalDatasource} que salva uma tarefa no banco de dados}
+    \label{fig:save_local_task}
+\end{figure}
+
+Nas duas camadas apresentadas até então, tem-se a presença apenas de código Dart e o uso de algumas bibliotecas da linguagem para ações específicas como acessoa a banco de dados e requisições na internet, de forma que em ambas as camadas não a presença do Flutter. Isso se deve pois na arquitetura elaborada, a sua presença se restringe a camada de apresentação, que tem como responsabilidade criar a interface gráfica que o usuário irá utilizar, de forma que interagirá com a regra de negócio da aplicação por meio de chamadas aos casos de uso presentes na camada de domínio. Assim, caso deseje-se utilizar outro framework para construção de interface gráfica, ou até mesmo deseje-se alterar para que a aplicação rode apenas no console da máquina do usuário, será necessário apenas alterar código na camada de apresentação, visto que a regra de negócio está presente apenas na camada de domínio e o acesso a dados está restrito à camada de infraestrutura.
+
+Dessa forma, na camada de apresentação têm-se como componentes: os \textit{stores}(que também podem ser chamados de controladores) e os componentes visuais, comumente chamados no Flutter de \textit{Widgets}. Os stores tem como objetivo fazer as chamadas assíncronas aos casos de uso e fazer o papel de gerenciar o estado da aplicação, utilizando de técnicas de reatividade como apresentado na Seção \ref{sec:state_representation}. Já os \textit{widgets} são os componentes do Flutter que serão responsáveis por realizar a criação das telas e páginas.
+
+
+\subsection{Uma Arquitetura de Duas Camadas Simplificada} \label{subsec:simplified_arch}
+
+Com a criação do projeto nas seções anteriores, percebeu-se que
 % Application Bussiness Rules da CleanArch são muito atrelados à tela
 
 \chapter{Conclusão}
