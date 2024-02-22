@@ -14,12 +14,18 @@ class TasksRepositoryImpl implements TasksRepository {
 
   @override
   Future<List<TaskEntity>> getCompletedTasksInLastMonth() async {
-    return _localDatasource.getCompletedTasksInLastMonth();
+    final tasks = await _localDatasource.getCompletedTasksInLastMonth();
+    return tasks.map((taskModel) {
+      return IsarTaskMapper.toEntity(taskModel);
+    }).toList();
   }
 
   @override
   Future<List<TaskEntity>> getPendingTasks() async {
-    return _localDatasource.getPendingTasks();
+    final tasks = await _localDatasource.getPendingTasks();
+    return tasks.map((taskModel) {
+      return IsarTaskMapper.toEntity(taskModel);
+    }).toList();
   }
 
   @override

@@ -11,25 +11,21 @@ class IsarTasksLocalDatasource implements TasksLocalDatasource {
   IsarTasksLocalDatasource(this._isar);
 
   @override
-  Future<List<TaskEntity>> getCompletedTasksInLastMonth() async {
+  Future<List<IsarTaskModel>> getCompletedTasksInLastMonth() async {
     final collection = _isar.collection<IsarTaskModel>();
     final tasks = await collection
         .filter()
         .completionEqualTo(true)
         .dateGreaterThan(clock.now().subtract(const Duration(days: 30)))
         .findAll();
-    return tasks.map((taskModel) {
-      return IsarTaskMapper.toEntity(taskModel);
-    }).toList();
+    return tasks;
   }
 
   @override
-  Future<List<TaskEntity>> getPendingTasks() async {
+  Future<List<IsarTaskModel>> getPendingTasks() async {
     final collection = _isar.collection<IsarTaskModel>();
     final tasks = await collection.filter().completionEqualTo(false).findAll();
-    return tasks.map((taskModel) {
-      return IsarTaskMapper.toEntity(taskModel);
-    }).toList();
+    return tasks;
   }
 
   @override
