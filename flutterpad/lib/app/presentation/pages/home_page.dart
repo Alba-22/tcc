@@ -6,6 +6,7 @@ import 'package:flutterpad/app/core/components/custom_button.dart';
 import 'package:flutterpad/app/core/di/di.dart';
 import 'package:flutterpad/app/core/utils/custom_colors.dart';
 import 'package:flutterpad/app/core/utils/notifier_builder.dart';
+import 'package:flutterpad/app/infra/services/network_checker/network_checker.dart';
 import 'package:flutterpad/app/presentation/components/home/home_header.dart';
 import 'package:flutterpad/app/presentation/components/home/home_success_widget.dart';
 import 'package:flutterpad/app/presentation/stores/get_tasks_store.dart';
@@ -25,6 +26,7 @@ class _HomePageState extends State<HomePage> {
   final getStore = locator.get<GetTasksStore>();
   final markStore = locator.get<MarkTaskCompletionStore>();
   final syncStore = locator.get<SynchronizeStore>();
+  final networkChecker = locator.get<NetworkChecker>();
 
   void markCompletionListener() {
     if (markStore.state is MarkTaskCompletionSuccessState) {
@@ -47,6 +49,11 @@ class _HomePageState extends State<HomePage> {
     onStart();
     markStore.addListener(markCompletionListener);
     syncStore.addListener(synchronizeListener);
+    networkChecker.onConnectionChange.listen((event) {
+      if (event == NetworkStatus.connected) {
+        syncStore.synchronize();
+      }
+    });
   }
 
   void onStart() {
