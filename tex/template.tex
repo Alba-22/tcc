@@ -785,6 +785,22 @@ Como vantagem dessa arquitetura simplificada, pode-se notar uma maior velocidade
 
 \chapter{Conclusão}
 
+Nesse trabalho foram apresentadas várias técnicas e abordagens que colaboram para uma melhor construção de um software. Quanto à aplicação dos padrões de projeto, nota-se um sucesso nas implementações dos padrões \textit{Observer}, \textit{Builder}, \textit{Factory} e \textit{Repository} em aplicações Flutter, visto que esses padrões, no geral, ajudaram a tornar o código mais coeso e mais desacoplado.
+
+Quanto aos estudos sobre arquitetura de software realizados, percebe-se que o mais importante não é a arquitetura utilizada em um projeto de software, e sim a aplicação de bons princípios que irão levar a uma independência entre as camadas, a não interferência de ferramentas externas na regra de negócio da aplicação e uma alta coesão e baixo acoplamento na base de código. Além disso, outro fator muito importante de ser considerado no momento de definição da arquitetura de uma aplicação cliente é qual o impacto que a regra de negócio irá ter nessa aplicação. Caso seja uma aplicação muito simples, que sirva somente como interface para o usuário acessar os dados contidos em um servidor, é esperado que uma arquitetura muito complexa venha a causar lentidão no processo de desenvolvimento, visto que as regras de negócio não estarão na aplicação cliente, e sim na aplicação que está rodando no lado do servidor. 
+
+Assim, é mais plausível que tenha-se uma arquitetura mais robusta do lado do servidor e talvez uma mais simplificada do lado do cliente. Agora, caso a aplicação cliente seja o principal foco do problema a ser resolvido de forma computacional, de forma que essa aplicação cliente deve executar uma série de regras, guardar informações em um banco local, comunicar com um ou mais servidores, tratar sobre sincronização de dados, fazer comunicação com outros dispositivos, como impressoras e fones de ouvidos, dentre outras ações mais complexas, então é muito provável que essa aplicação cliente precise ter uma arquitetura mais complexa, de forma que essa aplicação poderá ser desenvolvida e evoluída de uma forma melhor ao longo dos anos.
+
+\section{Trabalhos Futuros} \label{sec:future_work}
+
+No quesito de trabalhos futuros, existem alguns trabalhos que podem ser originar a partir deste. Uma primeira opção seria a aplicação de outros padrões de projeto em aplicações Flutter, visto que nesse trabalho foram explorados apenas quatro padrões e, considerando que apenas o catálogo de padrões fornecido por \citeonline{GOF} possui mais de 20 padrões documentados, com certeza há mais aplicações deles possíveis de se realizar. 
+
+Outra opção de trabalho pode ser o desenvolvimento de uma aplicação mais complexa, com mais funcionalidades e mais regras de negócio do lado do cliente, de forma a realizar uma validação mais precisa das duas propostas elaboradas, de forma que pode ser feita até algum tipo de análise quantitativa entre as propostas.
+
+Uma terceira possibilidade, já mais próxima da área de Sistemas Distribuídos, é buscar melhorar a funcionalidade de sincronização de tarefas feita para a aplicação \textit{FlutterPad}, visto que a implementação foi feita de forma bem simples, com o envio de tarefas pendentes quando é realizada alguma ação como abrir o aplicativo, marcar uma tarefa como feita ou criar/editar uma tarefa. Para a construção de um modelo mais elaborado, provavelmente seria necessário uma aplicação do lado do servidor que esteja pronta para lidar com a sincronização, de forma a prover a lista de tarefas para a aplicação cliente de forma contínua, por meio de algum mecanismo de \textit{websocket} e que também consiga lidar com potenciais conflitos que podem acontecer pelo uso da aplicação cliente ao mesmo tempo em múltiplos dispositivos.
+
+
+
 % ----------------------------------------------------------
 % ELEMENTOS PÓS-TEXTUAIS
 % ----------------------------------------------------------
