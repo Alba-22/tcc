@@ -1,6 +1,6 @@
-import 'package:flutterpad/app/domain/entities/task_entity.dart';
+import 'package:flutterpad/app/presentation/entities/task_entity.dart';
 
-class RestTaskAdapter {
+class RestTaskMapper {
   static Map<String, dynamic> toMap(TaskEntity task) {
     return {
       "title": task.text,

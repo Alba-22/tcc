@@ -1,7 +1,7 @@
 import 'package:clock/clock.dart';
 import 'package:flutterpad/app/domain/entities/task_entity.dart';
-import 'package:flutterpad/app/infra/adapters/isar_task_adapter.dart';
 import 'package:flutterpad/app/infra/datasources/local/tasks_local_datasource.dart';
+import 'package:flutterpad/app/infra/mappers/isar_task_mapper.dart';
 import 'package:flutterpad/app/infra/models/isar_task_model.dart';
 import 'package:isar/isar.dart';
 
@@ -19,7 +19,7 @@ class IsarTasksLocalDatasource implements TasksLocalDatasource {
         .dateGreaterThan(clock.now().subtract(const Duration(days: 30)))
         .findAll();
     return tasks.map((taskModel) {
-      return IsarTaskAdapter.toEntity(taskModel);
+      return IsarTaskMapper.toEntity(taskModel);
     }).toList();
   }
 
@@ -28,7 +28,7 @@ class IsarTasksLocalDatasource implements TasksLocalDatasource {
     final collection = _isar.collection<IsarTaskModel>();
     final tasks = await collection.filter().completionEqualTo(false).findAll();
     return tasks.map((taskModel) {
-      return IsarTaskAdapter.toEntity(taskModel);
+      return IsarTaskMapper.toEntity(taskModel);
     }).toList();
   }
 
@@ -41,7 +41,7 @@ class IsarTasksLocalDatasource implements TasksLocalDatasource {
   @override
   Future<void> saveTask(TaskEntity task, bool synchorized, {String? newTaskId}) async {
     final collection = _isar.collection<IsarTaskModel>();
-    final taskModel = IsarTaskAdapter.fromEntity(task);
+    final taskModel = IsarTaskMapper.fromEntity(task);
     final existingTaskOnDb = await collection.filter().taskIdEqualTo(task.id).findFirst();
     if (existingTaskOnDb != null) {
       taskModel.id = existingTaskOnDb.id;

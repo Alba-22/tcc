@@ -1,7 +1,7 @@
 import 'package:flutterpad/app/core/services/network_checker/network_checker.dart';
-import 'package:flutterpad/app/infra/adapters/isar_task_adapter.dart';
 import 'package:flutterpad/app/infra/datasources/local/tasks_local_datasource.dart';
 import 'package:flutterpad/app/infra/datasources/remote/tasks_remote_datasource.dart';
+import 'package:flutterpad/app/infra/mappers/isar_task_mapper.dart';
 import 'package:flutterpad/app/presentation/entities/task_entity.dart';
 import 'package:flutterpad/app/presentation/repositories/tasks_repository.dart';
 
@@ -37,7 +37,7 @@ class TasksRepositoryImpl implements TasksRepository {
     if (await _networkChecker.isConnected) {
       final tasksToSync = await _localDatasource.getTasksNotSynchronized();
       for (final toSyncTask in tasksToSync) {
-        TaskEntity task = IsarTaskAdapter.toEntity(toSyncTask);
+        TaskEntity task = IsarTaskMapper.toEntity(toSyncTask);
         if (toSyncTask.createdRemotelly) {
           await _remoteDatasource.updateTask(task);
           await _localDatasource.saveTask(task, true);

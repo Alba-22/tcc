@@ -1,7 +1,7 @@
 import 'package:flutterpad/app/infra/models/isar_task_model.dart';
 import 'package:flutterpad/app/presentation/entities/task_entity.dart';
 
-class IsarTaskAdapter {
+class IsarTaskMapper {
   static TaskEntity toEntity(IsarTaskModel model) {
     return TaskEntity(
       id: model.taskId,
@@ -21,9 +21,4 @@ class IsarTaskAdapter {
       completion: entity.completed,
     );
   }
-}
-
-abstract class Adapter<T, E> {
-  T toEntity(E model);
-  E fromEntity(T entity);
 }
