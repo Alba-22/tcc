@@ -748,11 +748,29 @@ Nas duas camadas apresentadas até então, tem-se a presença apenas de código 
 
 Dessa forma, na camada de apresentação têm-se como componentes: os \textit{stores}(que também podem ser chamados de controladores) e os componentes visuais, comumente chamados no Flutter de \textit{Widgets}. Os stores tem como objetivo fazer as chamadas assíncronas aos casos de uso e fazer o papel de gerenciar o estado da aplicação, utilizando de técnicas de reatividade como apresentado na Seção \ref{sec:state_representation}. Já os \textit{widgets} são os componentes do Flutter que serão responsáveis por realizar a criação das telas e páginas.
 
+Além da organização de cada uma das camadas, vale destacar um trecho de código posterior a inicialização da aplicação que é o responsável por inicializar todas as instâncias das classes usadas no projeto, desde os controladores na camada de apresentação até às fontes de dados na camada de infraestrutura. Para isso, foi utilizado a biblioteca \textit{GetIt}, que age no projeto como localizador de serviços e antes da aplicação Flutter ser inicializada, faz o registro de todas as instâncias, o que pode ser visto na Figura \ref{fig:service_locator}.O registro das instâncias pode ser como \textit{factory}, em que cada chamada para obter a instância da classe retorna uma nova instância, o que é útil em casos em que a classe tem apenas o papel de fazer uma operação e retornar um dado, como nos casos de uso, repositórios e fontes de dados. Além disso, o registro pode ser feito por meio de \textit{lazy singletons}, no qual a biblioteca irá criar a instância daquela classe desejada apenas quando ela for chamada pela primeira vez e manterá essa instância em memória enquanto a aplicação estiver rodando, o que é útil para classes que carregam o estado da aplicação e podem ser chamadas em diversos pontos da aplicação, como é o exemplo dos controladores. Essa parte do sistema a ser chamada em sua inicialização é colocada por \citeonline{MARTIN} no capítulo 26, no qual ele descreve o componente principal como o detalhe final de uma aplicação, de forma a ser o componente mais sujo de todos os componentes e que deve montar todas as condições inicias e configurações da aplicação.
 
-\subsection{Uma Arquitetura de Duas Camadas Simplificada} \label{subsec:simplified_arch}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.85\textwidth, trim={0 30 0 100}, clip]{figures/arch/service_locator.png}
+    \caption{Função para fazer o registro de instâncias antes da inicialização da aplicação}
+    \label{fig:service_locator}
+\end{figure}
 
-Com a criação do projeto nas seções anteriores, percebeu-se que
-% Application Bussiness Rules da CleanArch são muito atrelados à tela
+\subsection{Uma Arquitetura Simplificada} \label{subsec:simplified_arch}
+
+Com a criação do projeto na seção \ref{sec:arch}, percebeu-se que em uma aplicação cliente, grande parte das \textit{Application Bussiness Rules}, descritas na obra Arquitetura Limpa, podem estar atreladas à tela da aplicação, principalmente em casos de aplicações mais simples que tem como objetivo apenas resgatar um dado de um servidor por meio de uma API para mostrar para o usuário e enviar dados de formulário para esse mesmo servidor para que se tenha o registro, de forma que se há mais controle sobre os dados em questão quando eles estão do lado do servidor. Em casos como esses, as entidades criadas na aplicação cliente facilmente espelham como o dado deve ser representado em tela.
+
+Com isso em mente, foi desenvolvida uma segunda versão da aplicação \textit{FlutterPad}, que se diferencia da anterior pelo fato de, em sua arquitetura, a camada de domínio ter se unido com a de apresentação, como pode ser visto no Figura \ref{fig:arch_simplified_diagram}. Nessa nova versão, o papel dos casos de uso foram unificados dentro do controladores, que já acessam diretamente os repositórios e manipulam as entidades.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/arch/arch_simplified_diagram.png}
+    \caption{Diagrama da Arquitetura Simplificada}
+    \label{fig:arch_simplified_diagram}
+\end{figure}
+
+Como vantagem dessa arquitetura simplificada, pode-se notar uma maior velocidade no momento da construção do código, visto que simplificou-se o projeto ao retirar uma camada e o componente de caso de uso, o que permitirá com que o desenvolvedor tenha um maior foco na construção da interface e na experiência do usuário que irá construir aquela aplicação, visto que, em casos de aplicações mais simples que não possuem uma forte regra de negócio do lado do cliente, o tempo gasto na criação de código dos casos de uso, que por muitas vezes apenas são um intermediário para o acesso ao repositório, irá aumentar o tempo de desenvolvimento do projeto e aumentar o tamanho da base de código de forma desnecessária. Ainda considerando o caso de aplicações simples, na parte de infraestrutura, caso seja definido que a aplicação irá sempre consumir apenas uma base de dados, pode-se remover os componentes de fonte de dados, de forma que o próprio repositório obtenha os dados, chame o adaptador para converter para a entidade e retorne esse dado para o controlador que o chamou.
 
 \chapter{Conclusão}
 
