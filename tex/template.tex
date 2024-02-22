@@ -116,13 +116,12 @@ brazil]{facom-ufu-abntex2}
 
 
 
-\begin{resumo} %TCC:
-
+\begin{resumo}
+    No desenvolvimento dos primeiros softwares só se havia uma preocupação: que ele funcionasse. Porém, com o passar do tempo e os avanços e estudos na área de Engenharia de Software, tanto pelo mundo acadêmico quanto pelo mercado, passaram a ser desenvolvidas mais e mais ferramentas, técnicas e modos de se fazer um bom software, que seja fácil de ler o código e de dar manutenção, de forma que ele consiga evoluir e atender a novas demandas exigidas. Esse trabalho tem como objetivo estudar a aplicação de algumas dessas técnicas em aplicações construídas com o \textit{framework} Flutter, de forma a mostrar como essas técnicas, tanto de projeto de código quanto de arquitetura, podem trazer benefícios para o software sendo contruído. Assim, nesse trabalho tem-se um estudo feito em cima dos principais princípios que regem a qualidade de um software, assim como algumas propostas de arquitetura e metodologias de desenvolvimento. Além disso, há implementação de padrões de projeto em aplicações Flutter, mostrando o passo a passo e justificando as melhorias causadas no código, além da criação de duas propostas de arquitetura para aplicações Flutter baseadas nos estudos feitos em cima de \textit{Domain Driven Design}, \textit{Clean Architecture} e \textit{Hexagonal Architecture}.
 
     \vspace{\onelineskip}
-
     \noindent
-    \textbf{Palavras-chave}: Flutter, DDD, Arquitetura Limpa, Arquitetura Hexagonal. %TCC:
+    \textbf{Palavras-chave}: Flutter, Dart, DDD, \textit{Domain Driven Design}, \textit{Clean Architecture}, Arquitetura Limpa, Arquitetura Hexagonal, \textit{Design Patterns}, Padrões de Projeto.
 \end{resumo}
 
 % ---
@@ -787,13 +786,13 @@ Como vantagem dessa arquitetura simplificada, pode-se notar uma maior velocidade
 
 Nesse trabalho foram apresentadas várias técnicas e abordagens que colaboram para uma melhor construção de um software. Quanto à aplicação dos padrões de projeto, nota-se um sucesso nas implementações dos padrões \textit{Observer}, \textit{Builder}, \textit{Factory} e \textit{Repository} em aplicações Flutter, visto que esses padrões, no geral, ajudaram a tornar o código mais coeso e mais desacoplado.
 
-Quanto aos estudos sobre arquitetura de software realizados, percebe-se que o mais importante não é a arquitetura utilizada em um projeto de software, e sim a aplicação de bons princípios que irão levar a uma independência entre as camadas, a não interferência de ferramentas externas na regra de negócio da aplicação e uma alta coesão e baixo acoplamento na base de código. Além disso, outro fator muito importante de ser considerado no momento de definição da arquitetura de uma aplicação cliente é qual o impacto que a regra de negócio irá ter nessa aplicação. Caso seja uma aplicação muito simples, que sirva somente como interface para o usuário acessar os dados contidos em um servidor, é esperado que uma arquitetura muito complexa venha a causar lentidão no processo de desenvolvimento, visto que as regras de negócio não estarão na aplicação cliente, e sim na aplicação que está rodando no lado do servidor. 
+Quanto aos estudos sobre arquitetura de software realizados, percebe-se que o mais importante não é a arquitetura utilizada em um projeto de software, e sim a aplicação de bons princípios que irão levar a uma independência entre as camadas, a não interferência de ferramentas externas na regra de negócio da aplicação e uma alta coesão e baixo acoplamento na base de código. Além disso, outro fator muito importante de ser considerado no momento de definição da arquitetura de uma aplicação cliente é qual o impacto que a regra de negócio irá ter nessa aplicação. Caso seja uma aplicação muito simples, que sirva somente como interface para o usuário acessar os dados contidos em um servidor, é esperado que uma arquitetura muito complexa venha a causar lentidão no processo de desenvolvimento, visto que as regras de negócio não estarão na aplicação cliente, e sim na aplicação que está rodando no lado do servidor.
 
 Assim, é mais plausível que tenha-se uma arquitetura mais robusta do lado do servidor e talvez uma mais simplificada do lado do cliente. Agora, caso a aplicação cliente seja o principal foco do problema a ser resolvido de forma computacional, de forma que essa aplicação cliente deve executar uma série de regras, guardar informações em um banco local, comunicar com um ou mais servidores, tratar sobre sincronização de dados, fazer comunicação com outros dispositivos, como impressoras e fones de ouvidos, dentre outras ações mais complexas, então é muito provável que essa aplicação cliente precise ter uma arquitetura mais complexa, de forma que essa aplicação poderá ser desenvolvida e evoluída de uma forma melhor ao longo dos anos.
 
 \section{Trabalhos Futuros} \label{sec:future_work}
 
-No quesito de trabalhos futuros, existem alguns trabalhos que podem ser originar a partir deste. Uma primeira opção seria a aplicação de outros padrões de projeto em aplicações Flutter, visto que nesse trabalho foram explorados apenas quatro padrões e, considerando que apenas o catálogo de padrões fornecido por \citeonline{GOF} possui mais de 20 padrões documentados, com certeza há mais aplicações deles possíveis de se realizar. 
+No quesito de trabalhos futuros, existem alguns trabalhos que podem ser originar a partir deste. Uma primeira opção seria a aplicação de outros padrões de projeto em aplicações Flutter, visto que nesse trabalho foram explorados apenas quatro padrões e, considerando que apenas o catálogo de padrões fornecido por \citeonline{GOF} possui mais de 20 padrões documentados, com certeza há mais aplicações deles possíveis de se realizar.
 
 Outra opção de trabalho pode ser o desenvolvimento de uma aplicação mais complexa, com mais funcionalidades e mais regras de negócio do lado do cliente, de forma a realizar uma validação mais precisa das duas propostas elaboradas, de forma que pode ser feita até algum tipo de análise quantitativa entre as propostas.
 
