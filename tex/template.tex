@@ -418,7 +418,7 @@ Para resolver o primeiro problema, pode-se criar uma classe separada para fazer 
     \caption{Classe \textit{Notifier} que implementa o \textit{Observer Pattern}}
     \label{fig:notifier}
 \end{figure}
-Para auxiliar no quesito de exibição na tela, podemos criar uma classe \textit{NotifierBuilder}, que será um \textit{StatefulWidget} que receberá uma instância da classe \textit{Notifier} e na sua inicialização chamará o método \textit{addListener} passando uma função anônima que chama a função \textit{setState}, que causará a reconstrução da tela sempre que o método \textit{notifyListeners} for chamado na classe \textit{Notifier}. O código para a classe \textit{NotifierBuilder}, que nada mais é que um ouvinte inscrito na classe publicadora \textit{Notifier}, pode ser visto na Figura \ref{fig:notifier_builder}.
+Para auxiliar no quesito de exibição na tela, pode-se criar uma classe \textit{NotifierBuilder}, que será um \textit{StatefulWidget} que receberá uma instância da classe \textit{Notifier} e na sua inicialização chamará o método \textit{addListener} passando uma função anônima que chama a função \textit{setState}, que causará a reconstrução da tela sempre que o método \textit{notifyListeners} for chamado na classe \textit{Notifier}. O código para a classe \textit{NotifierBuilder}, que nada mais é que um ouvinte inscrito na classe publicadora \textit{Notifier}, pode ser visto na Figura \ref{fig:notifier_builder}.
 
 \begin{figure}[ht]
     \centering
@@ -445,7 +445,7 @@ Com isso, basta reescrever a parte da interface gráfica para passar a utilizar 
     \label{fig:with_notifier_page}
 \end{figure}
 
-Assim, com a implementação do padrão de projeto \textit{Observer} temos que todo código referente a alteração de estado e obtenção dos dados pela ação assíncrona ficam separados da parte do código de construção da interface. Porém, ainda têm-se o problema de que pode-se haver a representação de estados inválidos, como descrito anteriormente.
+Assim, com a implementação do padrão de projeto \textit{Observer} tem-se que todo código referente a alteração de estado e obtenção dos dados pela ação assíncrona ficam separados da parte do código de construção da interface. Porém, ainda têm-se o problema de que pode-se haver a representação de estados inválidos, como descrito anteriormente.
 
 \subsection{Aplicação de Polimorfismo para Representação de Estados Válidos}
 
@@ -467,7 +467,7 @@ Com essas classes novas para representar o estado, pode-se refatorar a classe \t
     \label{fig:controller_with_states}
 \end{figure}
 
-Com essa alteração feita, podemos agora alterar a classe da interface para utilizar esses novos estados, fazendo a verificação se a variável \textit{state} do \textit{Controller} é dos subtipos de estado inicial, de carregamento, de erro ou de sucesso, como visto na Figura \ref{fig:with_state_page}.
+Com essa alteração feita, poode-se agora alterar a classe da interface para utilizar esses novos estados, fazendo a verificação se a variável \textit{state} do \textit{Controller} é dos subtipos de estado inicial, de carregamento, de erro ou de sucesso, como visto na Figura \ref{fig:with_state_page}.
 
 \begin{figure}[ht]
     \centering
@@ -643,7 +643,7 @@ Para a exibição de \textit{Dialogs}, o Flutter disponibiliza a função assín
 
 Apesar de bem direta, a forma apresentada acarretará em problemas futuros para o projeto, visto que haverá sempre a duplicação de código ao chamar as classes \textit{AlertDialog} e \textit{CupertinoAlertDialog} em vários lugares na base de código, de forma que caso o Flutter mude os parâmetros dessas classes em versões futuras, ou até mesmo descontinue a classe em favor de outra, seria necessário fazer alterações em vários arquivos do projeto. Além disso, têm-se o fato de sempre ser necessária as verificações de plataforma em todo lugar que for necessário exibir o \textit{Dialog}, de forma que se em um futuro a aplicação passar a dar suporte a uma nova plataforma, será necessário ir em todas as checagens e adicionar uma nova condição para essa nova plataforma para que seja exibido um novo componente.
 
-\subsection{Uso do Padrão Factory para Mostrar Componentes Nativos}
+\subsection{Uso do Padrão Factory para Exibir Componentes Nativos}
 
 Diante dos problemas apresentados, é possível introduzir o padrão de projeto \textit{Factory}, que permitirá a criação de uma classe que encapsulará a responsabilidade de realizar a checagem de plataforma e, diante de uma interface criada para a exibição de \textit{Dialogs}, irá retornar o \textit{Dialog} apropriado para a plataforma vigente em que a aplicação está rodando. Para implementar esse padrão, é necessário primeiramente criar a interface que todas as implementações de \textit{Dialog} devem seguir. Essa interface receberá o título, conteúdo e as ações possíveis para os botões do \textit{Dialog}, como visto na Figura \ref{fig:base_dialog}
 
