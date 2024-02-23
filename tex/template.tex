@@ -329,16 +329,29 @@ A camada seguinte é a de adaptadores de interface. Essa camada é responsável 
 
 Na camada mais externa proposta por \citeonline{MARTIN2}, tem-se a camada de \textit{Frameworks} e \textit{Drivers}, que é composta pela implementação de \textit{frameworks} e ferramentas como bancos de dados, web, etc. Nessa camada se encontram todos os detalhes da aplicação e, no máximo, se encontra código que irá servir como ponte para se comunicar com a camada mais interna.
 
-\section{Flutter e Dart}
-Para demonstrar as boas e más práticas na arquitetura e desenvolvimento de software, será criada uma aplicação de exemplo. Para a construção dela, foi utilizada a linguagem Dart, apresentada pelo Google em 2011, em conjunto com o \textit{framework} Flutter para a criação das partes relacionadas a interface gráfica. A linguagem Dart é uma linguagem de código aberto do paradigma orientado a objetos e se destaca por:
-\begin{itemize}
-    \item Ser otimizada para \textit{User Interface}
-    \item Ter um ambiente de desenvolvimento produtivo, contando com funcionalidades como \textit{Hot Reload}, que permite realizar mudanças iterativamente e visualizar resultados na alteração de código sem que ele precise ser compilado novamente do zero
-    \item Estar disponível em diversas plataformas, permitindo compilar para código de máquina ARM e x64 para plataformas móveis, \textit{desktop} e \textit{backend}, além de compilar para JavaScript para a web.
-\end{itemize}
-Já o \textit{framework} Flutter, criado também pela Google, e apresentado inicialmente em 2015, tem como objetivo permitir a construção de aplicações compiladas de forma nativa e multi plataforma a partir de uma mesma base de código, se caracterizando como um \textit{framework cross-platform}. Para permitir tais capacidades, o Flutter utiliza do Dart como sua linguagem de programação base.
+\section{Flutter e Dart} \label{sec:flutter_dart}
 
+Para a implementação dos padrões de projeto e dos estudos em arquitetura desse trabalho, será usada a linguagem de programação Dart, em conjunto com o \textit{framework} Flutter para construção da interface gráfica e execução da aplicação em si. A linguagem Dart é uma linguagem de programação projetada por Lars Bak e Kasper Lund e desenvolvida dentro da Google, apresentada inicialmente em 2011 na conferência GOTO e com lançamento da sua versão 1.0 em novembro de 2013. A linguagem se caracteriza por ser orientada a objetos, baseada em classes, com sintaxe inspirada na linguagem C e por possuir \textit{garbage collector}, de forma a ser muito semelhante à Java, além de possuir uma tipagem forte e dinâmica, com inferência de tipos. Ademais, a linguagem é projetada de forma a ser apropriada para desenvolvimento de aplicações cliente, priorizando tanto desenvolvimento(pela funcionalidade de \textit{hot reload}, que permite com que um projeto não tenha que ser compilado novamente após alguma alteração de código) quanto experiências em produção de alta qualidade em diversas plataformas(\textit{mobile}, \textit{web} e \textit{desktop}).
 
+A linguagem Dart também se caracteriza pela funcionalidade de \textit{null safety}, disponibilizada na sua versão 2.12 e presente em outras linguagens como Kotlin, Swift e C\#, que faz com que toda variável criada por padrão não possa ser nula. Para que se possa atribuir um valor nulo a uma variável, é necessário explicitar a possibilidade do valor nulo, como mostrado na Figura \ref{fig:null_safety}. Um outro fator diferencial da linguagem é o fato dela estar fortemente ligada ao \textit{framework} Flutter, também da Google, para criação de interfaces gráficas. Essa ligação se materializa por a linguagem dar suporte e evoluir de acordo com as necessidades do \textit{framework}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.6\textwidth]{figures/bibliographical_review/null_safety.png}
+    \caption{Exemplo de Null Safety em Dart}
+    \label{fig:null_safety}
+\end{figure}
+
+Sobre o Flutter em si, ele foi apresentado inicialmente em 2015 e lançado em versão estável em dezembro de 2018. Ele se caracteriza como um \textit{framework} para construção de interfaces gráficas que é capaz de construir aplicações compiladas nativamente para diversas plataformas, como \textit{mobile}, \textit{web}, \textit{desktop} e sistemas embarcados a partir de uma única base de código, com destaque para o fato das aplicações rodarem a 60 quadros por segundo e com o desenvolvedor conseguindo controlar cada pixel na tela.
+
+Muitos \textit{frameworks} para criação de interface trabalham de forma imperativa, com a construção sendo realizada por meio de objeto criados e modificações sendo feitas de forma explícita pela chamada de métodos desses objetos. O Flutter se diferencia por sua UI ser feita de forma declarativa. Os componentes de visualização, representados por objetos e comumente chamados de \textit{Widgets}, são imutáveis e são apenas esquemáticas leves de como a tela deve ser. Para que seja feita alguma alteração na tela, algum \textit{widget} deve acionar uma reconstrução dele mesmo, que fará com que no próximo quadro de renderização a tela seja recriada com base no novo estado. Sobre estados, a interface no Flutter se caracteriza por ser uma função do estado atual dos componentes, de forma que o estado é caracterizado como qualquer dado que seja necessário para reconstruir a interface em um dado momento do tempo. Na Figura \ref{fig:counter_example}, tem-se um exemplo de como funciona uma interface com Flutter. É criado um objeto que estende de \textit{StatefulWidget}, que é um \textit{widget} que possui um estado mutável, e possui dentro de si uma variável do tipo inteiro que guarda um valor de contador. A interface é construída dentro do método \textit{build}, que é chamado sempre que há um acionamento para reconstrução da tela. Esse acionamento é realizado por meio da chamada do método \textit{setState}, que é herdado da classe \textit{State}. Assim, pela construção da tela do exemplo da Figura \ref{fig:counter_example}, sempre que o usuário tocar ou clicar no valor do contador sendo mostrado ao centro do tela, irá ocorrer o incremento do valor da variável do contador e a tela será reconstruída de forma a ser exibido o novo valor do contador no próximo quadro de renderização da aplicação.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.5\textwidth, trim={0 30 0 100}, clip]{figures/bibliographical_review/counter_example.png}
+    \caption{Exemplo de interface declarativa}
+    \label{fig:counter_example}
+\end{figure}
 
 \chapter{Desenvolvimento} \label{chapt:development}
 Nesta seção serão abordados alguns problemas comuns no desenvolvimento de aplicações Flutter, de forma que para cada problema será apresentada uma ou mais resoluções de forma a aplicar padrões de projeto e de arquitetura amplamente conhecidos e já documentados. Por meio desses padrões, busca-se código mais padronizados, legíveis, manuteníveis e que haja uma menor chance de erros serem cometidos pelos desenvolvedores enquanto constroem softwares complexos.
