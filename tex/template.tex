@@ -414,7 +414,7 @@ Por último nessa classe têm-se a função \textit{getInformation}, que será r
     \label{fig:adhoc_getinfo}
 \end{figure}
 
- Um primeiro problema é a quebra do Princípio da Responsabilidade Única, visto que a classe responsável pela exibição da interface gráfica é também responsável por gerenciar o estado da aplicação. 
+Um primeiro problema é a quebra do Princípio da Responsabilidade Única, visto que a classe responsável pela exibição da interface gráfica é também responsável por gerenciar o estado da aplicação.
 
 Além disso, a forma apresentada permite a representação de estados inválidos. Por exemplo, é possível de ter a variável \textit{isLoading} com o valor verdadeiro ao mesmo tempo que a variável \textit{successData} não é nula ou então é possível ter ambas as variáveis \textit{successData} e \textit{errorMessage} não nulas ao mesmo tempo. Esses casos e outros são considerados representações inválidas, visto que não estão previstas no diagrama da Figura \ref{fig:states_diagram}, além de ferirem o princípio DRY que afirma que todo pedaço de conhecimento deve ter uma representação única, não ambígua e autoritativa dentro de um sistema.
 
@@ -682,7 +682,7 @@ Para a aplicação do padrão \textit{Factory} em si, deve-se criar a classe abt
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/dialog/dialog_factory.png}
+    \includegraphics[width=.75\textwidth, trim={0 30 0 100}, clip]{figures/dialog/dialog_factory.png}
     \caption{Classe que utiliza propriamente o padrão \textit{Factory}}
     \label{fig:dialog_factory}
 \end{figure}
@@ -702,15 +702,24 @@ Para a abordagem prática dos estudos sobre arquitetura realizados no Capítulo 
 
 Do ponto de vista de ferramentas utilizadas para construção da aplicação, além do Flutter para construção da interface gráfica, destaca-se o uso das seguintes bibliotecas de Dart:
 \begin{itemize}
-    \item \href{https://pub.dev/packages/isar}{Isar} para banco de dados local da aplicação;
-    \item \href{https://pub.dev/packages/dio}{Dio} para realizar requisições HTTP na aplicação;
-    \item \href{https://pub.dev/packages/json_rest_server}{JSON Rest Server} para simular uma API REST para comunicação com um servidor
-    \item \href{https://pub.dev/packages/get_it}{GetIt} como provedor de instâncias de classes, auxiliando na inversão de controle e injeção de dependências
-    \item \href{https://pub.dev/packages/internet_connection_checker}{Internet Connection Checker} e \href{https://pub.dev/packages/connectivity_plus}{Connectivity Plus} para verificação de acesso à internet
-    \item \href{https://pub.dev/packages/equatable}{Equatable} para facilitar a comparação de classes por seu conteúdo, sem ter que sobreescrever métodos de igualdade
+    \item \textit{Isar}\footnote{Disponível em \href{https://pub.dev/packages/isar}{https://pub.dev/packages/isar}} para banco de dados local da aplicação;
+    \item \textit{Dio}\footnote{Disponível em \href{https://pub.dev/packages/dio}{https://pub.dev/packages/dio}} para realizar requisições HTTP na aplicação;
+    \item \textit{JSON Rest Server}\footnote{Disponível em \href{https://pub.dev/packages/json_rest_server}{https://pub.dev/packages/json\_rest\_server}} para simular uma API REST para comunicação com um servidor;
+    \item \textit{GetIt}\footnote{Disponível em \href{https://pub.dev/packages/get_it}{https://pub.dev/packages/get\_it}} como provedor de instâncias de classes, auxiliando na inversão de controle e injeção de dependências;
+    \item \textit{Internet Connection Checker}\footnote{Disponível em \href{https://pub.dev/packages/internet_connection_checker}{https://pub.dev/packages/internet\_connection\_checker}} e \textit{Connectivity Plus}\footnote{Disponível em \href{https://pub.dev/packages/connectivity_plus}{https://pub.dev/packages/connectivity\_plus}} para verificação de acesso à internet;
+    \item \textit{Equatable}\footnote{Disponível em \href{https://pub.dev/packages/equatable}{https://pub.dev/packages/equatable}} para facilitar a comparação de classes por seu conteúdo, sem ter que sobreescrever métodos de igualdade.
 \end{itemize}
 
-Todo o código da aplicação feita está disponível no seguinte \href{https://github.com/Alba-22/tcc}{repositório público}, em que além do código da aplicação FlutterPad, também contém as provas de conceito utilizadas para as seções anteriores desse capítulo 3. Além disso, vale destacar que essa aplicação foi desenvolvida com o intuito de conseguir funcionar de forma totalmente offline quando o dispositivo do usuário não tiver conexão com a internet, mas a partir do momento que houver o restabelecimento da conexão, a aplicação deve conseguir se sincronizar com a API sendo utilizada e obter dados mais recentes e enviar dados que ainda estão pendentes de serem enviados. Mais detalhes sobre essa sincronização estarão presentes no momento que for discutida a camada de infraestrutura da aplicação.
+Todo o código utilizado nesse trabalho está disponível em \href{https://tcc.alba.dev}{https://tcc.alba.dev} e na Figura \ref{fig:repo_files} é possível ver a estrutura de pastas do repositório. Nas pastas ``flutterpad'', ``flutterpad\_simplified'' e ``poc'', que são projetos Flutter, o código fonte escrito em Dart se localiza na pasta ``lib'', as demais pastas sendo as configurações nativas geradas na criação do projeto para cada uma das plaformas e o arquivo ``pubspec.yaml'' contendo informações do projeto, como por exemplo as dependências utilizadas. Na pasta ``backend'' há os arquivos ``config.yaml'', que define as configuraçòes da API REST a ser executada pelo pacote \textit{JSON Rest Server}, e o arquivo ``database.json'', que armazena os dados da API em formato JSON e já possui uma carga inicial com algumas tarefas. Na pasta ``text'', há os arquivos utilizados para a escrita desse texto, em que há os arquivo ``.tex'' e ``.bib'', e as imagens utilizadas ao longo do trabalho dentro da pasta ``figures''. Além disso, há a pasta ``.vscode'' com arquivos de configuração específicos da IDE Visual Studio Code, utilizada para a realização do trabalho.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.50\textwidth]{figures/arch/repo_files.png}
+    \caption{Estrutura de arquivos do repositório do projeto}
+    \label{fig:repo_files}
+\end{figure}
+
+Vale destacar que essa aplicação foi desenvolvida com o intuito de conseguir funcionar de forma totalmente offline quando o dispositivo do usuário não tiver conexão com a internet, mas a partir do momento que houver o restabelecimento da conexão, a aplicação deve conseguir se sincronizar com a API sendo utilizada e obter dados mais recentes e enviar dados que ainda estão pendentes de serem enviados. Mais detalhes sobre essa sincronização estarão presentes no momento que for discutida a camada de infraestrutura da aplicação.
 
 
 \subsection{Uma Aplicação Clássica da Arquitetura Limpa} \label{subsec:clean_arch}
