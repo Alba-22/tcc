@@ -335,7 +335,7 @@ A camada seguinte é a de adaptadores de interface. Essa camada é responsável 
 
 Na camada mais externa proposta por \citeonline{MARTIN2}, tem-se a camada de \textit{Frameworks} e \textit{Drivers}, que é composta pela implementação de \textit{frameworks} e ferramentas como bancos de dados, web, etc. Nessa camada se encontram todos os detalhes da aplicação e, no máximo, se encontra código que irá servir como ponte para se comunicar com a camada mais interna.
 
-
+Assim, essa divisão em camadas se mostra útil ao isolar o domínio da aplicação de tudo que é externo a ela, como a interface gráfica e bancos de dados, presentes apenas na camada mais externa de \textit{Frameworks} e \textit{Drivers}. Dessa forma, como no caso da Arquitetura Hexagonal, é possível de utilizar técnicas vindas do \textit{Domain Driven Design} para estruturar o núcleo da aplicação.
 
 \section{Flutter e Dart} \label{sec:flutter_dart}
 
@@ -687,7 +687,7 @@ Para a aplicação do padrão \textit{Factory} em si, deve-se criar a classe abt
     \label{fig:dialog_factory}
 \end{figure}
 
-
+Dessa forma, com a aplicação do padrão de projeto \textit{Factory}, é possível que qualquer parte da interface da aplicação chame o método estático da fábrica para exibir o componente de \textit{Dialog}, sem que a interface tenha que se preocupar com qual a plataforma na qual a aplicação está sendo executada, de forma a focar apenas no conteúdo que o \textit{Dialog} deve receber.
 
 \section{Aplicação de Conceitos de Arquitetura de Software} \label{sec:arch}
 
