@@ -205,21 +205,24 @@ brazil]{facom-ufu-abntex2}
 \chapter[Introdução]{Introdução} \label{chapt:introduction}
 %TCC:
 
-No final da década de 1960, foram criados os primeiros computadores modernos, que objetivavam resolver problemas científicos e executar alguns poucos programas, sem que se houvesse uma preocupação central em torno do software em si. Com isso, em outubro de 1968, ocorreu uma conferência patrocinada pela Organização do Tratado do Atlântico Norte(OTAN), que produziu um relatório que afirmava a necessidade do uso de princípios práticos e teóricos para a construção de software, assim como em outros ramos da Engenharia. Foi nesse momento que cunhou-se o termo Engenharia de Software. Desde então, os avanços na área de desenvolvimento de software são notáveis, com a criação de bibliotecas e frameworks que permitem o reuso de código e abstraem os detalhes de baixo nível para interagir com computadores, além da criação de diversos padrões de projetos que podem ser seguidos para resolver problemas amplamente conhecidos\cite{engsoftmoderna}.
+No final da década de 1960, foram criados os primeiros computadores modernos, que objetivavam resolver problemas científicos e executar alguns poucos programas, sem que se houvesse uma preocupação central em torno do software em si. Com isso, em outubro de 1968, ocorreu uma conferência patrocinada pela Organização do Tratado do Atlântico Norte (OTAN), que produziu um relatório que afirmava a necessidade do uso de princípios práticos e teóricos para a construção de software, assim como em outros ramos da Engenharia. Foi nesse momento que cunhou-se o termo Engenharia de Software. Desde então, os avanços na área de desenvolvimento de software são notáveis, com a criação de bibliotecas e frameworks que permitem o reuso de código e abstraem os detalhes de baixo nível para interagir com computadores, além da criação de diversos padrões de projetos que podem ser seguidos para resolver problemas amplamente conhecidos \cite{engsoftmoderna}.
 
 Por conta desses avanços que fizeram com que o desenvolvimento de software passase a operar em um nível mais abstrato, a barreira de entrada passou a ser menor, o que fez com que, segundo \citeonline{Martin17} não fosse necessário ter-se muito conhecimento e habilidades técnicas de desenvolvimento de software para que se tenha um programa funcionando. Isso faz com que desenvolvedores em início de carreira ao redor do mundo trabalhem duramente para cumprir requisitos necessários para fazer suas aplicações funcionarem, de forma que o código produzido não é necessariamente o melhor, mas é um que funciona.
 
-Agora, construir um software da forma certa é algo completamente diferente. Para isso, é necessário pensamento crítico e experiência que muitos desenvolvedores, ainda mais em início de carreira, ainda não tem. Quando o software é construído da forma certa, em geral, não é necessário uma grande quantidade de desenvolvedores para mantê-lo e continuar seu desenvolvimento. Com isso, alterações de código são feitas com menor esforço e de forma mais rápida, além de que bugs são reduzidos\cite{Martin17}.
+Agora, construir um software da forma certa é algo completamente diferente. Para isso, é necessário pensamento crítico e experiência que muitos desenvolvedores, ainda mais em início de carreira, ainda não tem. Quando o software é construído da forma certa, em geral, não é necessário uma grande quantidade de desenvolvedores para mantê-lo e continuar seu desenvolvimento. Com isso, alterações de código são feitas com menor esforço e de forma mais rápida, além de que bugs são reduzidos \cite{Martin17}.
 
 Para a criação de projetos de software melhores que atinjam as qualidades descritas, têm-se diversos trabalhos e autores amplamente reconhecidos na área de Engenharia de Software e Arquitetura de Software, como \citeonline{Martin17}, \citeonline{EVANS}, \citeonline{COCKBURN} e \citeonline{GOF}.
 
-Apesar da existência de diversas arquiteturas de software desenvolvidas nas últimas duas décadas, segundo \citeonline{lemosarqlimpa}, muitas delas são muito semelhantes em sua essência, apesar de variarem nos detalhes. Todas buscam realizar a separação de interesses por meio da divisão do software em camadas. Assim, o mais importante no estudo de Arquitetura de Software não é qual arquitetura que um projeto de software deve utilizar, mas sim os conceitos fundamentais que essas arquiteturas empregam para atingir o objetivo de minimizar os recursos humanos requeridos para construir e manter um sistema de software\cite{Martin17}.
+Apesar da existência de diversas arquiteturas de software desenvolvidas nas últimas duas décadas, segundo \citeonline{lemosarqlimpa}, muitas delas são muito semelhantes em sua essência, apesar de variarem nos detalhes. Todas buscam realizar a separação de interesses por meio da divisão do software em camadas. Assim, o mais importante no estudo de Arquitetura de Software não é qual arquitetura que um projeto de software deve utilizar, mas sim os conceitos fundamentais que essas arquiteturas empregam para atingir o objetivo de minimizar os recursos humanos requeridos para construir e manter um sistema de software \cite{Martin17}.
 
-Assim, o objetivo desse trabalho é explorar o uso de padrões de projeto e conceitos de arquitetura de software em aplicações Flutter. Esse trabalho visa descrever alguns padrões e princípios de desenvolvimento de software, assim como descrever alguns conceitos de arquitetura das principais obras existentes no ramo de Arquitetura e Engenharia de Software. Além disso, esse trabalho busca demonstrar como a aplicação de padrões de projeto em aplicações Flutter pode melhorar a qualidade de código se comparado ao não uso deles em determinadas situações, assim como pode-se utilizar dos conceitos de arquitetura para construir uma aplicação Flutter melhor.
+Assim, o objetivo desse trabalho é explorar o uso de padrões de projeto e conceitos de arquitetura de software em aplicações Flutter. Esse trabalho visa descrever alguns padrões e princípios de desenvolvimento de software, assim como descrever alguns conceitos de arquitetura das principais obras existentes no ramo de Arquitetura e Engenharia de Software. Além disso, visto a não existência de muitos trabalhos sobre padrões de projeto e arquitetura no framework Flutter, esse trabalho busca demonstrar como a aplicação de padrões de projeto em aplicações Flutter pode melhorar a qualidade de código se comparado ao não uso deles em determinadas situações, assim como pode-se utilizar dos conceitos de arquitetura para construir uma aplicação Flutter melhor.
 
-Dessa forma, para esse trabalho faz uma revisão da literatura nos temas de arquitetura de software e boas práticas e padrões de desenvolvimento de software. Em seguida, esse trabalho mostra como alguns padrões de projeto podem ser aplicados em aplicações Flutter por meio de pequenas provas de conceito, nas quais é mostrada uma forma mais direta e simples de se resolver algum problema, além de mostrar todo o passo a passo para a aplicação do padrão de projeto para melhorar o trecho de código previamente desenvolvido. Ainda no que tange o desenvolvimento do trabalho, esse trabalho mostra a construção de uma arquitetura com base nos estudos feitos nas obras citadas na revisão bibliográfica, de forma que é criada uma aplicação simples de exemplo para aplicar de fato a arquitetura elaborada.
+Dessa forma, em seu segundo capítulo, esse trabalho faz uma revisão da literatura nos temas de arquitetura de software e boas práticas e padrões de desenvolvimento de software. Em seu  terceiro capítulo, esse trabalho mostra como alguns padrões de projeto podem ser aplicados em aplicações Flutter por meio de pequenas provas de conceito, nas quais é mostrada uma forma mais direta e simples de se resolver algum problema, além de mostrar todo o passo a passo para a aplicação do padrão de projeto para melhorar o trecho de código previamente desenvolvido. Ainda no que tange o desenvolvimento do trabalho, é mostrada a construção de uma arquitetura com base nos estudos feitos nas obras citadas na revisão bibliográfica, de forma que é criada uma aplicação simples de exemplo para aplicar de fato a arquitetura elaborada.
 
 \chapter{Revisão Bibliográfica} \label{chapt:bibliography}
+
+Nessa seção serão abordados os principais tópicos teóricos utilizados durante o desenvolvimento desse trabalhos, abrangendo desde definições mais simples de o que é arquitetura de software até a descrição de padrões de projeto e arquitetura construídas por diversos autores da área de Engenharia de Software.
+
 
 \section{Arquitetura de Software}
 Ao longo da literatura de engenharia de software, o termo ``Arquitetura'' é usado por diversos autores muitas vezes com significados diferentes. Segundo \citeonline{VALENTE}, uma das definições mais comuns é que a arquitetura se importa com os detalhes de alto nível de um projeto de software, o que faz com que o foco deixe de ser na organização de classes e funções individuais, consideradas de detalhes de baixo nível, e passe a ser em componentes de maior tamanho, que são um agregado dessas classes e funções individuais.
@@ -250,7 +253,7 @@ O padrão de projeto \textit{Observer}, segundo \citeonline{SHVETZ}, define uma 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth]{figures/bibliographical_review/observer_diagram.png}
-    \caption{Diagrama da Estrutura do Padrão Observer}
+    \caption{Diagrama da Estrutura do Padrão Observer. Fonte: Do Autor.. Fonte: Do Autor.}
     \label{fig:observer_diagram}
 \end{figure}
 
@@ -263,7 +266,7 @@ Para casos em que um mesmo processo de construção pode ter múltiplas implemen
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth]{figures/bibliographical_review/builder_diagram.png}
-    \caption{Diagrama da Estrutura do Padrão Builder}
+    \caption{Diagrama da Estrutura do Padrão Builder. Fonte: Do Autor.}
     \label{fig:builder_diagram}
 \end{figure}
 
@@ -274,7 +277,7 @@ De acordo com \citeonline{GOF}, o \textit{Factory} é um padrão criacional que 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth]{figures/bibliographical_review/factory_diagram.png}
-    \caption{Diagrama da Estrutura do Padrão Factory}
+    \caption{Diagrama da Estrutura do Padrão Factory. Fonte: Do Autor.}
     \label{fig:factory_diagram}
 \end{figure}
 
@@ -284,7 +287,7 @@ O padrão \textit{Repository} foi introduzido por \citeonline{EVANS} e provê um
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth]{figures/bibliographical_review/repository_diagram.png}
-    \caption{Diagrama da Estrutura do Padrão Repository}
+    \caption{Diagrama da Estrutura do Padrão Repository. Fonte: Do Autor.}
     \label{fig:repository_diagram}
 \end{figure}
 
@@ -308,14 +311,14 @@ A ideia central da arquitetura hexagonal, também conhecida com arquitetura \tex
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.6\textwidth]{figures/bibliographical_review/hex_arch_diagram.png}
-    \caption{Diagrama representativo da Arquitetura Hexagonal}
+    \includegraphics[width=.8\textwidth]{figures/bibliographical_review/hex_arch_diagram.png}
+    \caption{Diagrama representativo da Arquitetura Hexagonal. Fonte: Do Autor.}
     \label{fig:hex_arch_diagram}
 \end{figure}
 
 Ainda nessa ideia da criação de adaptadores, \citeonline{COCKBURN} faz a distinção entre adaptadores primário e secundários. Um adaptador primário se caracteriza por conduzir a aplicação, atuando como entrada de dados nela, em muitos casos sendo o meio pelo qual o usuário acessa a aplicação, como por uma interface GUI ou por chamadas HTTP. Já o adaptador secundário, colocado como lado conduzido da arquitetura, age ao prover para aplicação dados que ela pode precisar para responder a uma interação feita por um adaptador primário, de forma a atuar na saída de dados, normalmente acessando um banco de dados ou interagindo com algum serviço externo para solicitar algum dado. É importante destacar ainda que a arquitetura hexagonal foca em isolar as regras de negócio da aplicação do mundo externo, mas não estabelece nada sobre como devem ser conduzidas as regras de negócio na camada de aplicação. Assim, pode-se utilizar de outras técnicas para gerenciamento do domínio da aplicação, como por exemplo o \textit{Domain Driven Design}.
 
-\section{Clean Architecture}
+\section{Arquitetura Limpa}
 Após anos na indústria de desenvolvimento de software, \citeonline{MARTIN2} percebeu o surgimento de muitas arquiteturas de sistemas sendo desenvolvidas, a maioria delas variando pouco nos detalhes de implementação, mas com diversas semelhanças em suas essências, com foco na independência de agentes externos, testabilidade, manutenibilidade, alta coesão e baixo acoplamento.
 
 Assim, \citeonline{MARTIN2} definiu um modelo geral de como se ter uma arquitetura mais limpa, que não fosse ``suja'' de detalhes externos que não interessam ao cerne da aplicação e à regra de negócio em questão. Esse modelo é representado por algumas camadas, que podem ser vistas na Figura \ref{fig:clean_arch_diagram}, de forma que existe uma regra de dependência, na qual as dependências de código devem apontar sempre para dentro. Dessa forma, qualquer função, classe, variável ou entidade de software que reside em uma camada interna não deve, em hipótese alguma, saber da existência de uma entidade pertencente a uma camada mais externa.
@@ -323,7 +326,7 @@ Assim, \citeonline{MARTIN2} definiu um modelo geral de como se ter uma arquitetu
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.6\textwidth]{figures/bibliographical_review/clean_arch_diagram.png}
-    \caption{Diagrama representativo da Arquitetura Limpa}
+    \caption{Diagrama representativo da Arquitetura Limpa. Fonte: Do Autor.}
     \label{fig:clean_arch_diagram}
 \end{figure}
 
@@ -346,7 +349,7 @@ A linguagem Dart também se caracteriza pela funcionalidade de \textit{null safe
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.6\textwidth]{figures/bibliographical_review/null_safety.png}
-    \caption{Exemplo de Null Safety em Dart}
+    \caption{Exemplo de Null Safety em Dart. Fonte: Do Autor.}
     \label{fig:null_safety}
 \end{figure}
 
@@ -357,12 +360,12 @@ Muitos \textit{frameworks} para criação de interface trabalham de forma impera
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.5\textwidth, trim={0 30 0 100}, clip]{figures/bibliographical_review/counter_example.png}
-    \caption{Exemplo de interface declarativa}
+    \caption{Exemplo de interface declarativa. Fonte: Do Autor.}
     \label{fig:counter_example}
 \end{figure}
 
 \chapter{Desenvolvimento} \label{chapt:development}
-Nesta seção serão abordados alguns problemas comuns no desenvolvimento de aplicações Flutter, de forma que para cada problema será apresentada uma ou mais resoluções de forma a aplicar padrões de projeto e de arquitetura amplamente conhecidos e já documentados. Por meio desses padrões, busca-se código mais padronizado, legível, manutenível e que haja uma menor chance de erros serem cometidos pelos desenvolvedores enquanto constroem softwares complexos.
+Neste capítulo serão abordados alguns problemas comuns no desenvolvimento de aplicações Flutter, de forma que para cada problema será apresentada uma ou mais resoluções de forma a aplicar padrões de projeto e de arquitetura amplamente conhecidos e já documentados. Por meio desses padrões, busca-se código mais padronizado, legível, manutenível e que haja uma menor chance de erros serem cometidos pelos desenvolvedores enquanto constroem softwares complexos.
 
 \section{O Problema da Representação de Estados} \label{sec:state_representation}
 Por o framework Flutter ser focado na criação de aplicações cliente, ou seja, que são executadas no dispositivo do usuário, existem muitos casos em que é necessário que haja a comunicação com um servidor para execução de regras de negócio e armazenamento de dados. Essa comunicação é feita por meio de requisições à rede internet e ocorrem de maneira assíncrona, com a resposta dessas requisições demorando algum tempo para acontecer. Além disso, essas requisições podem se completar de duas formas: com sucesso e com erro. Em casos de sucesso, costuma-se ter como o resultado a informação que se deseja obter do servidor, ou então uma confirmação de que o envio de dados foi realizado com sucesso. Em casos de erros, pode-se ter mensagens ou códigos de erro de forma que o usuário possa entender melhor qual o erro que ocorreu ao realizar uma ação dentro da aplicação, já que o erro pode ser causado por motivos diversos, desde um valor inválido informado pelo usuário até erros de comunicação de baixo nível na rede. Esse mesmo princípio pode se aplicar para comunicações que não sejam em rede, como em acessos a bancos de dados no dispositivo do usuário, chamadas de sistema operacional, comunicação por \textit{Bluetooth}, dentre outras.
@@ -372,7 +375,7 @@ Com isso em vista, têm-se que qualquer tipo de comunicação assíncrona pode s
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.6\textwidth]{figures/states/states_diagram.png}
-    \caption{Diagrama dos estados possíveis em uma ação assíncrona}
+    \caption{Diagrama dos estados possíveis em uma ação assíncrona. Fonte: Do Autor.}
     \label{fig:states_diagram}
 \end{figure}
 
@@ -381,7 +384,7 @@ Para exemplificar esse mecanismo de realizar uma ação assíncrona a como pode-
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/getInformationFromNetwork.png}
-    \caption{Função para simular uma ação assíncrona}
+    \caption{Função para simular uma ação assíncrona. Fonte: Do Autor.}
     \label{fig:simulate_request}
 \end{figure}
 
@@ -392,7 +395,7 @@ Como um exemplo \textit{adhoc}, utilizando o mecanismo mais básico para gerenci
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/variables.png}
-    \caption{Variáveis para representar os estados da página}
+    \caption{Variáveis para representar os estados da página. Fonte: Do Autor.}
     \label{fig:variables}
 \end{figure}
 
@@ -401,16 +404,16 @@ Em seguida, cria-se a parte visual que tratará por exibir diferentes componente
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/adhoc_widget.png}
-    \caption{Método \textit{build} para construção da tela da abordagem \textit{adhoc}}
+    \caption{Método \textit{build} para construção da tela da abordagem \textit{adhoc}. Fonte: Do Autor.}
     \label{fig:adhoc_widget}
 \end{figure}
 
-Por último nessa classe têm-se a função \textit{getInformation}, que será responsável por alterar as variáveis e fazer a chamada à função que simulará a requisição, visto na Figura \ref{fig:adhoc_getinfo}. Sobre essa abordagem, embora seja simples e direta, pode-se apontar alguns problemas.
+Por último, nessa classe têm-se a função \textit{getInformation}, que será responsável por alterar as variáveis e fazer a chamada à função que simulará a requisição, visto na Figura \ref{fig:adhoc_getinfo}. Sobre essa abordagem, embora seja simples e direta, pode-se apontar alguns problemas.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/adhoc_getinfo.png}
-    \caption{Função que realizará a alteração dos estados de acordo com o andamento da ação assíncrona}
+    \caption{Função que realizará a alteração dos estados de acordo com o andamento da ação assíncrona. Fonte: Do Autor.}
     \label{fig:adhoc_getinfo}
 \end{figure}
 
@@ -427,7 +430,7 @@ Para resolver o primeiro problema de quebra do Princípio de Responsabilidade Ú
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/notifier.png}
-    \caption{Classe \textit{Notifier} que implementa o \textit{Observer Pattern}}
+    \caption{Classe \textit{Notifier} que implementa o \textit{Observer Pattern}. Fonte: Do Autor.}
     \label{fig:notifier}
 \end{figure}
 Para auxiliar no quesito de exibição na tela, pode-se criar uma classe \textit{NotifierBuilder}, que será um \textit{StatefulWidget} que receberá uma instância da classe \textit{Notifier} e na sua inicialização chamará o método \textit{addListener} passando uma função anônima que chama a função \textit{setState}, que causará a reconstrução da tela sempre que o método \textit{notifyListeners} for chamado na classe \textit{Notifier}. O código para a classe \textit{NotifierBuilder}, que nada mais é que um ouvinte inscrito na classe publicadora \textit{Notifier}, pode ser visto na Figura \ref{fig:notifier_builder}.
@@ -435,7 +438,7 @@ Para auxiliar no quesito de exibição na tela, pode-se criar uma classe \textit
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/notifier_builder.png}
-    \caption{Classe \textit{NotifierBuilder}, um ouvinte do \textit{Notifier}}
+    \caption{Classe \textit{NotifierBuilder}, um ouvinte do \textit{Notifier}. Fonte: Do Autor.}
     \label{fig:notifier_builder}
 \end{figure}
 
@@ -444,7 +447,7 @@ Com isso, pode-se criar uma classe que será a nossa controladora de estado e es
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/notifier_controller.png}
-    \caption{Classe \textit{Controller}, responsável por gerenciar o estado da aplicação}
+    \caption{Classe \textit{Controller}, responsável por gerenciar o estado da aplicação. Fonte: Do Autor.}
     \label{fig:notifier_controller}
 \end{figure}
 
@@ -453,7 +456,7 @@ Com isso, basta reescrever a parte da interface gráfica para passar a utilizar 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/with_notifier_page.png}
-    \caption{Código da UI utilizando o \textit{Controller} criado}
+    \caption{Código da UI utilizando o \textit{Controller} criado. Fonte: Do Autor.}
     \label{fig:with_notifier_page}
 \end{figure}
 
@@ -466,7 +469,7 @@ Para resolver a questão dos estados inválidos, pode-se utilizar de polimorfism
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/states.png}
-    \caption{Representação de código utilizando polimorfismo}
+    \caption{Representação de código utilizando polimorfismo. Fonte: Do Autor.}
     \label{fig:states}
 \end{figure}
 
@@ -475,7 +478,7 @@ Com essas classes novas para representar o estado, pode-se refatorar a classe \t
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/controller_with_states.png}
-    \caption{Nova versão do \textit{Controller} utilizando as classes de estado criadas}
+    \caption{Nova versão do \textit{Controller} utilizando as classes de estado criadas. Fonte: Do Autor.}
     \label{fig:controller_with_states}
 \end{figure}
 
@@ -484,7 +487,7 @@ Com essa alteração feita, poode-se agora alterar a classe da interface para ut
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/with_state_page.png}
-    \caption{UI utilizando as classes de estado criadas}
+    \caption{UI utilizando as classes de estado criadas. Fonte: Do Autor.}
     \label{fig:with_state_page}
 \end{figure}
 
@@ -495,7 +498,7 @@ Um problema apontado que ainda não foi resolvido é o da possibilidade de o des
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/sealed_states.png}
-    \caption{Alteração nas classes de estados, introduzido o conceito de classes seladas}
+    \caption{Alteração nas classes de estados, introduzido o conceito de classes seladas. Fonte: Do Autor.}
     \label{fig:sealed_states}
 \end{figure}
 
@@ -504,13 +507,13 @@ Com essa alteração feita nas classes de estados, pode-se alterar a interface d
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/states/sealed_page.png}
-    \caption{UI utilizando \textit{pattern matching} para exibição dos componentes de acordo com o estado}
+    \caption{UI utilizando \textit{pattern matching} para exibição dos componentes de acordo com o estado. Fonte: Do Autor.}
     \label{fig:sealed_page}
 \end{figure}
 
 \section{Melhorias para Formulários e suas Validações} \label{sec:forms}
 
-Em aplicações que rodam no lado do cliente, é muito comum a presença de formulários, seja para criação de conta, login, criação de recursos, edição de dados, etc. Para isso, é comum a presença de campos de formulários nessas aplicações, que são componentes de interface que permitem ao usuário digitar valores e registrá-los, seja por um envio desses dados à algum servidor ou pela escrita em um banco de dados no próprio dispositivo.
+Em aplicações executadas no lado do cliente, é muito comum a presença de formulários, seja para criação de conta, login, criação de recursos, edição de dados, etc. Para isso, é comum a presença de campos de formulários nessas aplicações, que são componentes de interface que permitem ao usuário digitar valores e registrá-los, seja por um envio desses dados à algum servidor ou pela escrita em um banco de dados no próprio dispositivo.
 
 Assim, além da coleta desses dados pela aplicação cliente, é muito importante haver também a validação desses dados na própria aplicação por dois principais motivos.
 
@@ -523,7 +526,7 @@ Para lidar com validações de campos de formulário, o Flutter por si só já o
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/forms/example_form.png}
-    \caption{Exemplo de criação de formulário com Flutter}
+    \caption{Exemplo de criação de formulário com Flutter. Fonte: Do Autor.}
     \label{fig:example_form}
 \end{figure}
 
@@ -531,15 +534,15 @@ Essa abordagem, porém, pode apresentar alguns problemas. Para demonstrar esses 
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.65\textwidth]{figures/forms/form_preview_invalid.png}
-    \caption{Exemplos de formulários inválidos}
+    \includegraphics[width=.8\textwidth]{figures/forms/form_preview_invalid.png}
+    \caption{Exemplos de formulários inválidos. Fonte: Do Autor.}
     \label{fig:form_preview_invalid}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.65\textwidth]{figures/forms/form_preview_valid.png}
-    \caption{Exemplos de formulários válidos}
+    \includegraphics[width=.8\textwidth]{figures/forms/form_preview_valid.png}
+    \caption{Exemplos de formulários válidos. Fonte: Do Autor.}
     \label{fig:form_preview_valid}
 \end{figure}
 
@@ -548,21 +551,21 @@ A partir do exemplo apresentado na Figura \ref{fig:example_form}, para criar ess
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/forms/form_adhoc_validators.png}
-    \caption{Funções para validação dos campos da demonstração}
+    \caption{Funções para validação dos campos da demonstração. Fonte: Do Autor.}
     \label{fig:form_adhoc_validators}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/forms/form_adhoc_textformfield.png}
-    \caption{Widget TextFormField para o campo de e-mail}
+    \caption{Widget TextFormField para o campo de e-mail. Fonte: Do Autor.}
     \label{fig:form_adhoc_textformfield}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.8\textwidth, trim={0 30 0 100}, clip]{figures/forms/form_adhoc_checkFields.png}
-    \caption{Função para verificação da validade}
+    \caption{Função para verificação da validade. Fonte: Do Autor.}
     \label{fig:form_adhoc_checkFields}
 \end{figure}
 
@@ -575,7 +578,7 @@ Para resolver o último problema apontado, sobre a especificidade e não reaprov
 \begin{figure}[ht]
     \centering
     \includegraphics[width=1\textwidth, trim={0 30 0 100}, clip]{figures/forms/form_validator.png}
-    \caption{Classe Validator com aplicação do \textit{Builder Pattern}}
+    \caption{Classe Validator com aplicação do \textit{Builder Pattern}. Fonte: Do Autor.}
     \label{fig:form_validator}
 \end{figure}
 
@@ -597,7 +600,7 @@ Além dessa estrutura de dados, a classe \textit{FormManager} terá o método \t
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.7\textwidth, trim={0 30 0 100}, clip]{figures/forms/form_manager.png}
-    \caption{Classe \textit{FormManager}, responsável por encapsular todo o registro e validação dos formulários}
+    \caption{Classe \textit{FormManager}, responsável por encapsular todo o registro e validação dos formulários. Fonte: Do Autor.}
     \label{fig:form_manager}
 \end{figure}
 
@@ -606,7 +609,7 @@ Assim, como o \textit{FormManager} criado, pode-se criar uma nova instância del
 \begin{figure}[ht]
     \centering
     \includegraphics[width=1\textwidth, trim={0 30 0 100}, clip]{figures/forms/set_forms.png}
-    \caption{Inicialização dos formulários na tela}
+    \caption{Inicialização dos formulários na tela. Fonte: Do Autor.}
     \label{fig:set_forms}
 \end{figure}
 
@@ -615,7 +618,7 @@ Para terminar o uso das novas estruturas criadas, basta passar as informações 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/forms/custom_text_field.png}
-    \caption{Criação do componente personalizado para um formulário}
+    \caption{Criação do componente personalizado para um formulário. Fonte: Do Autor.}
     \label{fig:custom_text_field}
 \end{figure}
 
@@ -624,7 +627,7 @@ Assim, o uso de todas essas classes será como na Figura \ref{fig:use_of_form_pr
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/forms/use_of_form_proposal.png}
-    \caption{Uso dos formulários com reatividade no código da interface gráfica}
+    \caption{Uso dos formulários com reatividade no código da interface gráfica. Fonte: Do Autor.}
     \label{fig:use_of_form_proposal}
 \end{figure}
 
@@ -640,7 +643,7 @@ Porém, para desenvolvedores que utilizam de \textit{frameworks cross-platform},
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth]{figures/dialog/platforms_dialog.png}
-    \caption{Exemplo da visualização dos Dialog no iOS e Android, respectivamente}
+    \caption{Exemplo da visualização dos Dialog no iOS e Android, respectivamente. Fonte: Do Autor.}
     \label{fig:plaforms_dialog}
 \end{figure}
 
@@ -651,7 +654,7 @@ Para a exibição de \textit{Dialogs}, o Flutter disponibiliza a função assín
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/dialog/adhoc_dialog.png}
-    \caption{Exemplo direto do uso de diferentes Dialogs de acordo com o SO no qual a aplicação está rodando}
+    \caption{Exemplo direto do uso de diferentes Dialogs de acordo com o SO no qual a aplicação está rodando. Fonte: Do Autor.}
     \label{fig:adhoc_dialog}
 \end{figure}
 
@@ -664,7 +667,7 @@ Diante dos problemas apresentados, é possível introduzir o padrão de projeto 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.85\textwidth, trim={0 30 0 100}, clip]{figures/dialog/base_dialog.png}
-    \caption{Interface para criação de Dialogs}
+    \caption{Interface para criação de Dialogs. Fonte: Do Autor.}
     \label{fig:base_dialog}
 \end{figure}
 
@@ -674,7 +677,7 @@ Em seguida, deve-se criar as implementações dos \textit{Dialogs} a partir dess
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.85\textwidth, trim={0 30 0 100}, clip]{figures/dialog/dialog_implementations.png}
-    \caption{Implementações dos \textit{Dialogs} com base na interface \textit{BaseDialog}}
+    \caption{Implementações dos \textit{Dialogs} com base na interface \textit{BaseDialog}. Fonte: Do Autor.}
     \label{fig:dialog_implementations}
 \end{figure}
 
@@ -683,7 +686,7 @@ Para a aplicação do padrão \textit{Factory} em si, deve-se criar a classe abt
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.75\textwidth, trim={0 30 0 100}, clip]{figures/dialog/dialog_factory.png}
-    \caption{Classe que utiliza propriamente o padrão \textit{Factory}}
+    \caption{Classe que utiliza propriamente o padrão \textit{Factory}. Fonte: Do Autor.}
     \label{fig:dialog_factory}
 \end{figure}
 
@@ -696,7 +699,7 @@ Para a abordagem prática dos estudos sobre arquitetura realizados no Capítulo 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.85\textwidth]{figures/arch/flutterpad_figma.png}
-    \caption{Protótipo da Aplicação FlutterPad}
+    \caption{Protótipo da Aplicação FlutterPad. Fonte: Comunidade Flutterando.}
     \label{fig:flutterpad_figma}
 \end{figure}
 
@@ -715,7 +718,7 @@ Todo o código utilizado nesse trabalho está disponível em \href{https://tcc.a
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.50\textwidth]{figures/arch/repo_files.png}
-    \caption{Estrutura de arquivos do repositório do projeto}
+    \caption{Estrutura de arquivos do repositório do projeto. Fonte: Do Autor.}
     \label{fig:repo_files}
 \end{figure}
 
@@ -731,7 +734,7 @@ Apesar de em sua obra ``Clean Architecture: A Craftsman's Guide to Software Stru
 \begin{figure}[ht]
     \centering
     \includegraphics[width=1\textwidth]{figures/arch/arch_diagram.png}
-    \caption{Diagrama da Arquitetura Desenvolvida}
+    \caption{Diagrama da Arquitetura Desenvolvida. Fonte: Do Autor.}
     \label{fig:arch_diagram}
 \end{figure}
 
@@ -740,7 +743,7 @@ Na arquitetura elaborada, a camada de domínio, como seu próprio nome diz, é r
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.50\textwidth, trim={0 30 0 100}, clip]{figures/arch/task_entity.png}
-    \caption{Código para classe TaskEntity}
+    \caption{Código para classe TaskEntity. Fonte: Do Autor.}
     \label{fig:task_entity}
 \end{figure}
 
@@ -749,7 +752,7 @@ Ainda na camada de domínio, têm-se os casos de uso. Inspirados nos casos de us
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/arch/usecase_interface.png}
-    \caption{Classe genérica para representação de casos de uso}
+    \caption{Classe genérica para representação de casos de uso. Fonte: Do Autor.}
     \label{fig:usecase_interface}
 \end{figure}
 
@@ -757,7 +760,7 @@ Ainda na camada de domínio, têm-se os casos de uso. Inspirados nos casos de us
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/arch/mark_task_completion_usecase.png}
-    \caption{Caso de uso para marcação de realização de tarefas}
+    \caption{Caso de uso para marcação de realização de tarefas. Fonte: Do Autor.}
     \label{fig:mark_task_completion_usecase}
 \end{figure}
 
@@ -766,7 +769,7 @@ Por último na camada de domínio, têm-se os repositórios, que inspirados no p
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.65\textwidth, trim={0 30 0 100}, clip]{figures/arch/tasks_repository.png}
-    \caption{Interface do Repositório de Tarefas}
+    \caption{Interface do Repositório de Tarefas. Fonte: Do Autor.}
     \label{fig:tasks_repository}
 \end{figure}
 
@@ -779,7 +782,7 @@ Na arquitetura criada para essa aplicação, os modelos estão muito relacionado
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.5\textwidth, trim={0 30 0 100}, clip]{figures/arch/isar_task_model.png}
-    \caption{Classe que representa uma tarefa no banco de dados}
+    \caption{Classe que representa uma tarefa no banco de dados. Fonte: Do Autor.}
     \label{fig:isar_task_model}
 \end{figure}
 
@@ -788,7 +791,7 @@ No quesito das fontes de dados, foram criadas duas fontes de dados para essa apl
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.7\textwidth, trim={0 30 0 100}, clip]{figures/arch/save_local_task.png}
-    \caption{Método do \textit{TasksLocalDatasource} que salva uma tarefa no banco de dados}
+    \caption{Método do \textit{TasksLocalDatasource} que salva uma tarefa no banco de dados. Fonte: Do Autor.}
     \label{fig:save_local_task}
 \end{figure}
 
@@ -801,7 +804,7 @@ Além da organização de cada uma das camadas, vale destacar um trecho de códi
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.85\textwidth, trim={0 30 0 100}, clip]{figures/arch/service_locator.png}
-    \caption{Função para fazer o registro de instâncias antes da inicialização da aplicação}
+    \caption{Função para fazer o registro de instâncias antes da inicialização da aplicação. Fonte: Do Autor.}
     \label{fig:service_locator}
 \end{figure}
 
@@ -814,7 +817,7 @@ Com isso em mente, foi desenvolvida uma segunda versão da aplicação \textit{F
 \begin{figure}[ht]
     \centering
     \includegraphics[width=1\textwidth]{figures/arch/arch_simplified_diagram.png}
-    \caption{Diagrama da Arquitetura Simplificada}
+    \caption{Diagrama da Arquitetura Simplificada. Fonte: Do Autor.}
     \label{fig:arch_simplified_diagram}
 \end{figure}
 
@@ -827,8 +830,6 @@ Nesse trabalho foram apresentadas várias técnicas e abordagens que colaboram p
 Quanto aos estudos sobre arquitetura de software realizados, percebe-se que o mais importante não é a arquitetura utilizada em um projeto de software, e sim a aplicação de bons princípios que irão levar a uma independência entre as camadas, a não interferência de ferramentas externas na regra de negócio da aplicação e uma alta coesão e baixo acoplamento na base de código. Além disso, outro fator muito importante de ser considerado no momento de definição da arquitetura de uma aplicação cliente é qual o impacto que a regra de negócio irá ter nessa aplicação. Caso seja uma aplicação muito simples, que sirva somente como interface para o usuário acessar os dados contidos em um servidor, é esperado que uma arquitetura muito complexa venha a causar lentidão no processo de desenvolvimento, visto que as regras de negócio não estarão na aplicação cliente, e sim na aplicação que está rodando no lado do servidor.
 
 Assim, é mais plausível que tenha-se uma arquitetura mais robusta do lado do servidor e talvez uma mais simplificada do lado do cliente. Agora, caso a aplicação cliente seja o principal foco do problema a ser resolvido de forma computacional, de forma que essa aplicação cliente deve executar uma série de regras, guardar informações em um banco local, comunicar com um ou mais servidores, tratar sobre sincronização de dados, fazer comunicação com outros dispositivos, como impressoras e fones de ouvidos, dentre outras ações mais complexas, então é muito provável que essa aplicação cliente precise ter uma arquitetura mais complexa, de forma que essa aplicação poderá ser desenvolvida e evoluída de uma forma melhor ao longo dos anos.
-
-\section{Trabalhos Futuros} \label{sec:future_work}
 
 No quesito de trabalhos futuros, existem alguns trabalhos que podem se originar a partir deste. Uma primeira opção seria a aplicação de outros padrões de projeto em aplicações Flutter, visto que nesse trabalho foram explorados apenas quatro padrões e, considerando que apenas o catálogo de padrões fornecido por \citeonline{GOF} possui mais de 20 padrões documentados, com certeza há mais aplicações deles possíveis de se realizar.
 
