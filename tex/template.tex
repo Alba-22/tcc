@@ -353,7 +353,7 @@ A linguagem Dart também se caracteriza pela funcionalidade de \textit{null safe
     \label{fig:null_safety}
 \end{figure}
 
-Sobre o Flutter em si, ele foi apresentado inicialmente em 2015 e lançado em versão estável em dezembro de 2018. Ele se caracteriza como um \textit{framework} para construção de interfaces gráficas que é capaz de construir aplicações compiladas nativamente para diversas plataformas, como \textit{mobile}, \textit{web}, \textit{desktop} e sistemas embarcados a partir de uma única base de código, com destaque para o fato das aplicações rodarem a 60 quadros por segundo e com o desenvolvedor conseguindo controlar cada pixel na tela.
+Sobre o Flutter em si, ele foi apresentado inicialmente em 2015 e lançado em versão estável em dezembro de 2018. Ele se caracteriza como um \textit{framework} para construção de interfaces gráficas que utiliza da linguagem Dart para construir aplicações compiladas nativamente para diversas plataformas, como \textit{mobile}, \textit{web}, \textit{desktop} e sistemas embarcados a partir de uma única base de código, com destaque para o fato das aplicações rodarem a 60 quadros por segundo e com o desenvolvedor conseguindo controlar cada pixel na tela.
 
 Muitos \textit{frameworks} para criação de interface trabalham de forma imperativa, com a construção sendo realizada por meio de objeto criados e modificações sendo feitas de forma explícita pela chamada de métodos desses objetos. O Flutter se diferencia por sua UI ser feita de forma declarativa. Os componentes de visualização, representados por objetos e comumente chamados de \textit{Widgets}, são imutáveis e são apenas esquemáticas leves de como a tela deve ser. Para que seja feita alguma alteração na tela, algum \textit{widget} deve acionar uma reconstrução dele mesmo, que fará com que no próximo quadro de renderização a tela seja recriada com base no novo estado. Sobre estados, a interface no Flutter se caracteriza por ser uma função do estado atual dos componentes, de forma que o estado é caracterizado como qualquer dado que seja necessário para reconstruir a interface em um dado momento do tempo. Na Figura \ref{fig:counter_example}, tem-se um exemplo de como funciona uma interface com Flutter. É criado um objeto que estende de \textit{StatefulWidget}, que é um \textit{widget} que possui um estado mutável, e possui dentro de si uma variável do tipo inteiro que guarda um valor de contador. A interface é construída dentro do método \textit{build}, que é chamado sempre que há um acionamento para reconstrução da tela. Esse acionamento é realizado por meio da chamada do método \textit{setState}, que é herdado da classe \textit{State}. Assim, pela construção da tela do exemplo da Figura \ref{fig:counter_example}, sempre que o usuário tocar ou clicar no valor do contador sendo mostrado ao centro do tela, irá ocorrer o incremento do valor da variável do contador e a tela será reconstruída de forma a ser exibido o novo valor do contador no próximo quadro de renderização da aplicação.
 
@@ -662,7 +662,7 @@ Apesar de bem direta, a forma apresentada acarretará em problemas futuros para 
 
 \subsection{Uso do Padrão Factory para Exibir Componentes Nativos}
 
-Diante dos problemas apresentados, é possível introduzir o padrão de projeto \textit{Factory}, que permitirá a criação de uma classe que encapsulará a responsabilidade de realizar a checagem de plataforma e, diante de uma interface criada para a exibição de \textit{Dialogs}, irá retornar o \textit{Dialog} apropriado para a plataforma vigente em que a aplicação está rodando. Para implementar esse padrão, é necessário primeiramente criar a interface que todas as implementações de \textit{Dialog} devem seguir. Essa interface receberá o título, conteúdo e as ações possíveis para os botões do \textit{Dialog}, como visto na Figura \ref{fig:base_dialog}.
+Diante dos problemas apresentados, é possível introduzir o padrão de projeto \textit{Factory}, no qual a partir de uma classe abstrata pode-se definir qual será a interface necessária para a criação de um \textit{Dialog}, com a aplicação instanciando a devida implementação do \textit{Dialog} de acordo com o sistema operacional no qual a aplicação está sendo executada.Para implementar esse padrão, é necessário primeiramente criar a interface que todas as implementações de \textit{Dialog} devem seguir. Essa interface receberá o título, conteúdo e as ações possíveis para os botões do \textit{Dialog}, como visto na Figura \ref{fig:base_dialog}.
 
 \begin{figure}[ht]
     \centering
@@ -671,26 +671,35 @@ Diante dos problemas apresentados, é possível introduzir o padrão de projeto 
     \label{fig:base_dialog}
 \end{figure}
 
-Em seguida, deve-se criar as implementações dos \textit{Dialogs} a partir dessa interface criada, com cada um retornando o componente correto de cada plataforma e realizando customizações que serão específicas daquela plataforma, como visto na Figura \ref{fig:dialog_implementations}.
-
+Em seguida, deve-se criar as implementações dos \textit{Dialogs} a partir dessa interface criada, com cada uma sendo responsável por exibir o componente correto para aquela plataforma, como visto na Figura \ref{fig:dialog_implementations}.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.85\textwidth, trim={0 30 0 100}, clip]{figures/dialog/dialog_implementations.png}
+    \includegraphics[width=1\textwidth, trim={0 30 0 100}, clip]{figures/dialog/dialog_implementations.png}
     \caption{Implementações dos \textit{Dialogs} com base na interface \textit{BaseDialog}. Fonte: Do Autor.}
     \label{fig:dialog_implementations}
 \end{figure}
 
-Para a aplicação do padrão \textit{Factory} em si, deve-se criar a classe abtrasta que conterá um método fábrica para retornar uma instância de \textit{BaseDialog} e também sua implementação concreta. Para esse trabalho, como apenas haveria uma classe concreta, decidiu-se criar apenas uma classe concreta que conterá um método estático que, de acordo com a plataforma em que a aplicação está executando, irá retornar a implementação de \textit{BaseDialog}. Assim, foi criada a classe \textit{DialogFactory}, que irá receber os parâmetros de título, conteúdo e ações dos botões e irá fazer a verificação de qual plataforma a aplicação está rodando para que possa ser feita a escolha de qual implementação do \textit{BaseDialog} será utilizada para a exibição do componente de \textit{dialog}, como visto na Figura \ref{fig:dialog_factory}. Com essa implementação utilizando o padrão \textit{Factory}, quando for necessário adicionar uma nova plataforma, bastará criar a nova implementação da interface \textit{BaseDialog} e adicionar uma única nova condição dentro da fábrica, de forma que em qualquer lugar da base de código que chame o método estático \textit{showAlertDialog} já será exibido o componente correto para a nova plataforma. Destaca-se que esse padrão pode ser aplicado para qualquer parte da interface, desde partes que chamem componentes de interface comuns nos sistemas operacionais, como \textit{overlays} de carregamento, \textit{date pickers}, \textit{dialogs}, até componentes mais específicos da aplicação em si, como \textit{cards}, campos de texto, botões, etc.
+Com as implementações da interface \textit{BaseDialog} feita, deve-se agora realizar a configuração de qual \textit{Dialog} será utilizado, de forma que isso deve ser feito na inicialização da aplicação, na função \textit{main}, com a atribuição da variável global \textit{dialog}, como pode ser visto na Figura \ref{fig:dialog_init}
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.75\textwidth, trim={0 30 0 100}, clip]{figures/dialog/dialog_factory.png}
-    \caption{Classe que utiliza propriamente o padrão \textit{Factory}. Fonte: Do Autor.}
-    \label{fig:dialog_factory}
+    \includegraphics[width=0.5\textwidth, trim={0 30 0 100}, clip]{figures/dialog/dialog_init.png}
+    \caption{Inicialização do \textit{Dialog} de acordo com o Sistema Operacional. Fonte: Do Autor.}
+    \label{fig:dialog_init}
 \end{figure}
 
-Dessa forma, com a aplicação do padrão de projeto \textit{Factory}, é possível que qualquer parte da interface da aplicação chame o método estático da fábrica para exibir o componente de \textit{Dialog}, sem que a interface tenha que se preocupar com qual a plataforma na qual a aplicação está sendo executada, de forma a focar apenas no conteúdo que o \textit{Dialog} deve receber.
+O uso do padrão pode ser visualizado na Figura \ref{fig:dialog_factory_use}, no qual é chamada diretamente o método \textit{show} na variável \textit{dialog}, em que são passados argumentos como título, conteúdo e ações, definidos na interface \textit{BaseDialog}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\textwidth, trim={0 30 0 100}, clip]{figures/dialog/dialog_factory_use.png}
+    \caption{Uso do padrão \textit{Factory}. Fonte: Do Autor.}
+    \label{fig:dialog_factory_use}
+\end{figure}
+
+Com essa implementação utilizando o padrão \textit{Factory}, quando for necessário adicionar uma nova plataforma, bastará criar a nova implementação da interface \textit{BaseDialog} e adicionar uma única nova condição na inicialização da aplicação. Dessa forma, qualquer parte da interface gráfica poderá exibir \textit{Dialogs} sem ter que se preocupar com qual a plataforma na qual a aplicação está sendo executada, de forma a focar apenas no conteúdo que o \textit{Dialog} deve receber. É importante destacar que esse padrão pode ser aplicado para qualquer parte da interface, desde partes que chamem componentes de interface comuns nos sistemas operacionais, como \textit{overlays} de carregamento, \textit{date pickers}, \textit{dialogs}, até componentes mais específicos da aplicação em si, como \textit{cards}, campos de texto, botões, etc.
+
 
 \section{Aplicação de Conceitos de Arquitetura de Software} \label{sec:arch}
 

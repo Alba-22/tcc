@@ -1,18 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:poc_tcc/dialog/approaches/factory/base_dialog.dart';
 
-class AndroidDialog implements BaseDialog {
+import 'base_dialog.dart';
+
+class AndroidDialog<T> implements BaseDialog {
   @override
-  Widget create(BuildContext context, String title, String content, List<DialogAction> actions) {
-    return AlertDialog(
-      title: Text(title),
-      content: Text(content),
-      actions: actions.map<Widget>((e) {
-        return TextButton(
-          onPressed: e.onPressed,
-          child: Text(e.text),
+  Future<T?> show(
+    BuildContext context, {
+    required String title,
+    required String content,
+    required List<DialogAction> actions,
+  }) async {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(content),
+          actions: actions.map<Widget>((e) {
+            return TextButton(
+              onPressed: e.onPressed,
+              child: Text(e.text),
+            );
+          }).toList(),
         );
-      }).toList(),
+      },
     );
   }
 }

@@ -1,18 +1,30 @@
 import 'package:flutter/cupertino.dart';
-import 'package:poc_tcc/dialog/approaches/factory/base_dialog.dart';
+import 'package:flutter/material.dart';
 
-class IosDialog implements BaseDialog {
+import 'base_dialog.dart';
+
+class IosDialog<T> implements BaseDialog {
   @override
-  Widget create(BuildContext context, String title, String content, List<DialogAction> actions) {
-    return CupertinoAlertDialog(
-      title: Text(title),
-      content: Text(content),
-      actions: actions.map<Widget>((e) {
-        return CupertinoButton(
-          onPressed: e.onPressed,
-          child: Text(e.text),
+  Future<T?> show(
+    BuildContext context, {
+    required String title,
+    required String content,
+    required List<DialogAction> actions,
+  }) async {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: Text(title),
+          content: Text(content),
+          actions: actions.map<Widget>((e) {
+            return CupertinoButton(
+              onPressed: e.onPressed,
+              child: Text(e.text),
+            );
+          }).toList(),
         );
-      }).toList(),
+      },
     );
   }
 }

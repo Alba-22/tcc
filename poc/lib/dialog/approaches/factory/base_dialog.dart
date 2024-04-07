@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
-abstract interface class BaseDialog {
-  Widget create(BuildContext context, String title, String content, List<DialogAction> actions);
+abstract interface class BaseDialog<T> {
+  Future<T?> show(
+    BuildContext context, {
+    required String title,
+    required String content,
+    required List<DialogAction> actions,
+  });
 }
 
 class DialogAction {
